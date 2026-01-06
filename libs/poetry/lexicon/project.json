@@ -1,0 +1,18 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "poetry-lexicon",
+  "projectType": "library",
+  "sourceRoot": "libs/poetry/lexicon/src",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/poetry/lexicon",
+        "main": "libs/poetry/lexicon/src/index.ts",
+        "tsConfig": "libs/poetry/lexicon/tsconfig.lib.json"
+      }
+    }
+  },
+  "tags": ["scope:poetry", "type:data"]
+}

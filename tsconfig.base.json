@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@haikupedias/core/types": ["libs/core/types/src/index.ts"],
-      "@haikupedias/core/utils": ["libs/core/utils/src/index.ts"]
+      "@haikupedias/core/utils": ["libs/core/utils/src/index.ts"],
+      "@haikupedias/poetry/lexicon": ["libs/poetry/lexicon/src/index.ts"]
     },
     "strict": true,
     "noImplicitOverride": true,
