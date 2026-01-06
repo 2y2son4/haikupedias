@@ -9,7 +9,6 @@ import {
 import { randomNote } from '@haikupedias/core/utils';
 import {
   BAR_LENGTH,
-  BARS_TOTAL,
   MAJOR_THIRD,
   MINOR_THIRD,
 } from '@haikupedias/core/utils';
