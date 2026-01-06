@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -17,7 +16,10 @@
     "paths": {
       "@haikupedias/core/types": ["libs/core/types/src/index.ts"],
       "@haikupedias/core/utils": ["libs/core/utils/src/index.ts"],
-      "@haikupedias/poetry/lexicon": ["libs/poetry/lexicon/src/index.ts"]
+      "@haikupedias/poetry/lexicon": ["libs/poetry/lexicon/src/index.ts"],
+      "@haikupedias/poetry/haiku-engine": [
+        "libs/poetry/haiku-engine/src/index.ts"
+      ]
     },
     "strict": true,
     "noImplicitOverride": true,
