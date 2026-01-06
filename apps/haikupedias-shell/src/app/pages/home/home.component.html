@@ -40,38 +40,28 @@
       <section class="step" id="haiku-section">
         <h2 class="step-title">Your Haiku</h2>
         <lib-haiku-display [haiku]="haiku()!" />
-      </section>
-    }
-
-    <!-- Step 2.5: Composition Details (shown after haiku generation) -->
-    @if (composition()) {
-      <section class="step">
-        <h2 class="step-title">Composition Notes</h2>
-        <div class="composition-details">
-          @for (bar of composition()!.bars; track $index) {
-            <div class="bar">
-              <h3>Bar {{ $index + 1 }} (Tonic: {{ getNoteLabel(bar.tonic) }})</h3>
-              <div class="steps-grid">
-                @for (step of bar.steps; track $index) {
-                  <div class="step-detail">
-                    <span class="note-label">{{ getNoteLabel(step.root) }}</span>
-                    <span class="interval">{{ step.interval >= 0 ? '+' : '' }}{{ step.interval }}</span>
-                    <span class="arrow">→</span>
-                    <span class="note-label result">{{ getNoteLabel(step.result) }}</span>
-                  </div>
-                }
+        @if (composition()) {
+          <!-- Step 2.5: Composition Details (shown after haiku generation) -->
+          <div class="composition-details">
+            @for (bar of composition()!.bars; track $index) {
+              <div class="bar">
+                <h3>Bar {{ $index + 1 }} (Tonic: {{ getNoteLabel(bar.tonic) }})</h3>
+                <div class="steps-grid">
+                  @for (step of bar.steps; track $index) {
+                    <div class="step-detail">
+                      <span class="note-label">{{ getNoteLabel(step.root) }}</span>
+                      <span class="interval">{{ step.interval >= 0 ? '+' : '' }}{{ step.interval }}</span>
+                      <span class="arrow">→</span>
+                      <span class="note-label result">{{ getNoteLabel(step.result) }}</span>
+                    </div>
+                  }
+                </div>
               </div>
-            </div>
-          }
-        </div>
-      </section>
-    }
-
-    <!-- Step 3: Audio Controls (shown after haiku generation) -->
-    @if (composition()) {
-      <section class="step">
-        <h2 class="step-title">Musical Composition</h2>
-        <lib-audio-controls [composition]="composition()" (restart)="resetSelection()" />
+            }
+          </div>
+          <!-- Step 3: Audio Controls (shown after haiku generation) -->
+          <lib-audio-controls [composition]="composition()" (restart)="resetSelection()" />
+        }
       </section>
     }
   </main>
