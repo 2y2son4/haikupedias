@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WORD_SET_A, WORD_SET_B, Word } from '@haikupedias/poetry/lexicon';
 import { HaikuBuilder, validateHaiku } from '@haikupedias/poetry/haiku-engine';
+import {
+  CompositionGenerator,
+  CompositionFormatter,
+} from '@haikupedias/music/composition-engine';
 
 @Component({
   selector: 'app-lexicon',
@@ -21,6 +25,8 @@ export class LexiconComponent implements OnInit {
   ngOnInit() {
     // Test the haiku-engine library
     this.testHaikuEngine();
+    // Test the composition-engine library
+    this.testCompositionPipeline();
   }
 
   testHaikuEngine() {
@@ -93,6 +99,60 @@ export class LexiconComponent implements OnInit {
     }
 
     console.log('🎉 Haiku Engine tests complete!');
+  }
+
+  testCompositionPipeline() {
+    console.log(
+      '\n🎵 Testing Complete Pipeline: Words → Haiku → Composition...',
+    );
+
+    // Step 1: Select 8 words from Set A
+    const selectedWords = this.wordSetA.slice(0, 8);
+    console.log(
+      'Selected words:',
+      selectedWords.map((w) => `${w.label} (${w.tonalityGroup})`).join(', '),
+    );
+
+    // Step 2: Build haiku from words
+    const haikuResult = HaikuBuilder.buildFromArray(selectedWords);
+    if (!haikuResult.success || !haikuResult.haiku) {
+      console.log('❌ Failed to build haiku:', haikuResult.errors);
+      return;
+    }
+    console.log('✅ Haiku built successfully:');
+    console.log(
+      '  Line 1:',
+      haikuResult.haiku.lines[0].words.map((w) => w.label).join(' '),
+    );
+    console.log(
+      '  Line 2:',
+      haikuResult.haiku.lines[1].words.map((w) => w.label).join(' '),
+    );
+    console.log(
+      '  Line 3:',
+      haikuResult.haiku.lines[2].words.map((w) => w.label).join(' '),
+    );
+
+    // Step 3: Generate composition from haiku
+    const composition = CompositionGenerator.generate(haikuResult.haiku);
+    console.log('✅ Composition generated successfully!');
+    console.log('  Bar 1 tonic:', composition.bars[0].tonic);
+    console.log('  Bar 2 tonic:', composition.bars[1].tonic);
+
+    // Step 4: Format composition for display
+    const formatted = CompositionFormatter.format(composition);
+    console.log('\n📜 Formatted Composition:');
+    console.log(formatted);
+
+    // Step 5: Get note sequence
+    const noteSequence = CompositionFormatter.getNoteSequence(composition);
+    console.log('\n🎼 Note Sequence:', noteSequence);
+
+    const noteNames = CompositionFormatter.formatNoteSequence(composition);
+    console.log('🎹 Note Names:', noteNames);
+
+    console.log('\n🎉 Complete Pipeline Test Successful!');
+    console.log('✨ Words → Haiku → Composition → Ready for Audio Engine');
   }
 
   get currentWords(): Word[] {
