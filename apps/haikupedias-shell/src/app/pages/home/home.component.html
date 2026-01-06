@@ -12,15 +12,13 @@
     <!-- Step 1: Word Selection -->
     <section class="step">
       <div class="selection-header">
-        <div>
-          <h2 class="step-title">Select 8 Words</h2>
-          <p class="progress-text">{{ selectedWords().length }} / 8 words selected:
-            @for (word of selectedWords(); track word.id) {
-              <span class="selected-word" [class]="getWordSetClass(word)">{{ word.label }}</span><span
-                class="separator">, </span>
-            }
-          </p>
-        </div>
+        <h2 class="step-title">Select 8 Words</h2>
+        <p class="progress-text">{{ selectedWords().length }} / 8 words selected:
+          @for (word of selectedWords(); track word.id) {
+            <span class="selected-word" [class]="getWordSetClass(word)">{{ word.label }}</span><span class="separator">,
+            </span>
+          }
+        </p>
         @if (selectedWords().length >= 8) {
           <button class="reset-button" (click)="resetSelection()">Start Over</button>
         }
@@ -49,10 +47,7 @@
                 <div class="steps-grid">
                   @for (step of bar.steps; track $index) {
                     <div class="step-detail">
-                      <span class="note-label">{{ getNoteLabel(step.root) }}</span>
-                      <span class="interval">{{ step.interval >= 0 ? '+' : '' }}{{ step.interval }}</span>
-                      <span class="arrow">→</span>
-                      <span class="note-label result">{{ getNoteLabel(step.result) }}</span>
+                      <span class="note-label played">{{ getNoteLabel(step.root) }}</span>
                     </div>
                   }
                 </div>

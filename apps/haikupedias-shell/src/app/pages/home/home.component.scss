@@ -7,7 +7,7 @@
 .hero {
   text-align: center;
   margin-bottom: 3rem;
-  padding: 2rem 1rem;
+  padding: 1rem;
 
   .title {
     font-size: 3.5rem;
@@ -50,8 +50,9 @@
 
 .selection-header {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
   gap: 1rem;
@@ -183,40 +184,26 @@
       .step-detail {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        padding: 0.75rem;
+        justify-content: center;
+        padding: 1rem;
         background: white;
         border-radius: 6px;
         font-family: 'Courier New', monospace;
-        font-size: 0.9rem;
+        font-size: 1.1rem;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
         .note-label {
           font-weight: 600;
-          color: #495057;
-          min-width: 30px;
-          text-align: center;
-          padding: 0.25rem 0.4rem;
-          background: #e9ecef;
+          color: white;
+          padding: 0.5rem 1rem;
+          background: #667eea;
           border-radius: 4px;
-          font-size: 0.85rem;
+          font-size: 1rem;
 
-          &.result {
+          &.played {
             background: #667eea;
             color: white;
           }
-        }
-
-        .interval {
-          color: #6c757d;
-          font-size: 0.8rem;
-          min-width: 35px;
-          text-align: center;
-        }
-
-        .arrow {
-          color: #adb5bd;
-          font-size: 0.85rem;
         }
       }
     }

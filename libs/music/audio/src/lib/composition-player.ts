@@ -38,14 +38,10 @@ export class CompositionPlayer {
     let currentTime = this.startTime;
 
     for (const bar of composition.bars) {
-      // Play tonic
-      this.notePlayer.playNote(bar.tonic, currentTime, noteDuration);
-      currentTime += noteDuration;
-      this.scheduledNotes++;
-
-      // Play each step result
+      // Play each harmonic step (root note of first step is the tonic)
       for (const step of bar.steps) {
-        this.notePlayer.playNote(step.result, currentTime, noteDuration);
+        // Play the root note (starting note of this step)
+        this.notePlayer.playNote(step.root, currentTime, noteDuration);
         currentTime += noteDuration;
         this.scheduledNotes++;
       }
