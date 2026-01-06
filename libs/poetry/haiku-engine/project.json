@@ -1,0 +1,22 @@
+{
+  "name": "haiku-engine",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/poetry/haiku-engine/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/poetry/haiku-engine",
+        "main": "libs/poetry/haiku-engine/src/index.ts",
+        "tsConfig": "libs/poetry/haiku-engine/tsconfig.lib.json",
+        "assets": ["libs/poetry/haiku-engine/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}
