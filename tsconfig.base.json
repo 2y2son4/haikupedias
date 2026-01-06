@@ -16,6 +16,7 @@
     "paths": {
       "@haikupedias/core/types": ["libs/core/types/src/index.ts"],
       "@haikupedias/core/utils": ["libs/core/utils/src/index.ts"],
+      "@haikupedias/music/audio": ["libs/music/audio/src/index.ts"],
       "@haikupedias/music/composition-engine": [
         "libs/music/composition-engine/src/index.ts"
       ],
