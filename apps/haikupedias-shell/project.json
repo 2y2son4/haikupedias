@@ -1,0 +1,63 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "haikupedias-shell",
+  "projectType": "application",
+  "sourceRoot": "apps/haikupedias-shell/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/haikupedias-shell",
+        "index": "apps/haikupedias-shell/src/index.html",
+        "main": "apps/haikupedias-shell/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/haikupedias-shell/tsconfig.app.json",
+        "assets": [],
+        "styles": ["apps/haikupedias-shell/src/styles.scss"],
+        "scripts": [],
+        "inlineStyleLanguage": "scss"
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "haikupedias-shell:build:production"
+        },
+        "development": {
+          "buildTarget": "haikupedias-shell:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    }
+  },
+  "tags": ["type:app"]
+}

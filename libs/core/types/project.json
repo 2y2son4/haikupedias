@@ -1,0 +1,18 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "core-types",
+  "projectType": "library",
+  "sourceRoot": "libs/core/types/src",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/core/types",
+        "main": "libs/core/types/src/index.ts",
+        "tsConfig": "libs/core/types/tsconfig.lib.json"
+      }
+    }
+  },
+  "tags": ["scope:core", "type:types"]
+}
