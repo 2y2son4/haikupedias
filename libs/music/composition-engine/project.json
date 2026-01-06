@@ -1,0 +1,9 @@
+{
+  "name": "composition-engine",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/music/composition-engine/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project composition-engine --web",
+  "targets": {}
+}
