@@ -39,6 +39,7 @@
     "@types/node": "20.19.9",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
+    "jsonc-eslint-parser": "^2.1.0",
     "nx": "^22.3.3",
     "prettier": "~3.6.2",
     "sass": "^1.97.2",
