@@ -1,0 +1,92 @@
+.haiku-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.haiku-container {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 12px;
+  padding: 3rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+}
+
+.haiku-content {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.haiku-line {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 1.5rem;
+  line-height: 2;
+  color: #2c3e50;
+  margin: 0.5rem 0;
+  font-style: italic;
+}
+
+.line-1 {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.line-2 {
+  animation: fadeInUp 0.6s ease-out 0.2s;
+  animation-fill-mode: backwards;
+}
+
+.line-3 {
+  animation: fadeInUp 0.6s ease-out 0.4s;
+  animation-fill-mode: backwards;
+}
+
+.haiku-metadata {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.word-badge,
+.tonality-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.word-badge {
+  background: #007bff;
+  color: white;
+}
+
+.tonality-badge {
+  background: #6c757d;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .haiku-container {
+    padding: 2rem;
+  }
+
+  .haiku-line {
+    font-size: 1.2rem;
+  }
+}

@@ -1,29 +1,78 @@
 <div class="home-container">
-  <div class="hero">
+  <header class="hero">
     <h1 class="title">Haikupedias</h1>
     <p class="tagline">Where poetry meets algorithmic music</p>
     <p class="description">
-      Compose a short poem by selecting words, and watch as your choices
-      transform into a musical composition inspired by Erik Satie's Gymnopédies.
+      Select a word, watch it transform into a haiku, and hear it come alive
+      as a musical composition inspired by Erik Satie's Gymnopédies.
     </p>
-    <button class="cta-button">Start Creating</button>
-  </div>
+  </header>
 
-  <div class="features">
-    <div class="feature">
-      <div class="feature-icon">📝</div>
-      <h3>Select Words</h3>
-      <p>Choose from curated word sets to compose your haiku</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🎵</div>
-      <h3>Generate Music</h3>
-      <p>Your word choices drive the harmonic composition</p>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🎨</div>
-      <h3>Create Art</h3>
-      <p>Each haikupedia is a unique poetic & musical object</p>
-    </div>
-  </div>
+  <main class="experience">
+    <!-- Step 1: Word Selection -->
+    <section class="step">
+      <div class="selection-header">
+        <div>
+          <h2 class="step-title">Select 8 Words</h2>
+          <p class="progress-text">{{ selectedWords().length }} / 8 words selected:
+            @for (word of selectedWords(); track word.id) {
+              <span class="selected-word" [class]="getWordSetClass(word)">{{ word.label }}</span><span
+                class="separator">, </span>
+            }
+          </p>
+        </div>
+        @if (selectedWords().length >= 8) {
+          <button class="reset-button" (click)="resetSelection()">Start Over</button>
+        }
+      </div>
+
+      @if (selectedWords().length < 8) {
+        <lib-word-selector [selectedWords]="selectedWords()" (wordSelected)="onWordSelected($event)" />
+      } @else {
+        <div class="selection-complete">
+          <p class="complete-message">✓ Selection complete! Scroll down to see your haiku.</p>
+        </div>
+      }
+    </section>
+
+    <!-- Step 2: Haiku Display (shown after word selection) -->
+    @if (haiku()) {
+      <section class="step" id="haiku-section">
+        <h2 class="step-title">Your Haiku</h2>
+        <lib-haiku-display [haiku]="haiku()!" />
+      </section>
+    }
+
+    <!-- Step 2.5: Composition Details (shown after haiku generation) -->
+    @if (composition()) {
+      <section class="step">
+        <h2 class="step-title">Composition Notes</h2>
+        <div class="composition-details">
+          @for (bar of composition()!.bars; track $index) {
+            <div class="bar">
+              <h3>Bar {{ $index + 1 }} (Tonic: {{ getNoteLabel(bar.tonic) }})</h3>
+              <div class="steps-grid">
+                @for (step of bar.steps; track $index) {
+                  <div class="step-detail">
+                    <span class="note-label">{{ getNoteLabel(step.root) }}</span>
+                    <span class="interval">{{ step.interval >= 0 ? '+' : '' }}{{ step.interval }}</span>
+                    <span class="arrow">→</span>
+                    <span class="note-label result">{{ getNoteLabel(step.result) }}</span>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    }
+
+    <!-- Step 3: Audio Controls (shown after haiku generation) -->
+    @if (composition()) {
+      <section class="step">
+        <h2 class="step-title">Musical Composition</h2>
+        <lib-audio-controls [composition]="composition()" (restart)="resetSelection()" />
+      </section>
+    }
+  </main>
 </div>

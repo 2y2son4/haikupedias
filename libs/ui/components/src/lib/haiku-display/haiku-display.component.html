@@ -1,0 +1,13 @@
+<div class="haiku-display">
+  <div class="haiku-container">
+    <div class="haiku-content">
+      @for (line of haiku().lines; track $index; let i = $index) {
+        <p class="haiku-line" [class]="'line-' + (i + 1)">
+          @for (word of line.words; track word.id) {
+            {{ word.label }}{{ $last ? '' : ' ' }}
+          }
+        </p>
+      }
+    </div>
+  </div>
+</div>

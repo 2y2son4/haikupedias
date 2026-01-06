@@ -1,0 +1,48 @@
+<div class="audio-controls">
+  @if (errorMessage()) {
+    <div class="error-message">
+      <p>⚠️ {{ errorMessage() }}</p>
+    </div>
+  }
+
+  <div class="controls-container">
+    @if (!hasPlayed()) {
+      <button class="control-button play-button" [disabled]="!canPlay" (click)="play()">
+        @if (isPlaying) {
+          <span class="icon playing">🎵</span>
+          <span>Playing...</span>
+        } @else {
+          <span class="icon">▶️</span>
+          <span>Play Composition</span>
+        }
+      </button>
+    }
+
+    @if (hasPlayed() && playbackState() !== 'playing') {
+      <button class="control-button replay-button" [disabled]="!canPlay" (click)="replay()">
+        <span class="icon">🔄</span>
+        <span>Replay</span>
+      </button>
+
+      <button class="control-button restart-button" (click)="onRestart()">
+        <span class="icon">🔁</span>
+        <span>Start Over</span>
+      </button>
+    }
+
+    @if (isPlaying) {
+      <button class="control-button play-button" disabled>
+        <span class="icon playing">🎵</span>
+        <span>Playing...</span>
+      </button>
+    }
+  </div>
+
+  @if (!isInitialized()) {
+    <p class="status-message">Initializing audio...</p>
+  }
+
+  @if (isInitialized() && !composition()) {
+    <p class="status-message">Select a word to generate a composition</p>
+  }
+</div>

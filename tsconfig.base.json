@@ -24,7 +24,8 @@
       "@haikupedias/poetry/haiku-engine": [
         "libs/poetry/haiku-engine/src/index.ts"
       ],
-      "@haikupedias/poetry/lexicon": ["libs/poetry/lexicon/src/index.ts"]
+      "@haikupedias/poetry/lexicon": ["libs/poetry/lexicon/src/index.ts"],
+      "@haikupedias/ui/components": ["libs/ui/components/src/index.ts"]
     },
     "strict": true,
     "noImplicitOverride": true,
