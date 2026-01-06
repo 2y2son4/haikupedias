@@ -1,3 +1,35 @@
-<h1>{{ title }}</h1>
-<p>Poetry meets algorithmic music.</p>
-<router-outlet />
+<div class="app-wrapper">
+  <header class="app-header">
+    <a routerLink="/" class="logo">Haikupedias</a>
+    <button class="menu-button" (click)="toggleMenu()" [class.open]="menuOpen">
+      <span class="menu-icon"></span>
+      <span class="menu-icon"></span>
+      <span class="menu-icon"></span>
+    </button>
+  </header>
+
+  <nav class="side-menu" [class.open]="menuOpen">
+    <div class="menu-overlay" (click)="closeMenu()"></div>
+    <div class="menu-content">
+      <button class="close-button" (click)="closeMenu()">×</button>
+      <ul class="menu-list">
+        <li>
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">
+            <span class="icon">🏠</span>
+            Home
+          </a>
+        </li>
+        <li>
+          <a routerLink="/lexicon" routerLinkActive="active" (click)="closeMenu()">
+            <span class="icon">📖</span>
+            Lexicon
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="app-content">
+    <router-outlet />
+  </main>
+</div>

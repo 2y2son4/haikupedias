@@ -1,0 +1,72 @@
+<div class="lexicon-container">
+  <header class="page-header">
+    <h1>Word Lexicon</h1>
+    <p class="subtitle">Explore the vocabulary available for composing haikupedias</p>
+  </header>
+
+  <section class="word-sets">
+    <div class="set-selector">
+      <button [class.active]="activeSet === 'A'" (click)="switchSet('A')">
+        Word Set A
+        <span class="theme">Contemplative & Natural</span>
+      </button>
+      <button [class.active]="activeSet === 'B'" (click)="switchSet('B')">
+        Word Set B
+        <span class="theme">Dynamic & Urban</span>
+      </button>
+    </div>
+
+    <div class="words-display">
+      <div class="word-category">
+        <h3>Nouns ({{ wordsByType.noun.length }})</h3>
+        <div class="word-grid">
+          <span *ngFor="let word of wordsByType.noun" [class.major]="word.tonalityGroup === 'major'"
+            [class.minor]="word.tonalityGroup === 'minor'" class="word">
+            {{ word.label }}
+          </span>
+        </div>
+      </div>
+
+      <div class="word-category">
+        <h3>Adjectives ({{ wordsByType.adjective.length }})</h3>
+        <div class="word-grid">
+          <span *ngFor="let word of wordsByType.adjective" [class.major]="word.tonalityGroup === 'major'"
+            [class.minor]="word.tonalityGroup === 'minor'" class="word">
+            {{ word.label }}
+          </span>
+        </div>
+      </div>
+
+      <div class="word-category">
+        <h3>Verbs ({{ wordsByType.verb.length }})</h3>
+        <div class="word-grid">
+          <span *ngFor="let word of wordsByType.verb" [class.major]="word.tonalityGroup === 'major'"
+            [class.minor]="word.tonalityGroup === 'minor'" class="word">
+            {{ word.label }}
+          </span>
+        </div>
+      </div>
+
+      <div class="word-category">
+        <h3>Adverbs ({{ wordsByType.adverb.length }})</h3>
+        <div class="word-grid">
+          <span *ngFor="let word of wordsByType.adverb" [class.major]="word.tonalityGroup === 'major'"
+            [class.minor]="word.tonalityGroup === 'minor'" class="word">
+            {{ word.label }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span class="legend-item">
+        <span class="badge major">Major</span>
+        Bright, uplifting tonality
+      </span>
+      <span class="legend-item">
+        <span class="badge minor">Minor</span>
+        Contemplative, introspective tonality
+      </span>
+    </div>
+  </section>
+</div>

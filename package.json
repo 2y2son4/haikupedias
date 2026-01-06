@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Algorithmic poetry and music generator",
   "scripts": {
-    "start": "nx serve haikupedias-shell",
+    "start": "nx serve haikupedias-shell --open",
     "build": "nx build haikupedias-shell",
     "build:all": "nx run-many --target=build --all",
     "test": "nx test",
@@ -14,7 +14,9 @@
     "music",
     "algorithmic-composition",
     "angular",
-    "nx"
+    "nx",
+    "satie",
+    "haiku"
   ],
   "author": "",
   "license": "ISC",
