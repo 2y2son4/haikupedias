@@ -1,4 +1,4 @@
-import { Composition } from '@haikupedias/core/types';
+import { ScheduledNote } from '@haikupedias/music/arrangers/base-arranger';
 import { NotePlayer } from './note-player';
 
 /**
@@ -8,6 +8,9 @@ export type PlaybackState = 'idle' | 'playing' | 'paused' | 'stopped';
 
 /**
  * Composition player with scheduling and playback controls
+ *
+ * This class is a simple audio playback engine that plays scheduled notes.
+ * It does not contain any musical interpretation logic - that is handled by arrangers.
  */
 export class CompositionPlayer {
   private notePlayer: NotePlayer;
@@ -21,38 +24,31 @@ export class CompositionPlayer {
   }
 
   /**
-   * Play a composition
-   * @param composition - The composition to play
-   * @param noteDuration - Duration of each note in seconds (default: 1.5s)
+   * Play a sequence of scheduled notes
+   * @param notes - Array of notes with timing information
    */
-  play(composition: Composition, noteDuration = 1.5): void {
+  play(notes: ScheduledNote[]): void {
     if (this.state === 'playing') {
       return; // Already playing
     }
 
     this.state = 'playing';
     this.startTime = this.audioContext.currentTime;
-    this.scheduledNotes = 0;
+    this.scheduledNotes = notes.length;
 
     // Schedule all notes
-    let currentTime = this.startTime;
-
-    for (const bar of composition.bars) {
-      // Play tonic
-      this.notePlayer.playNote(bar.tonic, currentTime, noteDuration);
-      currentTime += noteDuration;
-      this.scheduledNotes++;
-
-      // Play each step result
-      for (const step of bar.steps) {
-        this.notePlayer.playNote(step.result, currentTime, noteDuration);
-        currentTime += noteDuration;
-        this.scheduledNotes++;
-      }
+    for (const note of notes) {
+      this.notePlayer.playNote(
+        note.note,
+        this.startTime + note.startTime,
+        note.duration,
+      );
     }
 
     // Calculate total duration and schedule state reset
-    const totalDuration = this.scheduledNotes * noteDuration;
+    const lastNote = notes[notes.length - 1];
+    const totalDuration = lastNote.startTime + lastNote.duration;
+
     setTimeout(() => {
       if (this.state === 'playing') {
         this.state = 'idle';

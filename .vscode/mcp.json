@@ -6,17 +6,17 @@
     },
     "angular-cli": {
       "command": "npx",
-      "args": ["-y", "@angular/cli"],
+      "args": [
+        "-y",
+        "@angular/cli"
+      ],
       "type": "stdio"
     },
     "angular-docs": {
       "command": "npx",
-      "args": ["angular-mcp-server"]
-    },
-    "nx-mcp": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["nx-mcp@latest"]
+      "args": [
+        "angular-mcp-server"
+      ]
     }
   },
   "inputs": []

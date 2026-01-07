@@ -1,0 +1,39 @@
+<div class="word-selector">
+  <h3>Select Your Words</h3>
+  <p class="instructions">Choose <strong>8 unique words</strong> to create your haiku (2-4-2 pattern: 2 words, then 4
+    words, then 2 words)</p>
+
+  <div class="word-sets">
+    <div class="word-set">
+      <h4>Set A</h4>
+      <div class="word-grid">
+        @for (word of wordsSetA; track word.id) {
+          <button class="word-button" [class.selected]="isSelected(word)" [class.major]="word.tonalityGroup === 'major'"
+            [class.minor]="word.tonalityGroup === 'minor'" (click)="selectWord(word)">
+            <span class="word-text">{{ word.label }}</span>
+            <span class="word-tonality">{{ word.tonalityGroup }}</span>
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="word-set">
+      <h4>Set B</h4>
+      <div class="word-grid">
+        @for (word of wordsSetB; track word.id) {
+          <button class="word-button" [class.selected]="isSelected(word)" [class.major]="word.tonalityGroup === 'major'"
+            [class.minor]="word.tonalityGroup === 'minor'" (click)="selectWord(word)">
+            <span class="word-text">{{ word.label }}</span>
+            <span class="word-tonality">{{ word.tonalityGroup }}</span>
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+
+  @if (showToast()) {
+    <div class="toast-message">
+      <p>✓ Selected: <strong>{{ lastSelectedWord()?.label }}</strong> ({{ lastSelectedWord()?.tonalityGroup }})</p>
+    </div>
+  }
+</div>
