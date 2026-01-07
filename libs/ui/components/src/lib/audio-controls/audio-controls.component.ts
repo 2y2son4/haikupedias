@@ -4,6 +4,10 @@ import { Composition } from '@haikupedias/core/types';
 import {
   AudioContextManager,
   CompositionPlayer,
+  INotePlayer,
+  SyntheticNotePlayer,
+  PianoSynthNotePlayer,
+  PianoNotePlayer,
 } from '@haikupedias/music/audio';
 import {
   CompositionArranger,
@@ -33,11 +37,20 @@ export class AudioControlsComponent {
 
   private audioManager: AudioContextManager | null = null;
   private player: CompositionPlayer | null = null;
+  private syntheticPlayer: INotePlayer | null = null;
+  private pianoSynthPlayer: INotePlayer | null = null;
+  private pianoSamplesPlayer: INotePlayer | null = null;
 
   // Arrangers for different musical interpretations (public for template access)
   gymnoArranger = new GymnopedieArranger();
   dodecaArranger = new DodecaphonicArranger();
   currentArranger = signal<CompositionArranger>(this.gymnoArranger); // Default to Gymnopédie
+
+  // Sound type selection
+  soundType = signal<'synthetic' | 'piano-synth' | 'piano-samples'>(
+    'synthetic',
+  ); // Default to synthetic
+  soundTypeSelected = signal(false);
 
   playbackState = signal<PlaybackState>('idle');
   isInitialized = signal(false);
@@ -56,7 +69,14 @@ export class AudioControlsComponent {
       await this.audioManager.initialize();
 
       const context = this.audioManager.getContext();
-      this.player = new CompositionPlayer(context);
+
+      // Create all three note players
+      this.syntheticPlayer = new SyntheticNotePlayer(context);
+      this.pianoSynthPlayer = new PianoSynthNotePlayer(context);
+      this.pianoSamplesPlayer = new PianoNotePlayer(context);
+
+      // Initialize player with default (synthetic)
+      this.player = new CompositionPlayer(context, this.syntheticPlayer);
 
       this.isInitialized.set(true);
     } catch (error) {
@@ -113,6 +133,29 @@ export class AudioControlsComponent {
     this.genreSelectedEvent.emit(genreType);
   }
 
+  selectSoundType(type: 'synthetic' | 'piano-synth' | 'piano-samples') {
+    this.soundType.set(type);
+    this.soundTypeSelected.set(true);
+
+    // Update player with new sound type
+    if (this.audioManager) {
+      const context = this.audioManager.getContext();
+      let notePlayer: INotePlayer | null = null;
+
+      if (type === 'synthetic') {
+        notePlayer = this.syntheticPlayer;
+      } else if (type === 'piano-synth') {
+        notePlayer = this.pianoSynthPlayer;
+      } else {
+        notePlayer = this.pianoSamplesPlayer;
+      }
+
+      if (notePlayer) {
+        this.player = new CompositionPlayer(context, notePlayer);
+      }
+    }
+  }
+
   togglePlaybackStyle() {
     const current = this.currentArranger();
     const newArranger =
@@ -125,6 +168,22 @@ export class AudioControlsComponent {
     this.genreSelectedEvent.emit(genreType);
   }
 
+  toggleSoundType() {
+    const current = this.soundType();
+    let newType: 'synthetic' | 'piano-synth' | 'piano-samples';
+
+    // Cycle through: synthetic -> piano-synth -> piano-samples -> synthetic
+    if (current === 'synthetic') {
+      newType = 'piano-synth';
+    } else if (current === 'piano-synth') {
+      newType = 'piano-samples';
+    } else {
+      newType = 'synthetic';
+    }
+
+    this.selectSoundType(newType);
+  }
+
   onRestart() {
     this.restart.emit();
   }
@@ -134,11 +193,20 @@ export class AudioControlsComponent {
       this.isInitialized() &&
       this.composition() !== null &&
       this.genreSelected() &&
+      this.soundTypeSelected() &&
       this.playbackState() !== 'playing'
     );
   }
 
   get canSelectGenre(): boolean {
+    return (
+      this.isInitialized() &&
+      this.composition() !== null &&
+      this.soundTypeSelected()
+    );
+  }
+
+  get canSelectSoundType(): boolean {
     return this.isInitialized() && this.composition() !== null;
   }
 
@@ -148,6 +216,13 @@ export class AudioControlsComponent {
 
   get styleLabel(): string {
     return this.currentArranger().getName();
+  }
+
+  get soundLabel(): string {
+    const type = this.soundType();
+    if (type === 'synthetic') return 'Synthetic';
+    if (type === 'piano-synth') return 'Piano Synth';
+    return 'Piano Samples';
   }
 
   get currentGenre(): 'gymnopedie' | 'dodecaphonic' | null {
@@ -178,9 +253,15 @@ export class AudioControlsComponent {
         sampleRate,
       );
 
+      // Create offline note player (using synthetic for consistent rendering)
+      const offlineNotePlayer = new SyntheticNotePlayer(
+        offlineContext as unknown as AudioContext,
+      );
+
       // Create player with offline context and play arranged notes
       const offlinePlayer = new CompositionPlayer(
         offlineContext as unknown as AudioContext,
+        offlineNotePlayer,
       );
       offlinePlayer.play(notes);
 

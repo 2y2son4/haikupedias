@@ -3,6 +3,97 @@
   text-align: center;
 }
 
+.sound-type-selection {
+  width: 100%;
+  margin-bottom: 1.5rem;
+
+  .selection-prompt {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+
+  .sound-type-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+}
+
+.sound-type-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem 2.5rem;
+  font-size: 1rem;
+  border: 3px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 200px;
+
+  .sound-icon {
+    font-size: 2rem;
+  }
+
+  .sound-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .sound-description {
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.synthetic-button {
+  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+  color: #00838f;
+  border-color: #00838f;
+
+  &:hover:not(:disabled) {
+    background: #00838f;
+    color: white;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 131, 143, 0.5);
+  }
+}
+
+.piano-synth-button {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  color: #e65100;
+  border-color: #e65100;
+
+  &:hover:not(:disabled) {
+    background: #e65100;
+    color: white;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(230, 81, 0, 0.5);
+  }
+}
+
+.piano-samples-button {
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+  color: #c2185b;
+  border-color: #c2185b;
+
+  &:hover:not(:disabled) {
+    background: #c2185b;
+    color: white;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(194, 24, 91, 0.5);
+  }
+}
+
 .genre-selection {
   width: 100%;
   margin-bottom: 1.5rem;
@@ -153,6 +244,18 @@
   background: #6a1b9a;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(123, 31, 162, 0.6);
+}
+
+.sound-toggle-button {
+  background: #f57c00;
+  color: white;
+  box-shadow: 0 4px 15px rgba(245, 124, 0, 0.4);
+}
+
+.sound-toggle-button:hover:not(:disabled) {
+  background: #ef6c00;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 124, 0, 0.6);
 }
 
 .download-button {
