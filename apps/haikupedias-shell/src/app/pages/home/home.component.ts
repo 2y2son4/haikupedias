@@ -9,6 +9,8 @@ import { Word, Haiku, Composition, NoteValue } from '@haikupedias/core/types';
 import { HaikuBuilder } from '@haikupedias/poetry/haiku-engine';
 import { CompositionGenerator } from '@haikupedias/music/composition-engine';
 import { WORD_SET_A, WORD_SET_B } from '@haikupedias/poetry/lexicon';
+import { GymnopedieArranger } from '@haikupedias/music/arrangers/gymnopedie-arranger';
+import { DodecaphonicArranger } from '@haikupedias/music/arrangers/dodecaphonic-arranger';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +27,13 @@ import { WORD_SET_A, WORD_SET_B } from '@haikupedias/poetry/lexicon';
 export class HomeComponent {
   // Selected words (need 8 for haiku)
   selectedWords = signal<Word[]>([]);
+
+  // Selected musical genre
+  selectedGenre = signal<'gymnopedie' | 'dodecaphonic' | null>(null);
+
+  // Arranger instances for getting composition details
+  private gymnoArranger = new GymnopedieArranger();
+  private dodecaArranger = new DodecaphonicArranger();
 
   // Note labels for display
   private readonly noteLabels = [
@@ -64,7 +73,6 @@ export class HomeComponent {
     if (words.length !== 8) return null;
 
     const result = HaikuBuilder.buildFromArray(words);
-    console.log('HaikuBuilder result:', result);
 
     return result.success ? result.haiku : null;
   });
@@ -77,20 +85,23 @@ export class HomeComponent {
   });
 
   onWordSelected(word: Word) {
-    console.log('Word selected:', word);
     const current = this.selectedWords();
 
     // Add word if not already selected and less than 8 words
     if (current.length < 8 && !current.find((w) => w.id === word.id)) {
       this.selectedWords.set([...current, word]);
-      console.log('Selected words:', this.selectedWords());
     }
   }
 
   resetSelection() {
     this.selectedWords.set([]);
+    this.selectedGenre.set(null);
     // Scroll to top smoothly
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  onGenreSelected(genre: 'gymnopedie' | 'dodecaphonic') {
+    this.selectedGenre.set(genre);
   }
 
   getWordSetClass(word: Word): string {
@@ -99,5 +110,25 @@ export class HomeComponent {
 
   getNoteLabel(note: NoteValue): string {
     return this.noteLabels[note];
+  }
+
+  // Get 12-tone row for dodecaphonic display
+  getDodecaphonicToneRow(): NoteValue[] {
+    const comp = this.composition();
+    if (!comp) return [];
+
+    const notes = this.dodecaArranger.arrange(comp, 1.0);
+    return notes.map((n) => n.note);
+  }
+
+  // Get gymnopédie structure (bars with tonic + chord)
+  getGymnopedieStructure(): Array<{ tonic: NoteValue; chord: NoteValue[] }> {
+    const comp = this.composition();
+    if (!comp) return [];
+
+    return comp.bars.map((bar) => ({
+      tonic: bar.steps[0].root,
+      chord: [bar.steps[1].root, bar.steps[2].root, bar.steps[3].root],
+    }));
   }
 }

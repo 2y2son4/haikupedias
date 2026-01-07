@@ -1,0 +1,19 @@
+{
+  "name": "gymnopedie-arranger",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/music/arrangers/gymnopedie-arranger/src",
+  "projectType": "library",
+  "tags": ["type:library", "domain:music"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/music/arrangers/gymnopedie-arranger",
+        "main": "libs/music/arrangers/gymnopedie-arranger/src/index.ts",
+        "tsConfig": "libs/music/arrangers/gymnopedie-arranger/tsconfig.lib.json",
+        "assets": ["libs/music/arrangers/gymnopedie-arranger/*.md"]
+      }
+    }
+  }
+}

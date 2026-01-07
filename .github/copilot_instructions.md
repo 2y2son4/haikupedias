@@ -1,7 +1,7 @@
 # Copilot Instructions — Haikupedias (V1)
 
 > **Audience**: AI coding agents (e.g. GitHub Copilot) working inside an IDE.
-> **Goal**: Help the agent produce *correct, restrained, domain-aware code* for an artistic system.
+> **Goal**: Help the agent produce _correct, restrained, domain-aware code_ for an artistic system.
 
 This file **replaces** generic enterprise Copilot instructions. Follow it strictly.
 
@@ -13,6 +13,7 @@ Haikupedias is **not** an enterprise application.
 It is an **artistic, algorithmic poetry + music system**.
 
 Primary values:
+
 - Conceptual correctness
 - Deterministic behavior
 - Clear separation of domains
@@ -30,7 +31,7 @@ Avoid overengineering at all costs.
 - **No SSR**
 - **No Module Federation in V1**
 
-Future versions *may* introduce multiple “universes” and MFEs, but **do not anticipate them in code**.
+Future versions _may_ introduce multiple “universes” and MFEs, but **do not anticipate them in code**.
 
 ---
 
@@ -83,11 +84,13 @@ Nx boundaries must be respected.
 The agent **must not invent musical behavior**.
 
 All music generation must:
+
 - Use **numeric note representations (0–11)**
 - Follow the pseudocode defined in `Haikupedias_V1_Dev_Guide.md`
 - Be deterministic given the same inputs
 
 Forbidden:
+
 - Improvisation
 - Random harmony outside specified rules
 - Advanced theory concepts (modes, scales, modulations)
@@ -113,6 +116,7 @@ Do not introduce third-party audio frameworks.
 - Comments are encouraged for musical steps
 
 Avoid:
+
 - Metaprogramming
 - Dynamic evaluation
 - Hidden side effects
@@ -124,11 +128,13 @@ Avoid:
 Prefer **domain-neutral names** to allow future expansion:
 
 Good:
+
 - `CompositionRules`
 - `Universe`
 - `generateComposition()`
 
 Avoid:
+
 - Hardcoding `haiku` inside music libraries
 - Author-specific naming in shared logic
 
@@ -177,5 +183,4 @@ Write code that is:
 - Predictable
 - Respectful of constraints
 
-*End of Copilot instructions.*
-
+_End of Copilot instructions._

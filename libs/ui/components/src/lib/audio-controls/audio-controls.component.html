@@ -6,20 +6,49 @@
   }
 
   <div class="controls-container">
-    @if (!hasPlayed()) {
+    <!-- Genre Selection (before first play) -->
+    @if (!genreSelected() && !hasPlayed()) {
+      <div class="genre-selection">
+        <p class="selection-prompt">Choose your musical style:</p>
+        <div class="genre-buttons">
+          <button class="genre-button gymno-button" [disabled]="!canSelectGenre" (click)="selectGenre(gymnoArranger)">
+            <span class="genre-name">{{ gymnoArranger.getName() }}</span>
+            <span class="genre-description">Chordal, dreamy</span>
+          </button>
+          <button class="genre-button dodeca-button" [disabled]="!canSelectGenre" (click)="selectGenre(dodecaArranger)">
+            <span class="genre-name">{{ dodecaArranger.getName() }}</span>
+            <span class="genre-description">Sequential, atonal</span>
+          </button>
+        </div>
+      </div>
+    }
+
+    <!-- Play Button (after genre selected, before first play) -->
+    @if (genreSelected() && !hasPlayed()) {
       <button class="control-button play-button" [disabled]="!canPlay" (click)="play()">
         @if (isPlaying) {
           <span class="icon playing">🎵</span>
           <span>Playing...</span>
         } @else {
-          <span>Play Composition</span>
+          <span>Play Composition ({{ styleLabel }})</span>
         }
       </button>
     }
 
+    <!-- Post-Play Controls -->
     @if (hasPlayed() && playbackState() !== 'playing') {
       <button class="control-button replay-button" [disabled]="!canPlay" (click)="replay()">
-        <span>Replay</span>
+        <span>Replay ({{ styleLabel }})</span>
+      </button>
+
+      <button class="control-button style-toggle-button" (click)="togglePlaybackStyle()">
+        <span>
+          Switch to {{ currentArranger() === gymnoArranger ? dodecaArranger.getName() : gymnoArranger.getName() }}
+        </span>
+      </button>
+
+      <button class="control-button download-button" (click)="downloadComposition()">
+        <span>⬇ Download</span>
       </button>
 
       <button class="control-button restart-button" (click)="onRestart()">
@@ -27,6 +56,7 @@
       </button>
     }
 
+    <!-- Playing State -->
     @if (isPlaying) {
       <button class="control-button play-button" disabled>
         <span class="icon playing">🎵</span>
@@ -40,6 +70,6 @@
   }
 
   @if (isInitialized() && !composition()) {
-    <p class="status-message">Select a word to generate a composition</p>
+    <p class="status-message">Select words to generate a composition</p>
   }
 </div>

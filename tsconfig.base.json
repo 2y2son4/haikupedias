@@ -16,6 +16,15 @@
     "paths": {
       "@haikupedias/core/types": ["libs/core/types/src/index.ts"],
       "@haikupedias/core/utils": ["libs/core/utils/src/index.ts"],
+      "@haikupedias/music/arrangers/base-arranger": [
+        "libs/music/arrangers/base-arranger/src/index.ts"
+      ],
+      "@haikupedias/music/arrangers/dodecaphonic-arranger": [
+        "libs/music/arrangers/dodecaphonic-arranger/src/index.ts"
+      ],
+      "@haikupedias/music/arrangers/gymnopedie-arranger": [
+        "libs/music/arrangers/gymnopedie-arranger/src/index.ts"
+      ],
       "@haikupedias/music/audio": ["libs/music/audio/src/index.ts"],
       "@haikupedias/music/composition-engine": [
         "libs/music/composition-engine/src/index.ts"

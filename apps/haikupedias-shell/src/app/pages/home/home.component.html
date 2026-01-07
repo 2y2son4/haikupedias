@@ -39,23 +39,55 @@
         <h2 class="step-title">Your Haiku</h2>
         <lib-haiku-display [haiku]="haiku()!" />
         @if (composition()) {
-          <!-- Step 2.5: Composition Details (shown after haiku generation) -->
-          <div class="composition-details">
-            @for (bar of composition()!.bars; track $index) {
-              <div class="bar">
-                <h3>Bar {{ $index + 1 }} (Tonic: {{ getNoteLabel(bar.tonic) }})</h3>
-                <div class="steps-grid">
-                  @for (step of bar.steps; track $index) {
-                    <div class="step-detail">
-                      <span class="note-label played">{{ getNoteLabel(step.root) }}</span>
-                    </div>
-                  }
+          <!-- Step 2.5: Composition Details (shown after genre selection) -->
+          @if (selectedGenre()) {
+            <div class="composition-details">
+              <h3>Composition Structure</h3>
+
+              @if (selectedGenre() === 'dodecaphonic') {
+                <!-- Dodecaphonic: Show all 12 notes in tone row -->
+                <div class="dodecaphonic-structure">
+                  <p class="structure-label">12-Tone Row:</p>
+                  <div class="tone-row">
+                    @for (note of getDodecaphonicToneRow(); track $index) {
+                      <span class="note-label">{{ getNoteLabel(note) }}</span>
+                    }
+                  </div>
                 </div>
-              </div>
-            }
-          </div>
+              }
+
+              @if (selectedGenre() === 'gymnopedie') {
+                <!-- Gymnopédie: Show tonic + chord structure (played twice) -->
+                <div class="gymnopedie-structure">
+                  <p class="structure-label">Pattern (played twice):</p>
+                  <div class="bars-container">
+                    @for (barStructure of getGymnopedieStructure(); track $index) {
+                      <div class="bar-structure">
+                        <div class="bar-label">Bar {{ $index + 1 }}</div>
+                        <div class="notes-structure">
+                          <div class="tonic-section">
+                            <span class="note-label solo">{{ getNoteLabel(barStructure.tonic) }}</span>
+                            <span class="play-style">solo</span>
+                          </div>
+                          <div class="chord-section">
+                            <div class="chord-notes">
+                              @for (note of barStructure.chord; track $index) {
+                                <span class="note-label chord">{{ getNoteLabel(note) }}</span>
+                              }
+                            </div>
+                            <span class="play-style">chord</span>
+                          </div>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+          }
           <!-- Step 3: Audio Controls (shown after haiku generation) -->
-          <lib-audio-controls [composition]="composition()" (restart)="resetSelection()" />
+          <lib-audio-controls [composition]="composition()" (restart)="resetSelection()"
+            (genreSelectedEvent)="onGenreSelected($event)" />
         }
       </section>
     }

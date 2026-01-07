@@ -1,0 +1,19 @@
+{
+  "name": "base-arranger",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/music/arrangers/base-arranger/src",
+  "projectType": "library",
+  "tags": ["type:library", "domain:music"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/music/arrangers/base-arranger",
+        "main": "libs/music/arrangers/base-arranger/src/index.ts",
+        "tsConfig": "libs/music/arrangers/base-arranger/tsconfig.lib.json",
+        "assets": ["libs/music/arrangers/base-arranger/*.md"]
+      }
+    }
+  }
+}
