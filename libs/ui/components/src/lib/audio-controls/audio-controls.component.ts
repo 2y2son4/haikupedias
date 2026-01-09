@@ -165,6 +165,9 @@ export class AudioControlsComponent {
       }
 
       if (notePlayer) {
+        // Intentionally create a new CompositionPlayer when the sound type changes.
+        // This ensures the player is fully reset for the new INotePlayer while
+        // reusing the existing AudioContext from audioManager.
         this.player = new CompositionPlayer(context, notePlayer);
       }
     }
