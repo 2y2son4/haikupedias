@@ -4,6 +4,14 @@ import { Composition } from '@haikupedias/core/types';
 import {
   AudioContextManager,
   CompositionPlayer,
+  INotePlayer,
+  SyntheticNotePlayer,
+  PianoSynthNotePlayer,
+  PianoNotePlayer,
+  InstrumentNotePlayer,
+  SORTED_INSTRUMENTS,
+  INSTRUMENT_NAMES,
+  InstrumentType,
 } from '@haikupedias/music/audio';
 import {
   CompositionArranger,
@@ -33,11 +41,26 @@ export class AudioControlsComponent {
 
   private audioManager: AudioContextManager | null = null;
   private player: CompositionPlayer | null = null;
+  private syntheticPlayer: INotePlayer | null = null;
+  private pianoSynthPlayer: INotePlayer | null = null;
+  private pianoSamplesPlayer: INotePlayer | null = null;
+  private instrumentPlayer: InstrumentNotePlayer | null = null;
 
   // Arrangers for different musical interpretations (public for template access)
   gymnoArranger = new GymnopedieArranger();
   dodecaArranger = new DodecaphonicArranger();
   currentArranger = signal<CompositionArranger>(this.gymnoArranger); // Default to Gymnopédie
+
+  // Sound type selection
+  soundType = signal<
+    'synthetic' | 'piano-synth' | 'piano-samples' | 'instruments'
+  >('synthetic'); // Default to synthetic
+  soundTypeSelected = signal(false);
+
+  // Instrument selection (only used when soundType is 'instruments')
+  selectedInstrument = signal<InstrumentType>(SORTED_INSTRUMENTS[0]);
+  showInstrumentMenu = signal(false);
+  instrumentNames = INSTRUMENT_NAMES;
 
   playbackState = signal<PlaybackState>('idle');
   isInitialized = signal(false);
@@ -46,7 +69,6 @@ export class AudioControlsComponent {
   genreSelected = signal(false);
 
   constructor() {
-    // Auto-initialize audio when component is created
     this.initializeAudio();
   }
 
@@ -56,7 +78,15 @@ export class AudioControlsComponent {
       await this.audioManager.initialize();
 
       const context = this.audioManager.getContext();
-      this.player = new CompositionPlayer(context);
+
+      // Create all note players
+      this.syntheticPlayer = new SyntheticNotePlayer(context);
+      this.pianoSynthPlayer = new PianoSynthNotePlayer(context);
+      this.pianoSamplesPlayer = new PianoNotePlayer(context);
+      this.instrumentPlayer = new InstrumentNotePlayer(context, 'piano');
+
+      // Initialize player with default (synthetic)
+      this.player = new CompositionPlayer(context, this.syntheticPlayer);
 
       this.isInitialized.set(true);
     } catch (error) {
@@ -113,6 +143,52 @@ export class AudioControlsComponent {
     this.genreSelectedEvent.emit(genreType);
   }
 
+  selectSoundType(
+    type: 'synthetic' | 'piano-synth' | 'piano-samples' | 'instruments',
+  ) {
+    this.soundType.set(type);
+    this.soundTypeSelected.set(true);
+
+    // Update player with new sound type
+    if (this.audioManager) {
+      const context = this.audioManager.getContext();
+      let notePlayer: INotePlayer | null = null;
+
+      if (type === 'synthetic') {
+        notePlayer = this.syntheticPlayer;
+      } else if (type === 'piano-synth') {
+        notePlayer = this.pianoSynthPlayer;
+      } else if (type === 'piano-samples') {
+        notePlayer = this.pianoSamplesPlayer;
+      } else if (type === 'instruments') {
+        notePlayer = this.instrumentPlayer;
+      }
+
+      if (notePlayer) {
+        // Intentionally create a new CompositionPlayer when the sound type changes.
+        // This ensures the player is fully reset for the new INotePlayer while
+        // reusing the existing AudioContext from audioManager.
+        this.player = new CompositionPlayer(context, notePlayer);
+      }
+    }
+  }
+
+  selectInstrument(instrument: InstrumentType) {
+    this.selectedInstrument.set(instrument);
+    if (this.instrumentPlayer) {
+      this.instrumentPlayer.changeInstrument(instrument);
+      this.showInstrumentMenu.set(false);
+    }
+  }
+
+  toggleInstrumentMenu() {
+    this.showInstrumentMenu.update((value) => !value);
+  }
+
+  getAvailableInstruments(): InstrumentType[] {
+    return SORTED_INSTRUMENTS;
+  }
+
   togglePlaybackStyle() {
     const current = this.currentArranger();
     const newArranger =
@@ -125,6 +201,33 @@ export class AudioControlsComponent {
     this.genreSelectedEvent.emit(genreType);
   }
 
+  toggleSoundType() {
+    const current = this.soundType();
+    let newType: 'synthetic' | 'piano-synth' | 'piano-samples' | 'instruments';
+
+    // Cycle through: synthetic -> piano-synth -> piano-samples -> instruments -> synthetic
+    if (current === 'synthetic') {
+      newType = 'piano-synth';
+    } else if (current === 'piano-synth') {
+      newType = 'piano-samples';
+    } else if (current === 'piano-samples') {
+      newType = 'instruments';
+    } else {
+      newType = 'synthetic';
+    }
+
+    this.selectSoundType(newType);
+  }
+
+  changeInstrumentSelection() {
+    // Reset to instrument selection state without restarting everything
+    this.hasPlayed.set(false);
+    this.genreSelected.set(false);
+    this.showInstrumentMenu.set(false);
+    // Keep soundType as 'instruments' and soundTypeSelected as true
+    // This will show the instrument dropdown again
+  }
+
   onRestart() {
     this.restart.emit();
   }
@@ -134,11 +237,20 @@ export class AudioControlsComponent {
       this.isInitialized() &&
       this.composition() !== null &&
       this.genreSelected() &&
+      this.soundTypeSelected() &&
       this.playbackState() !== 'playing'
     );
   }
 
   get canSelectGenre(): boolean {
+    return (
+      this.isInitialized() &&
+      this.composition() !== null &&
+      this.soundTypeSelected()
+    );
+  }
+
+  get canSelectSoundType(): boolean {
     return this.isInitialized() && this.composition() !== null;
   }
 
@@ -148,6 +260,18 @@ export class AudioControlsComponent {
 
   get styleLabel(): string {
     return this.currentArranger().getName();
+  }
+
+  get soundLabel(): string {
+    const type = this.soundType();
+    if (type === 'synthetic') return 'Synthetic';
+    if (type === 'piano-synth') return 'Piano Synth';
+    if (type === 'piano-samples') return 'Piano Samples';
+    return `Instruments: ${INSTRUMENT_NAMES[this.selectedInstrument()]}`;
+  }
+
+  get canDownload(): boolean {
+    return this.soundType() === 'synthetic';
   }
 
   get currentGenre(): 'gymnopedie' | 'dodecaphonic' | null {
@@ -178,9 +302,15 @@ export class AudioControlsComponent {
         sampleRate,
       );
 
+      // Create offline note player - only synthetic sound supports download
+      const offlineNotePlayer = new SyntheticNotePlayer(
+        offlineContext as unknown as AudioContext,
+      );
+
       // Create player with offline context and play arranged notes
       const offlinePlayer = new CompositionPlayer(
         offlineContext as unknown as AudioContext,
+        offlineNotePlayer,
       );
       offlinePlayer.play(notes);
 

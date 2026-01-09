@@ -6,8 +6,64 @@
   }
 
   <div class="controls-container">
-    <!-- Genre Selection (before first play) -->
-    @if (!genreSelected() && !hasPlayed()) {
+    <!-- Sound Type Selection (first step) -->
+    @if (!soundTypeSelected() && !hasPlayed()) {
+      <div class="sound-type-selection">
+        <p class="selection-prompt">Choose your sound:</p>
+        <div class="sound-type-buttons">
+          <button class="sound-type-button synthetic-button" [disabled]="!canSelectSoundType"
+            (click)="selectSoundType('synthetic')">
+            <span class="sound-icon">🎵</span>
+            <span class="sound-name">Synthetic</span>
+            <span class="sound-description">Classic sine waves</span>
+          </button>
+          <button class="sound-type-button piano-synth-button" [disabled]="!canSelectSoundType"
+            (click)="selectSoundType('piano-synth')">
+            <span class="sound-icon">🎹</span>
+            <span class="sound-name">Piano (Synth)</span>
+            <span class="sound-description">Rich FM synthesis</span>
+          </button>
+          <button class="sound-type-button piano-samples-button" [disabled]="!canSelectSoundType"
+            (click)="selectSoundType('piano-samples')">
+            <span class="sound-icon">🎹</span>
+            <span class="sound-name">Piano (Samples)</span>
+            <span class="sound-description">Real recordings</span>
+          </button>
+          <button class="sound-type-button instruments-button" [disabled]="!canSelectSoundType"
+            (click)="selectSoundType('instruments')">
+            <span class="sound-icon">🎻</span>
+            <span class="sound-name">Instruments</span>
+            <span class="sound-description">Various samples</span>
+          </button>
+        </div>
+      </div>
+    }
+
+    <!-- Instrument selector (shown when instruments sound type is selected) -->
+    @if (soundType() === 'instruments' && soundTypeSelected() && !genreSelected() && !hasPlayed()) {
+      <div class="instrument-selector-container">
+        <p class="selection-prompt">Select an instrument:</p>
+        <div class="instrument-selector">
+          <button class="instrument-menu-toggle" (click)="toggleInstrumentMenu()">
+            <span>{{ instrumentNames[selectedInstrument()] }}</span>
+            <span class="dropdown-arrow">{{ showInstrumentMenu() ? '▲' : '▼' }}</span>
+          </button>
+          @if (showInstrumentMenu()) {
+            <div class="instrument-menu">
+              @for (instrument of getAvailableInstruments(); track instrument) {
+                <button class="instrument-option" [class.selected]="selectedInstrument() === instrument"
+                  (click)="selectInstrument(instrument)">
+                  {{ instrumentNames[instrument] }}
+                </button>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Genre Selection (after sound type, before first play) -->
+    @if (soundTypeSelected() && !genreSelected() && !hasPlayed()) {
       <div class="genre-selection">
         <p class="selection-prompt">Choose your musical style:</p>
         <div class="genre-buttons">
@@ -23,8 +79,8 @@
       </div>
     }
 
-    <!-- Play Button (after genre selected, before first play) -->
-    @if (genreSelected() && !hasPlayed()) {
+    <!-- Play Button (after both selections, before first play) -->
+    @if (soundTypeSelected() && genreSelected() && !hasPlayed()) {
       <button class="control-button play-button" [disabled]="!canPlay" (click)="play()">
         @if (isPlaying) {
           <span class="icon playing">🎵</span>
@@ -38,7 +94,7 @@
     <!-- Post-Play Controls -->
     @if (hasPlayed() && playbackState() !== 'playing') {
       <button class="control-button replay-button" [disabled]="!canPlay" (click)="replay()">
-        <span>Replay ({{ styleLabel }})</span>
+        <span>Replay ({{ styleLabel }} - {{ soundLabel }})</span>
       </button>
 
       <button class="control-button style-toggle-button" (click)="togglePlaybackStyle()">
@@ -47,9 +103,26 @@
         </span>
       </button>
 
-      <button class="control-button download-button" (click)="downloadComposition()">
-        <span>⬇ Download</span>
+      <button class="control-button sound-toggle-button" (click)="toggleSoundType()">
+        <span>Switch Sound</span>
       </button>
+
+      @if (soundType() === 'instruments') {
+        <button class="control-button instrument-change-button" (click)="changeInstrumentSelection()">
+          <span>Change Instrument</span>
+        </button>
+      }
+
+      @if (canDownload) {
+        <button class="control-button download-button" (click)="downloadComposition()">
+          <span>⬇ Download</span>
+        </button>
+      } @else {
+        <div class="download-info">
+          <p class="info-text">💡 Download is only available with Synthetic sound</p>
+          <p class="info-subtext">(Tone.js doesn't support offline rendering)</p>
+        </div>
+      }
 
       <button class="control-button restart-button" (click)="onRestart()">
         <span>Start Over</span>

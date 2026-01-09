@@ -1,6 +1,195 @@
 .audio-controls {
-  padding: 2rem 2rem 0;
+  padding: 1rem;
   text-align: center;
+}
+
+.sound-type-selection {
+  width: 100%;
+  margin-bottom: 1.5rem;
+
+  .selection-prompt {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+
+  .sound-type-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+}
+
+.sound-type-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem 2.5rem;
+  font-size: 1rem;
+  border: 3px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 280px;
+
+  .sound-icon {
+    font-size: 2rem;
+  }
+
+  .sound-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .sound-description {
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.synthetic-button {
+  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+  color: #00838f;
+  border-color: #00838f;
+
+  &:hover:not(:disabled) {
+    background: #00838f;
+    color: white;
+    transform: translateY(-3px) scale(1.05);
+  }
+}
+
+.piano-synth-button {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  color: #e65100;
+  border-color: #e65100;
+
+  &:hover:not(:disabled) {
+    background: #e65100;
+    color: white;
+    transform: translateY(-3px) scale(1.05);
+  }
+}
+
+.piano-samples-button {
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+  color: #c2185b;
+  border-color: #c2185b;
+
+  &:hover:not(:disabled) {
+    background: #c2185b;
+    color: white;
+    transform: translateY(-3px) scale(1.05);
+  }
+}
+
+.instruments-button {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  color: #2e7d32;
+  border-color: #2e7d32;
+
+  &:hover:not(:disabled) {
+    background: #2e7d32;
+    color: white;
+    transform: translateY(-3px) scale(1.05);
+  }
+}
+
+.instrument-selector-container {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  text-align: center;
+
+  .selection-prompt {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+}
+
+.instrument-selector {
+  margin-top: 1.5rem;
+  position: relative;
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .instrument-menu-toggle {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    background: white;
+    border: 2px solid #2e7d32;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #2e7d32;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #f1f8f4;
+      border-color: #1b5e20;
+    }
+
+    .dropdown-arrow {
+      font-size: 0.8rem;
+      transition: transform 0.2s ease;
+    }
+  }
+
+  .instrument-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.5rem;
+    background: white;
+    border: 2px solid #2e7d32;
+    border-radius: 8px;
+    max-height: 160px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    .instrument-option {
+      width: 100%;
+      padding: 0.5rem;
+      border: none;
+      background: white;
+      text-align: left;
+      cursor: pointer;
+      font-size: 1rem;
+      color: #333;
+      transition: background 0.2s ease;
+      min-height: 40px;
+
+      &:hover {
+        background: #f1f8f4;
+      }
+
+      &.selected {
+        background: #c8e6c9;
+        color: #1b5e20;
+        font-weight: 600;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #e0e0e0;
+      }
+    }
+  }
 }
 
 .genre-selection {
@@ -55,7 +244,6 @@
     background: #1976d2;
     color: white;
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(25, 118, 210, 0.5);
   }
 }
 
@@ -68,7 +256,6 @@
     background: #7b1fa2;
     color: white;
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(123, 31, 162, 0.5);
   }
 }
 
@@ -109,69 +296,103 @@
 .play-button {
   background: #e3f2fd;
   color: #1976d2;
-  box-shadow: 0 4px 15px rgba(25, 118, 210, 0.4);
 }
 
 .play-button:hover:not(:disabled) {
   background: #1976d2;
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(25, 118, 210, 0.6);
 }
 
 .replay-button {
   background: #e3f2fd;
   color: #1976d2;
-  box-shadow: 0 4px 15px rgba(25, 118, 210, 0.4);
 }
 
 .replay-button:hover:not(:disabled) {
   background: #1976d2;
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(25, 118, 210, 0.6);
 }
 
 .restart-button {
   background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(86, 171, 47, 0.4);
 }
 
 .restart-button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(86, 171, 47, 0.6);
 }
 
 .style-toggle-button {
   background: #7b1fa2;
   color: white;
-  box-shadow: 0 4px 15px rgba(123, 31, 162, 0.4);
 }
 
 .style-toggle-button:hover:not(:disabled) {
   background: #6a1b9a;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(123, 31, 162, 0.6);
+}
+
+.sound-toggle-button {
+  background: #f57c00;
+  color: white;
+}
+
+.sound-toggle-button:hover:not(:disabled) {
+  background: #ef6c00;
+  transform: translateY(-2px);
+}
+
+.instrument-change-button {
+  background: linear-gradient(135deg, #00897b 0%, #4db6ac 100%);
+  color: white;
+}
+
+.instrument-change-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #00695c 0%, #00897b 100%);
+  transform: translateY(-2px);
 }
 
 .download-button {
   background: #2e7d32;
   color: white;
-  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4);
 }
 
 .download-button:hover:not(:disabled) {
   background: #1b5e20;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.6);
+}
+
+.download-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem 1.5rem;
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  border-radius: 8px;
+
+  .info-text {
+    font-size: 0.95rem;
+    color: #856404;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .info-subtext {
+    font-size: 0.8rem;
+    color: #856404;
+    opacity: 0.8;
+    margin: 0;
+  }
 }
 
 .control-button:disabled {
   background: #e9ecef;
   color: #6c757d;
   cursor: not-allowed;
-  box-shadow: none;
 }
 
 .icon {

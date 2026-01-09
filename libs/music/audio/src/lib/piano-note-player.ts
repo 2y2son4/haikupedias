@@ -1,10 +1,13 @@
 import { NoteValue } from '@haikupedias/core/types';
 import * as Tone from 'tone';
 import { NOTE_NAMES } from './static/notes';
+import { INotePlayer } from './models/music-audio.model';
+
 /**
- * Note player using Tone.js with realistic piano samples
+ * Note player using Tone.js with high-quality piano samples
+ * Samples from https://nbrosowsky.github.io/tonejs-instruments/
  */
-export class NotePlayer {
+export class PianoNotePlayer implements INotePlayer {
   private sampler: Tone.Sampler;
   private volume: Tone.Volume;
   private isReady = false;
@@ -13,52 +16,52 @@ export class NotePlayer {
     // Create volume node for master control
     this.volume = new Tone.Volume(-10).toDestination(); // -10dB default (approximately 30% volume)
 
-    // Create piano sampler with realistic samples
-    // Using Tone.js's built-in piano samples
+    // Create piano sampler with samples from tonejs-instruments
+    // Using a simplified set of samples that are known to work
     this.sampler = new Tone.Sampler({
       urls: {
-        A0: "A0.mp3",
-        C1: "C1.mp3",
-        "D#1": "Ds1.mp3",
-        "F#1": "Fs1.mp3",
-        A1: "A1.mp3",
-        C2: "C2.mp3",
-        "D#2": "Ds2.mp3",
-        "F#2": "Fs2.mp3",
-        A2: "A2.mp3",
-        C3: "C3.mp3",
-        "D#3": "Ds3.mp3",
-        "F#3": "Fs3.mp3",
-        A3: "A3.mp3",
-        C4: "C4.mp3",
-        "D#4": "Ds4.mp3",
-        "F#4": "Fs4.mp3",
-        A4: "A4.mp3",
-        C5: "C5.mp3",
-        "D#5": "Ds5.mp3",
-        "F#5": "Fs5.mp3",
-        A5: "A5.mp3",
-        C6: "C6.mp3",
-        "D#6": "Ds6.mp3",
-        "F#6": "Fs6.mp3",
-        A6: "A6.mp3",
-        C7: "C7.mp3",
-        "D#7": "Ds7.mp3",
-        "F#7": "Fs7.mp3",
-        A7: "A7.mp3",
-        C8: "C8.mp3"
+        // A0: 'A0.mp3',
+        A1: 'A1.mp3',
+        A2: 'A2.mp3',
+        A3: 'A3.mp3',
+        A4: 'A4.mp3',
+        A5: 'A5.mp3',
+        A6: 'A6.mp3',
+        A7: 'A7.mp3',
+        C1: 'C1.mp3',
+        C2: 'C2.mp3',
+        C3: 'C3.mp3',
+        C4: 'C4.mp3',
+        C5: 'C5.mp3',
+        C6: 'C6.mp3',
+        C7: 'C7.mp3',
+        C8: 'C8.mp3',
+        'D#1': 'Ds1.mp3',
+        'D#2': 'Ds2.mp3',
+        'D#3': 'Ds3.mp3',
+        'D#4': 'Ds4.mp3',
+        'D#5': 'Ds5.mp3',
+        'D#6': 'Ds6.mp3',
+        'D#7': 'Ds7.mp3',
+        'F#1': 'Fs1.mp3',
+        'F#2': 'Fs2.mp3',
+        'F#3': 'Fs3.mp3',
+        'F#4': 'Fs4.mp3',
+        'F#5': 'Fs5.mp3',
+        'F#6': 'Fs6.mp3',
+        'F#7': 'Fs7.mp3',
       },
       release: 1,
-      baseUrl: "https://tonejs.github.io/audio/salamander/",
+      baseUrl: 'https://nbrosowsky.github.io/tonejs-instruments/samples/piano/',
       onload: () => {
         this.isReady = true;
-      }
+      },
     }).connect(this.volume);
   }
 
   /**
    * Convert note value (0-11) to Tone.js note name
-   * Uses octave 4 as the base octave for consistency with previous implementation
+   * Uses octave 4 as the base octave for consistency with synthetic player
    */
   private noteValueToName(note: NoteValue): string {
     return `${NOTE_NAMES[note]}4`;
@@ -77,11 +80,10 @@ export class NotePlayer {
     }
 
     const noteName = this.noteValueToName(note);
-    
+
     // Convert audio context time to Tone.js time
-    // Tone.js uses its own clock that starts when context starts
     const toneTime = startTime - this.audioContext.currentTime + Tone.now();
-    
+
     // Trigger note with attack and release
     this.sampler.triggerAttackRelease(noteName, duration, toneTime);
   }
@@ -93,7 +95,6 @@ export class NotePlayer {
   setVolume(volume: number): void {
     const clampedVolume = Math.max(0, Math.min(1, volume));
     // Convert linear volume (0-1) to decibels (-60 to 0)
-    // -60dB is essentially silent, 0dB is maximum
     const db = clampedVolume === 0 ? -60 : 20 * Math.log10(clampedVolume);
     this.volume.volume.value = db;
   }
@@ -113,5 +114,19 @@ export class NotePlayer {
    */
   isPlayerReady(): boolean {
     return this.isReady;
+  }
+
+  /**
+   * Clean up resources and dispose of Tone.js nodes
+   * Should be called when the player is no longer needed to prevent memory leaks
+   */
+  dispose(): void {
+    if (this.sampler) {
+      this.sampler.dispose();
+    }
+    if (this.volume) {
+      this.volume.dispose();
+    }
+    this.isReady = false;
   }
 }

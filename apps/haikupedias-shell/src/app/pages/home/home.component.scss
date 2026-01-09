@@ -44,7 +44,6 @@
   background: white;
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   animation: fadeIn 0.5s ease-out;
 }
 
@@ -163,7 +162,6 @@
   padding: 1.5rem;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   border-radius: 12px;
-  border-left: 4px solid #667eea;
 
   h3 {
     font-size: 1.3rem;
@@ -200,7 +198,6 @@
         border-radius: 6px;
         font-size: 1.1rem;
         font-family: 'Courier New', monospace;
-        box-shadow: 0 2px 4px rgba(123, 31, 162, 0.2);
         transition: transform 0.2s;
 
         &:hover {
@@ -221,7 +218,6 @@
         background: white;
         border-radius: 8px;
         padding: 1.5rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 
         .bar-label {
           font-size: 1rem;
@@ -268,7 +264,6 @@
             font-family: 'Courier New', monospace;
             text-align: center;
             min-width: 50px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
             &.solo {
               background: #1976d2;

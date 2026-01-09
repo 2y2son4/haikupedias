@@ -1,10 +1,10 @@
 <div class="home-container">
   <header class="hero">
-    <h1 class="title">Haikupedias</h1>
+    <h1 class="title">Haikupedias & Dodecaikus</h1>
     <p class="tagline">Where poetry meets algorithmic music</p>
     <p class="description">
       Select a word, watch it transform into a haiku, and hear it come alive
-      as a musical composition inspired by Erik Satie's Gymnopédies.
+      as a musical composition inspired by Erik Satie's Gymnopédies or with an atonal dodecaphonic composition.
     </p>
   </header>
 
@@ -15,8 +15,10 @@
         <h2 class="step-title">Select 8 Words</h2>
         <p class="progress-text">{{ selectedWords().length }} / 8 words selected:
           @for (word of selectedWords(); track word.id) {
-            <span class="selected-word" [class]="getWordSetClass(word)">{{ word.label }}</span><span class="separator">,
-            </span>
+            <span class="selected-word" [class]="getWordSetClass(word)">{{ word.label }}</span>
+            @if (!$last){
+              <span class="separator"> | </span>
+            }
           }
         </p>
         @if (selectedWords().length >= 8) {

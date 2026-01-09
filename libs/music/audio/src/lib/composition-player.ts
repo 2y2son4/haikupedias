@@ -1,10 +1,5 @@
 import { ScheduledNote } from '@haikupedias/music/arrangers/base-arranger';
-import { NotePlayer } from './note-player';
-
-/**
- * Playback state
- */
-export type PlaybackState = 'idle' | 'playing' | 'paused' | 'stopped';
+import { INotePlayer, PlaybackState } from './models/music-audio.model';
 
 /**
  * Composition player with scheduling and playback controls
@@ -13,14 +8,17 @@ export type PlaybackState = 'idle' | 'playing' | 'paused' | 'stopped';
  * It does not contain any musical interpretation logic - that is handled by arrangers.
  */
 export class CompositionPlayer {
-  private notePlayer: NotePlayer;
+  private notePlayer: INotePlayer;
   private state: PlaybackState = 'idle';
   private startTime = 0;
   private pauseTime = 0;
   private scheduledNotes = 0;
 
-  constructor(private audioContext: AudioContext) {
-    this.notePlayer = new NotePlayer(audioContext);
+  constructor(
+    private audioContext: AudioContext,
+    notePlayer: INotePlayer,
+  ) {
+    this.notePlayer = notePlayer;
   }
 
   /**

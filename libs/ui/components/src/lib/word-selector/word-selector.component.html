@@ -5,7 +5,7 @@
 
   <div class="word-sets">
     <div class="word-set">
-      <h4>Set A</h4>
+      <h4>Set A: Contemplative & Natural</h4>
       <div class="word-grid">
         @for (word of wordsSetA; track word.id) {
           <button class="word-button" [class.selected]="isSelected(word)" [class.major]="word.tonalityGroup === 'major'"
@@ -18,7 +18,7 @@
     </div>
 
     <div class="word-set">
-      <h4>Set B</h4>
+      <h4>Set B: Dynamic & Urban</h4>
       <div class="word-grid">
         @for (word of wordsSetB; track word.id) {
           <button class="word-button" [class.selected]="isSelected(word)" [class.major]="word.tonalityGroup === 'major'"
