@@ -1,24 +1,7 @@
 import { NoteValue } from '@haikupedias/core/types';
 import * as Tone from 'tone';
-import { INotePlayer } from './note-player.interface';
-
-/**
- * Note name mapping for Tone.js
- */
-const NOTE_NAMES = [
-  'C',
-  'C#',
-  'D',
-  'D#',
-  'E',
-  'F',
-  'F#',
-  'G',
-  'G#',
-  'A',
-  'A#',
-  'B',
-] as const;
+import { NOTE_NAMES } from './static/notes';
+import { INotePlayer } from './models/music-audio.model';
 
 /**
  * Note player using Tone.js with polyphonic FM synthesizer
@@ -106,5 +89,18 @@ export class PianoSynthNotePlayer implements INotePlayer {
     // Convert decibels back to linear scale
     if (db <= -60) return 0;
     return Math.pow(10, db / 20);
+  }
+
+  /**
+   * Clean up resources and dispose of Tone.js nodes
+   * Should be called when the player is no longer needed to prevent memory leaks
+   */
+  dispose(): void {
+    if (this.synth) {
+      this.synth.dispose();
+    }
+    if (this.volume) {
+      this.volume.dispose();
+    }
   }
 }

@@ -15,8 +15,10 @@
         <h2 class="step-title">Select 8 Words</h2>
         <p class="progress-text">{{ selectedWords().length }} / 8 words selected:
           @for (word of selectedWords(); track word.id) {
-            <span class="selected-word" [class]="getWordSetClass(word)">{{ word.label }}</span><span class="separator">,
-            </span>
+            <span class="selected-word" [class]="getWordSetClass(word)">{{ word.label }}</span>
+            @if (!$last){
+              <span class="separator"> | </span>
+            }
           }
         </p>
         @if (selectedWords().length >= 8) {

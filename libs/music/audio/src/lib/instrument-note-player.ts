@@ -1,58 +1,47 @@
 import { NoteValue } from '@haikupedias/core/types';
 import * as Tone from 'tone';
-import { NOTE_NAMES } from './static/notes';
-import { INotePlayer } from './models/music-audio.model';
+import { INSTRUMENT_SAMPLES, NOTE_NAMES } from './static/notes';
+import { INotePlayer, InstrumentType } from './models/music-audio.model';
 
 /**
- * Note player using Tone.js with high-quality piano samples
+ * Note player using Tone.js with selectable instrument samples
  * Samples from https://nbrosowsky.github.io/tonejs-instruments/
  */
-export class PianoNotePlayer implements INotePlayer {
-  private sampler: Tone.Sampler;
+export class InstrumentNotePlayer implements INotePlayer {
+  private sampler: Tone.Sampler | null = null;
   private volume: Tone.Volume;
   private isReady = false;
+  private currentInstrument: InstrumentType;
 
-  constructor(private audioContext: AudioContext) {
+  constructor(
+    private audioContext: AudioContext,
+    instrument: InstrumentType = 'piano',
+  ) {
+    this.currentInstrument = instrument;
+
     // Create volume node for master control
     this.volume = new Tone.Volume(-10).toDestination(); // -10dB default (approximately 30% volume)
 
-    // Create piano sampler with samples from tonejs-instruments
-    // Using a simplified set of samples that are known to work
+    // Load initial instrument
+    this.loadInstrument(instrument);
+  }
+
+  /**
+   * Load a specific instrument
+   */
+  private loadInstrument(instrument: InstrumentType): void {
+    this.isReady = false;
+
+    // Dispose of old sampler if exists
+    if (this.sampler) {
+      this.sampler.dispose();
+    }
+
+    // Create new sampler with instrument samples
     this.sampler = new Tone.Sampler({
-      urls: {
-        // A0: 'A0.mp3',
-        A1: 'A1.mp3',
-        A2: 'A2.mp3',
-        A3: 'A3.mp3',
-        A4: 'A4.mp3',
-        A5: 'A5.mp3',
-        A6: 'A6.mp3',
-        A7: 'A7.mp3',
-        C1: 'C1.mp3',
-        C2: 'C2.mp3',
-        C3: 'C3.mp3',
-        C4: 'C4.mp3',
-        C5: 'C5.mp3',
-        C6: 'C6.mp3',
-        C7: 'C7.mp3',
-        C8: 'C8.mp3',
-        'D#1': 'Ds1.mp3',
-        'D#2': 'Ds2.mp3',
-        'D#3': 'Ds3.mp3',
-        'D#4': 'Ds4.mp3',
-        'D#5': 'Ds5.mp3',
-        'D#6': 'Ds6.mp3',
-        'D#7': 'Ds7.mp3',
-        'F#1': 'Fs1.mp3',
-        'F#2': 'Fs2.mp3',
-        'F#3': 'Fs3.mp3',
-        'F#4': 'Fs4.mp3',
-        'F#5': 'Fs5.mp3',
-        'F#6': 'Fs6.mp3',
-        'F#7': 'Fs7.mp3',
-      },
+      urls: INSTRUMENT_SAMPLES[instrument],
       release: 1,
-      baseUrl: 'https://nbrosowsky.github.io/tonejs-instruments/samples/piano/',
+      baseUrl: `https://nbrosowsky.github.io/tonejs-instruments/samples/${instrument}/`,
       onload: () => {
         this.isReady = true;
       },
@@ -60,8 +49,28 @@ export class PianoNotePlayer implements INotePlayer {
   }
 
   /**
+   * Change the current instrument
+   * @param instrument - The instrument to switch to
+   */
+  changeInstrument(instrument: InstrumentType): void {
+    if (this.currentInstrument === instrument) {
+      return; // Already loaded
+    }
+
+    this.currentInstrument = instrument;
+    this.loadInstrument(instrument);
+  }
+
+  /**
+   * Get the current instrument
+   */
+  getCurrentInstrument(): InstrumentType {
+    return this.currentInstrument;
+  }
+
+  /**
    * Convert note value (0-11) to Tone.js note name
-   * Uses octave 4 as the base octave for consistency with synthetic player
+   * Uses octave 4 as the base octave for consistency
    */
   private noteValueToName(note: NoteValue): string {
     return `${NOTE_NAMES[note]}4`;
@@ -74,6 +83,8 @@ export class PianoNotePlayer implements INotePlayer {
    * @param duration - How long to play the note (in seconds)
    */
   playNote(note: NoteValue, startTime: number, duration: number): void {
+    if (!this.sampler) return;
+
     // Ensure Tone.js context is started (required for browser autoplay policies)
     if (Tone.context.state !== 'running') {
       Tone.start();
@@ -123,6 +134,7 @@ export class PianoNotePlayer implements INotePlayer {
   dispose(): void {
     if (this.sampler) {
       this.sampler.dispose();
+      this.sampler = null;
     }
     if (this.volume) {
       this.volume.dispose();

@@ -1,11 +1,6 @@
 import { NoteValue } from '@haikupedias/core/types';
 import * as Tone from 'tone';
-
-/**
- * Note name mapping for Tone.js
- */
-const NOTE_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'] as const;
-
+import { NOTE_NAMES } from './static/notes';
 /**
  * Note player using Tone.js with realistic piano samples
  */

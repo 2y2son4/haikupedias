@@ -1,6 +1,6 @@
 import { NoteValue } from '@haikupedias/core/types';
 import { noteToFrequency } from './note-frequency';
-import { INotePlayer } from './note-player.interface';
+import { INotePlayer } from './models/music-audio.model';
 
 /**
  * Note player using Web Audio API oscillators (synthetic sounds)

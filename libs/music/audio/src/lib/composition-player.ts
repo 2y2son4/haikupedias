@@ -1,10 +1,5 @@
 import { ScheduledNote } from '@haikupedias/music/arrangers/base-arranger';
-import { INotePlayer } from './note-player.interface';
-
-/**
- * Playback state
- */
-export type PlaybackState = 'idle' | 'playing' | 'paused' | 'stopped';
+import { INotePlayer, PlaybackState } from './models/music-audio.model';
 
 /**
  * Composition player with scheduling and playback controls
