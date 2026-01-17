@@ -1,0 +1,16 @@
+$font-serif: "Cormorant Garamond", serif;
+$font-sans: "Inter", system-ui, sans-serif;
+
+$text-body: (
+  font-family: $font-serif,
+  font-size: $font-size-md,
+  line-height: $line-height-poetry,
+  font-weight: 400
+);
+
+$text-ui: (
+  font-family: $font-sans,
+  font-size: $font-size-sm,
+  line-height: $line-height-ui,
+  font-weight: 500
+);

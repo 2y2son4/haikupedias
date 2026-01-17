@@ -1,0 +1,103 @@
+/* ==========================================================================
+   Haikupedias Color Palette
+   --------------------------------------------------------------------------
+   Base mood: calm, poetic, warm, restrained
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Base Colors
+   -------------------------------------------------------------------------- */
+
+$color-carafe:   #683326; // deep warm brown-red, anchor color
+$color-cream:    #fcfcfa; // soft off-white, main background
+$color-charcoal: #343841; // dark neutral, primary text
+$color-celadon:  #9ab19a; // muted green, organic accent
+
+/* --------------------------------------------------------------------------
+   Text Colors
+   -------------------------------------------------------------------------- */
+
+$text-primary:   $color-charcoal;
+$text-secondary: rgba($color-charcoal, 0.7);
+$text-muted:     rgba($color-charcoal, 0.45);
+$text-inverse:   $color-cream;
+
+/* --------------------------------------------------------------------------
+   Background Colors
+   -------------------------------------------------------------------------- */
+
+$bg-app:         $color-cream;
+$bg-surface:     lighten($color-cream, 1%);
+$bg-subtle:      rgba($color-charcoal, 0.04);
+$bg-overlay:     rgba($color-charcoal, 0.6);
+
+/* --------------------------------------------------------------------------
+   Brand / Accent Colors
+   -------------------------------------------------------------------------- */
+
+$accent-primary:   $color-carafe;
+$accent-secondary: $color-celadon;
+
+/* Softer accent variants */
+$accent-primary-soft:   rgba($color-carafe, 0.15);
+$accent-secondary-soft: rgba($color-celadon, 0.2);
+
+/* --------------------------------------------------------------------------
+   Border Colors
+   -------------------------------------------------------------------------- */
+
+$border-default: rgba($color-charcoal, 0.15);
+$border-muted:   rgba($color-charcoal, 0.08);
+$border-strong:  rgba($color-charcoal, 0.3);
+
+/* --------------------------------------------------------------------------
+   Interactive States
+   -------------------------------------------------------------------------- */
+
+$state-hover:   rgba($color-charcoal, 0.06);
+$state-active:  rgba($color-charcoal, 0.12);
+$state-focus:   rgba($color-celadon, 0.6);
+
+/* --------------------------------------------------------------------------
+   Semantic Feedback (Very Subtle)
+   -------------------------------------------------------------------------- */
+
+$feedback-success: mix($color-celadon, $color-cream, 70%);
+$feedback-warning: mix(#d4a373, $color-cream, 70%);
+$feedback-error:   mix(#b65c5c, $color-cream, 70%);
+
+/* Text on feedback */
+$text-on-feedback: $color-charcoal;
+
+/* --------------------------------------------------------------------------
+   Shadows (Soft, Paper-like)
+   -------------------------------------------------------------------------- */
+
+$shadow-soft:  0 2px 6px rgba($color-charcoal, 0.08);
+$shadow-medium: 0 4px 12px rgba($color-charcoal, 0.12);
+
+/* --------------------------------------------------------------------------
+   Disabled States
+   -------------------------------------------------------------------------- */
+
+$disabled-bg:   rgba($color-charcoal, 0.06);
+$disabled-text: rgba($color-charcoal, 0.4);
+$disabled-border: rgba($color-charcoal, 0.12);
+
+/* --------------------------------------------------------------------------
+   Selection & Highlights
+   -------------------------------------------------------------------------- */
+
+$selection-bg:   rgba($color-celadon, 0.35);
+$selection-text: $color-charcoal;
+
+/* --------------------------------------------------------------------------
+   Utility Maps (Optional)
+   -------------------------------------------------------------------------- */
+
+$palette: (
+  carafe:   $color-carafe,
+  cream:    $color-cream,
+  charcoal: $color-charcoal,
+  celadon:  $color-celadon
+);

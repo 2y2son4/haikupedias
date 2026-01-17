@@ -1,3 +1,20 @@
+@use "@haikupedias/design-tokens" as *;
+
+/* Global reset / base */
+body {
+  background-color: $bg-app;
+  color: $text-primary;
+  font-family: map-get($text-body, font-family);
+  line-height: map-get($text-body, line-height);
+}
+
+/* Theme hooks */
+body.theme-dark {
+  background-color: $dm-bg-app;
+  color: $dm-text-primary;
+}
+
+
 /* Global styles */
 * {
   margin: 0;
