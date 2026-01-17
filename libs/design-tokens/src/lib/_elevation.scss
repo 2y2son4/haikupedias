@@ -1,3 +1,5 @@
+@use 'palette';
+
 $elevation-flat: none;
-$elevation-soft: $shadow-soft;
-$elevation-medium: $shadow-medium;
+$elevation-soft: palette.$shadow-soft;
+$elevation-medium: palette.$shadow-medium;
