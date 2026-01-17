@@ -1,0 +1,47 @@
+/* ==========================================================================
+   Semantic Color Tokens
+   --------------------------------------------------------------------------
+   This file maps raw palettes to meaningful design tokens.
+   ========================================================================== */
+
+@use "palette" as light;
+@use "palette-dark" as dark;
+
+/* --------------------------------------------------------------------------
+   Light Theme (Default)
+   -------------------------------------------------------------------------- */
+
+$bg-app: light.$color-cream;
+$bg-surface: lighten(light.$color-cream, 1%);
+$bg-subtle: rgba(light.$color-charcoal, 0.04);
+
+$text-primary: light.$color-charcoal;
+$text-secondary: rgba(light.$color-charcoal, 0.7);
+$text-muted: rgba(light.$color-charcoal, 0.45);
+$text-inverse: light.$color-cream;
+
+$accent-primary: light.$color-carafe;
+$accent-secondary: light.$color-celadon;
+
+$border-default: rgba(light.$color-charcoal, 0.15);
+$border-muted: rgba(light.$color-charcoal, 0.08);
+
+/* --------------------------------------------------------------------------
+   Dark Theme
+   -------------------------------------------------------------------------- */
+
+$dm-bg-app: dark.$dm-bg-app;
+$dm-bg-surface: dark.$dm-bg-surface;
+$dm-bg-subtle: rgba(dark.$dm-text-primary, 0.04);
+
+$dm-text-primary: dark.$dm-text-primary;
+$dm-text-secondary: rgba(dark.$dm-text-primary, 0.75);
+$dm-text-muted: rgba(dark.$dm-text-primary, 0.5);
+$dm-text-inverse: dark.$dm-bg-app;
+
+$dm-accent-primary: dark.$dm-accent-primary;
+$dm-accent-secondary: dark.$dm-accent-secondary;
+
+$dm-border-default: rgba(dark.$dm-text-primary, 0.12);
+$dm-border-muted: rgba(dark.$dm-text-primary, 0.08);
+

@@ -152,3 +152,222 @@ It is an artistic and technical exploration.
 ---
 
 _An exploration of constraint, code, and composition._
+
+```
+haikupedias
+├─ .nx
+│  └─ nxw.js
+├─ .prettierignore
+├─ .prettierrc
+├─ apps
+│  └─ haikupedias-shell
+│     ├─ project.json
+│     ├─ src
+│     │  ├─ app
+│     │  │  ├─ app.component.html
+│     │  │  ├─ app.component.scss
+│     │  │  ├─ app.component.ts
+│     │  │  ├─ app.config.ts
+│     │  │  ├─ app.routes.ts
+│     │  │  └─ pages
+│     │  │     ├─ home
+│     │  │     │  ├─ home.component.html
+│     │  │     │  ├─ home.component.scss
+│     │  │     │  └─ home.component.ts
+│     │  │     └─ lexicon
+│     │  │        ├─ lexicon.component.html
+│     │  │        ├─ lexicon.component.scss
+│     │  │        └─ lexicon.component.ts
+│     │  ├─ index.html
+│     │  ├─ main.ts
+│     │  └─ styles.scss
+│     ├─ tsconfig.app.json
+│     └─ tsconfig.json
+├─ eslint.config.mjs
+├─ jest.config.ts
+├─ jest.preset.js
+├─ libs
+│  ├─ core
+│  │  ├─ types
+│  │  │  ├─ project.json
+│  │  │  ├─ README.md
+│  │  │  ├─ src
+│  │  │  │  ├─ index.ts
+│  │  │  │  └─ lib
+│  │  │  │     ├─ haikupedia.types.ts
+│  │  │  │     ├─ music.types.ts
+│  │  │  │     └─ poetry.types.ts
+│  │  │  ├─ tsconfig.json
+│  │  │  └─ tsconfig.lib.json
+│  │  └─ utils
+│  │     ├─ project.json
+│  │     ├─ README.md
+│  │     ├─ src
+│  │     │  ├─ index.ts
+│  │     │  └─ lib
+│  │     │     ├─ constants.ts
+│  │     │     └─ note-utils.ts
+│  │     ├─ tsconfig.json
+│  │     └─ tsconfig.lib.json
+│  ├─ design-tokens
+│  │  ├─ eslint.config.mjs
+│  │  ├─ jest.config.cts
+│  │  ├─ project.json
+│  │  ├─ README.md
+│  │  ├─ src
+│  │  │  ├─ index.ts
+│  │  │  ├─ lib
+│  │  │  │  ├─ _colors.scss
+│  │  │  │  ├─ _elevation.scss
+│  │  │  │  ├─ _index.scss
+│  │  │  │  ├─ _motion.scss
+│  │  │  │  ├─ _palette-dark.scss
+│  │  │  │  ├─ _palette.scss
+│  │  │  │  ├─ _spacing.scss
+│  │  │  │  └─ _typography.scss
+│  │  │  └─ test-setup.ts
+│  │  ├─ tsconfig.json
+│  │  ├─ tsconfig.lib.json
+│  │  └─ tsconfig.spec.json
+│  ├─ music
+│  │  ├─ arrangers
+│  │  │  ├─ base-arranger
+│  │  │  │  ├─ project.json
+│  │  │  │  ├─ README.md
+│  │  │  │  ├─ src
+│  │  │  │  │  ├─ index.ts
+│  │  │  │  │  └─ lib
+│  │  │  │  │     └─ composition-arranger.interface.ts
+│  │  │  │  ├─ tsconfig.json
+│  │  │  │  └─ tsconfig.lib.json
+│  │  │  ├─ dodecaphonic-arranger
+│  │  │  │  ├─ project.json
+│  │  │  │  ├─ README.md
+│  │  │  │  ├─ src
+│  │  │  │  │  ├─ index.ts
+│  │  │  │  │  └─ lib
+│  │  │  │  │     └─ dodecaphonic-arranger.ts
+│  │  │  │  ├─ tsconfig.json
+│  │  │  │  └─ tsconfig.lib.json
+│  │  │  └─ gymnopedie-arranger
+│  │  │     ├─ project.json
+│  │  │     ├─ README.md
+│  │  │     ├─ src
+│  │  │     │  ├─ index.ts
+│  │  │     │  └─ lib
+│  │  │     │     └─ gymnopedie-arranger.ts
+│  │  │     ├─ tsconfig.json
+│  │  │     └─ tsconfig.lib.json
+│  │  ├─ audio
+│  │  │  ├─ eslint.config.mjs
+│  │  │  ├─ package.json
+│  │  │  ├─ project.json
+│  │  │  ├─ README.md
+│  │  │  ├─ src
+│  │  │  │  ├─ index.ts
+│  │  │  │  └─ lib
+│  │  │  │     ├─ audio-context.ts
+│  │  │  │     ├─ composition-player.ts
+│  │  │  │     ├─ instrument-note-player.ts
+│  │  │  │     ├─ models
+│  │  │  │     │  └─ music-audio.model.ts
+│  │  │  │     ├─ note-frequency.ts
+│  │  │  │     ├─ note-player.ts
+│  │  │  │     ├─ piano-note-player.ts
+│  │  │  │     ├─ piano-synth-note-player.ts
+│  │  │  │     ├─ static
+│  │  │  │     │  └─ notes.ts
+│  │  │  │     └─ synthetic-note-player.ts
+│  │  │  ├─ tsconfig.json
+│  │  │  └─ tsconfig.lib.json
+│  │  ├─ composition-engine
+│  │  │  ├─ eslint.config.mjs
+│  │  │  ├─ project.json
+│  │  │  ├─ README.md
+│  │  │  ├─ src
+│  │  │  │  ├─ index.ts
+│  │  │  │  └─ lib
+│  │  │  │     ├─ composition-engine.ts
+│  │  │  │     ├─ composition-formatter.ts
+│  │  │  │     └─ composition-generator.ts
+│  │  │  ├─ tsconfig.json
+│  │  │  └─ tsconfig.lib.json
+│  │  └─ theory
+│  │     ├─ eslint.config.mjs
+│  │     ├─ project.json
+│  │     ├─ README.md
+│  │     ├─ src
+│  │     │  ├─ index.ts
+│  │     │  └─ lib
+│  │     │     ├─ intervals.ts
+│  │     │     ├─ note-arithmetic.ts
+│  │     │     └─ theory.ts
+│  │     ├─ tsconfig.json
+│  │     └─ tsconfig.lib.json
+│  ├─ poetry
+│  │  ├─ haiku-engine
+│  │  │  ├─ eslint.config.mjs
+│  │  │  ├─ project.json
+│  │  │  ├─ README.md
+│  │  │  ├─ src
+│  │  │  │  ├─ index.ts
+│  │  │  │  └─ lib
+│  │  │  │     ├─ haiku-builder.ts
+│  │  │  │     ├─ haiku-engine.ts
+│  │  │  │     └─ haiku-validator.ts
+│  │  │  ├─ tsconfig.json
+│  │  │  └─ tsconfig.lib.json
+│  │  └─ lexicon
+│  │     ├─ project.json
+│  │     ├─ README.md
+│  │     ├─ README.pdf
+│  │     ├─ src
+│  │     │  ├─ index.ts
+│  │     │  └─ lib
+│  │     │     ├─ word-set-a.ts
+│  │     │     └─ word-set-b.ts
+│  │     ├─ tsconfig.json
+│  │     └─ tsconfig.lib.json
+│  ├─ design-tokens
+│  └─ ui
+│     └─ components
+│        ├─ eslint.config.mjs
+│        ├─ jest.config.cts
+│        ├─ eslint.config.mjs
+│        ├─ jest.config.cts
+│        ├─ ng-package.json
+│        ├─ package.json
+│        ├─ project.json
+│        ├─ README.md
+│        ├─ src
+│        │  ├─ index.ts
+│        │  ├─ lib
+│        │  │  ├─ audio-controls
+│        │  │  │  ├─ audio-controls.component.html
+│        │  │  │  ├─ audio-controls.component.scss
+│        │  │  │  └─ audio-controls.component.ts
+│        │  │  ├─ components
+│        │  │  │  ├─ components.css
+│        │  │  │  ├─ components.html
+│        │  │  │  └─ components.ts
+│        │  │  ├─ haiku-display
+│        │  │  │  ├─ haiku-display.component.html
+│        │  │  │  ├─ haiku-display.component.scss
+│        │  │  │  └─ haiku-display.component.ts
+│        │  │  └─ word-selector
+│        │  │     ├─ word-selector.component.html
+│        │  │     ├─ word-selector.component.scss
+│        │  │     └─ word-selector.component.ts
+│        │  └─ test-setup.ts
+│        ├─ tsconfig.json
+│        ├─ tsconfig.lib.json
+│        ├─ tsconfig.lib.prod.json
+│        └─ tsconfig.spec.json
+├─ nx.json
+├─ package-lock.json
+├─ package.json
+├─ README.md
+├─ STRUCTURE.md
+└─ tsconfig.base.json
+
+```

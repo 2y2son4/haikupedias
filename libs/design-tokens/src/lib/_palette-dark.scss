@@ -1,0 +1,93 @@
+/* ==========================================================================
+   Haikupedias Dark Mode Palette
+   --------------------------------------------------------------------------
+   Mood: nocturne, quiet, intimate, focused
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Base Dark Surfaces
+   -------------------------------------------------------------------------- */
+
+$dm-bg-app:       #2a2d34; // warm charcoal (custom blend)
+$dm-bg-surface:   #30343c; // slightly lifted surface
+$dm-bg-subtle:    rgba(#fcfcfa, 0.04);
+$dm-bg-overlay:   rgba(#000000, 0.6);
+
+/* --------------------------------------------------------------------------
+   Text Colors
+   -------------------------------------------------------------------------- */
+
+$dm-text-primary:   #e6e6e2; // warm off-white (not pure white)
+$dm-text-secondary: rgba($dm-text-primary, 0.75);
+$dm-text-muted:     rgba($dm-text-primary, 0.5);
+$dm-text-inverse:   $dm-bg-app;
+
+/* --------------------------------------------------------------------------
+   Accent Colors (Adjusted for Dark)
+   -------------------------------------------------------------------------- */
+
+$dm-accent-primary:   #a0604d; // lifted carafe
+$dm-accent-secondary: #a8c2a8; // softened celadon
+
+$dm-accent-primary-soft:   rgba($dm-accent-primary, 0.25);
+$dm-accent-secondary-soft: rgba($dm-accent-secondary, 0.25);
+
+/* --------------------------------------------------------------------------
+   Borders & Dividers
+   -------------------------------------------------------------------------- */
+
+$dm-border-default: rgba($dm-text-primary, 0.12);
+$dm-border-muted:   rgba($dm-text-primary, 0.08);
+$dm-border-strong:  rgba($dm-text-primary, 0.24);
+
+/* --------------------------------------------------------------------------
+   Interactive States
+   -------------------------------------------------------------------------- */
+
+$dm-state-hover:  rgba(#ffffff, 0.06);
+$dm-state-active: rgba(#ffffff, 0.12);
+$dm-state-focus:  rgba($dm-accent-secondary, 0.7);
+
+/* --------------------------------------------------------------------------
+   Semantic Feedback (Muted, Not Loud)
+   -------------------------------------------------------------------------- */
+
+$dm-feedback-success: mix($dm-accent-secondary, $dm-bg-app, 55%);
+$dm-feedback-warning: mix(#d4a373, $dm-bg-app, 55%);
+$dm-feedback-error:   mix(#b65c5c, $dm-bg-app, 55%);
+
+$dm-text-on-feedback: $dm-text-primary;
+
+/* --------------------------------------------------------------------------
+   Shadows (Very Subtle, Ambient)
+   -------------------------------------------------------------------------- */
+
+$dm-shadow-soft:   0 2px 6px rgba(#000000, 0.35);
+$dm-shadow-medium: 0 6px 16px rgba(#000000, 0.45);
+
+/* --------------------------------------------------------------------------
+   Disabled States
+   -------------------------------------------------------------------------- */
+
+$dm-disabled-bg:     rgba(#ffffff, 0.06);
+$dm-disabled-text:   rgba($dm-text-primary, 0.4);
+$dm-disabled-border: rgba(#ffffff, 0.1);
+
+/* --------------------------------------------------------------------------
+   Selection & Highlights
+   -------------------------------------------------------------------------- */
+
+$dm-selection-bg:   rgba($dm-accent-secondary, 0.35);
+$dm-selection-text: $dm-text-primary;
+
+/* --------------------------------------------------------------------------
+   Utility Map (Optional)
+   -------------------------------------------------------------------------- */
+
+$palette-dark: (
+  bg-app:       $dm-bg-app,
+  bg-surface:   $dm-bg-surface,
+  text-primary: $dm-text-primary,
+  accent-main:  $dm-accent-primary,
+  accent-soft:  $dm-accent-primary-soft
+);
