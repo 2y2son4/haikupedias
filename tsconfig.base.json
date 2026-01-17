@@ -35,7 +35,7 @@
       ],
       "@haikupedias/poetry/lexicon": ["libs/poetry/lexicon/src/index.ts"],
       "@haikupedias/ui/components": ["libs/ui/components/src/index.ts"],
-      "design-tokens": ["libs/design-tokens/src/index.ts"]
+      "@haikupedias/design-tokens": ["libs/design-tokens/src/index.ts"]
     },
     "strict": true,
     "noImplicitOverride": true,
