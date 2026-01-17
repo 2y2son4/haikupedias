@@ -328,11 +328,11 @@ haikupedias
 │  │     │     └─ word-set-b.ts
 │  │     ├─ tsconfig.json
 │  │     └─ tsconfig.lib.json
-│  ├─ src
-│  │  └─ lib
-│  │     └─ design-tokens
+│  ├─ design-tokens
 │  └─ ui
 │     └─ components
+│        ├─ eslint.config.mjs
+│        ├─ jest.config.cts
 │        ├─ eslint.config.mjs
 │        ├─ jest.config.cts
 │        ├─ ng-package.json
