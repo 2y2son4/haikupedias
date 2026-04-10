@@ -17,7 +17,10 @@
         "assets": [],
         "styles": ["apps/haikupedias-shell/src/styles.scss"],
         "scripts": [],
-        "inlineStyleLanguage": "scss"
+        "inlineStyleLanguage": "scss",
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs"]
+        }
       },
       "configurations": {
         "production": {
