@@ -3,7 +3,7 @@
   "compilerOptions": {
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
@@ -12,31 +12,29 @@
     "lib": ["ES2022", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "ignoreDeprecations": "6.0",
-    "baseUrl": ".",
     "paths": {
-      "@haikupedias/core/types": ["libs/core/types/src/index.ts"],
-      "@haikupedias/core/utils": ["libs/core/utils/src/index.ts"],
+      "@haikupedias/core/types": ["./libs/core/types/src/index.ts"],
+      "@haikupedias/core/utils": ["./libs/core/utils/src/index.ts"],
       "@haikupedias/music/arrangers/base-arranger": [
-        "libs/music/arrangers/base-arranger/src/index.ts"
+        "./libs/music/arrangers/base-arranger/src/index.ts"
       ],
       "@haikupedias/music/arrangers/dodecaphonic-arranger": [
-        "libs/music/arrangers/dodecaphonic-arranger/src/index.ts"
+        "./libs/music/arrangers/dodecaphonic-arranger/src/index.ts"
       ],
       "@haikupedias/music/arrangers/gymnopedie-arranger": [
-        "libs/music/arrangers/gymnopedie-arranger/src/index.ts"
+        "./libs/music/arrangers/gymnopedie-arranger/src/index.ts"
       ],
-      "@haikupedias/music/audio": ["libs/music/audio/src/index.ts"],
+      "@haikupedias/music/audio": ["./libs/music/audio/src/index.ts"],
       "@haikupedias/music/composition-engine": [
-        "libs/music/composition-engine/src/index.ts"
+        "./libs/music/composition-engine/src/index.ts"
       ],
-      "@haikupedias/music/theory": ["libs/music/theory/src/index.ts"],
+      "@haikupedias/music/theory": ["./libs/music/theory/src/index.ts"],
       "@haikupedias/poetry/haiku-engine": [
-        "libs/poetry/haiku-engine/src/index.ts"
+        "./libs/poetry/haiku-engine/src/index.ts"
       ],
-      "@haikupedias/poetry/lexicon": ["libs/poetry/lexicon/src/index.ts"],
-      "@haikupedias/ui/components": ["libs/ui/components/src/index.ts"],
-      "@haikupedias/design-tokens": ["libs/design-tokens/src/index.ts"]
+      "@haikupedias/poetry/lexicon": ["./libs/poetry/lexicon/src/index.ts"],
+      "@haikupedias/ui/components": ["./libs/ui/components/src/index.ts"],
+      "@haikupedias/design-tokens": ["./libs/design-tokens/src/index.ts"]
     },
     "strict": true,
     "noImplicitOverride": true,
