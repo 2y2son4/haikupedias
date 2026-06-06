@@ -25,6 +25,7 @@ import { DodecaphonicArranger } from '@haikupedias/music/arrangers/dodecaphonic-
 export class HomeComponent {
   selectedWords = signal<Word[]>([]);
   selectedGenre = signal<'gymnopedie' | 'dodecaphonic' | null>(null);
+  isHaikuCompleted = signal(false);
 
   private dodecaArranger = new DodecaphonicArranger();
 
@@ -67,6 +68,8 @@ export class HomeComponent {
   });
 
   composition = computed(() => {
+    if (!this.isHaikuCompleted()) return null;
+
     const currentHaiku = this.haiku();
     if (!currentHaiku) return null;
     return CompositionGenerator.generate(currentHaiku);
@@ -83,7 +86,15 @@ export class HomeComponent {
   resetSelection() {
     this.selectedWords.set([]);
     this.selectedGenre.set(null);
+    this.isHaikuCompleted.set(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  onHaikuCompletionChanged(isCompleted: boolean) {
+    this.isHaikuCompleted.set(isCompleted);
+    if (!isCompleted) {
+      this.selectedGenre.set(null);
+    }
   }
 
   onGenreSelected(genre: 'gymnopedie' | 'dodecaphonic') {

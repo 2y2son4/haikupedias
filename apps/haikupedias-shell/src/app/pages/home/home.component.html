@@ -12,7 +12,7 @@
     <!-- Step 1: Word Selection -->
     <section class="step">
       <div class="selection-header">
-        <h2 class="step-title">Select 8 Words</h2>
+        <h2 class="step-title">Select 8 Seed Words</h2>
         <p class="progress-text">{{ selectedWords().length }} / 8 words selected:
           @for (word of selectedWords(); track word.id) {
             <span class="selected-word" [class]="getWordSetClass(word)">{{ word.label }}</span>
@@ -30,7 +30,7 @@
         <lib-word-selector [selectedWords]="selectedWords()" (wordSelected)="onWordSelected($event)" />
       } @else {
         <div class="selection-complete">
-          <p class="complete-message">✓ Selection complete! Scroll down to see your haiku.</p>
+          <p class="complete-message">✓ Selection complete! Scroll down and finish a 5-7-5 haiku.</p>
         </div>
       }
     </section>
@@ -39,7 +39,10 @@
     @if (haiku()) {
       <section class="step" id="haiku-section">
         <h2 class="step-title">Your Haiku</h2>
-        <lib-haiku-display [haiku]="haiku()!" />
+        <lib-haiku-display [haiku]="haiku()!" (completionChanged)="onHaikuCompletionChanged($event)" />
+        @if (!isHaikuCompleted()) {
+          <p class="complete-message">Complete the missing words to unlock music creation.</p>
+        }
         @if (composition()) {
           <!-- Step 2.5: Composition Details (shown after genre selection) -->
           @if (selectedGenre()) {

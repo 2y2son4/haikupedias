@@ -1,10 +1,15 @@
 <div class="haiku-display">
   <div class="haiku-container">
     <div class="haiku-content">
-      @for (line of haiku().lines; track $index; let i = $index) {
+      @for (lineTokens of lineTemplates(); track $index; let i = $index) {
         <p class="haiku-line" [class]="'line-' + (i + 1)">
-          @for (word of line.words; track word.id) {
-            {{ word.label }}{{ $last ? '' : ' ' }}
+          @for (token of lineTokens; track $index) {
+            @if (token.kind === 'fixed') {
+              <span class="fixed-word">{{ token.label }}</span>
+            } @else {
+              <input class="blank-word" type="text" maxlength="20" [value]="getBlankValue(token.key)"
+                (input)="onBlankInput(token.key, $event)" aria-label="Fill in a haiku word" />
+            }
           }
         </p>
       }
