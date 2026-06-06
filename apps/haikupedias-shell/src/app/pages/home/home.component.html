@@ -1,6 +1,6 @@
 <div class="home-container">
   <header class="hero">
-    <h1 class="title">Haikupedias & Dodecaikus</h1>
+    <h1 id="home-main-title" class="title">Haikupedias & Dodecaikus</h1>
     <p class="tagline">Where poetry meets algorithmic music</p>
     <!-- <p class="description">
       Select a word, watch it transform into a haiku, and hear it come alive
@@ -44,9 +44,11 @@
         <lib-haiku-display [haiku]="haiku()!" (completionChanged)="onHaikuCompletionChanged($event)"
           (created)="onHaikuCreated()" (changed)="onHaikuChanged()" />
         @if (!isHaikuCompleted()) {
-          <p class="complete-message selection-complete">Complete the missing words, then click CREATE to unlock music creation.</p>
+          <p class="complete-message selection-complete">Complete the missing words, then click CREATE to unlock music
+            creation.</p>
         } @else if (!isHaikuCreated()) {
-          <p class="complete-message selection-complete">Click CREATE to lock your haiku and generate a new composition.</p>
+          <p class="complete-message selection-complete">Click CREATE to lock your haiku and generate a new composition.
+          </p>
         }
         @if (composition()) {
           <!-- Step 2.5: Composition Details (shown after genre selection) -->

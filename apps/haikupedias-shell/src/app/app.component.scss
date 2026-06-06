@@ -33,7 +33,14 @@
       letter-spacing: 0.05em;
       color: #667eea;
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition:
+        color 0.3s ease,
+        opacity 0.2s ease;
+
+      &.logo-hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
 
       &:hover {
         color: #764ba2;
