@@ -14,7 +14,13 @@
         "main": "apps/haikupedias-shell/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/haikupedias-shell/tsconfig.app.json",
-        "assets": [],
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/haikupedias-shell/src",
+            "output": "/"
+          }
+        ],
         "styles": ["apps/haikupedias-shell/src/styles.scss"],
         "scripts": [],
         "inlineStyleLanguage": "scss",
