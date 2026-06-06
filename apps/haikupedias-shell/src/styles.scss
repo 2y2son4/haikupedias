@@ -1,6 +1,8 @@
 @use 'design-tokens/src/lib' as *;
 @use 'sass:map';
 
+@import 'material-icons/iconfont/material-icons.css';
+
 /* Global reset / base */
 * {
   margin: 0;

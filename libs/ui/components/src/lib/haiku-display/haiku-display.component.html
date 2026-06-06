@@ -15,10 +15,9 @@
         </p>
       }
     </div>
-
     <div class="haiku-actions">
       @if (!isLocked()) {
-        <button class="haiku-action create" [disabled]="!canCreate" (click)="onCreate()">CREATE</button>
+        <button class="haiku-action create" [disabled]="!canCreate" (click)="onCreate()">Create</button>
       } @else {
         <button class="haiku-action change" (click)="onChange()">Change</button>
       }

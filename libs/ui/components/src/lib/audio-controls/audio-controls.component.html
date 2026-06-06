@@ -13,26 +13,34 @@
         <div class="sound-type-buttons">
           <button class="sound-type-button synthetic-button" [disabled]="!canSelectSoundType"
             (click)="selectSoundType('synthetic')">
-            <span class="sound-icon">🎵</span>
-            <span class="sound-name">Synthetic</span>
+             <div class="sound-type-button__title">
+              <span class="material-icons">library_music</span>
+              <span class="sound-name">Synthetic</span>
+            </div>
             <span class="sound-description">Classic sine waves</span>
           </button>
           <button class="sound-type-button piano-synth-button" [disabled]="!canSelectSoundType"
             (click)="selectSoundType('piano-synth')">
-            <span class="sound-icon">🎹</span>
-            <span class="sound-name">Piano (Synth)</span>
+             <div class="sound-type-button__title">
+              <span class="material-icons">piano</span>
+              <span class="sound-name">Piano (Synth)</span>
+            </div>
             <span class="sound-description">Rich FM synthesis</span>
           </button>
           <button class="sound-type-button piano-samples-button" [disabled]="!canSelectSoundType"
             (click)="selectSoundType('piano-samples')">
-            <span class="sound-icon">🎹</span>
-            <span class="sound-name">Piano (Samples)</span>
+             <div class="sound-type-button__title">
+              <span class="material-icons">piano</span>
+              <span class="sound-name">Piano (Samples)</span>
+            </div>
             <span class="sound-description">Real recordings</span>
           </button>
           <button class="sound-type-button instruments-button" [disabled]="!canSelectSoundType"
             (click)="selectSoundType('instruments')">
-            <span class="sound-icon">🎻</span>
-            <span class="sound-name">Instruments</span>
+             <div class="sound-type-button__title">
+              <span class="material-icons">post_add</span>
+              <span class="sound-name">Instruments</span>
+            </div>
             <span class="sound-description">Various samples</span>
           </button>
         </div>
@@ -132,7 +140,7 @@
     <!-- Playing State -->
     @if (isPlaying) {
       <button class="control-button play-button" disabled>
-        <span class="icon playing">🎵</span>
+        <span class="material-icons">music_note</span>
         <span>Playing...</span>
       </button>
     }

@@ -2,18 +2,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem 2rem 2rem;
+  padding: 0.5rem 0;
 }
 
 .haiku-container {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   border-radius: 12px;
-  padding: 2rem;
+  padding: 1rem;
   width: 100%;
 }
 
 .haiku-content {
   text-align: center;
+  flex: 2;
 }
 
 .haiku-line {

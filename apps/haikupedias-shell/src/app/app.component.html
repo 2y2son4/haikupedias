@@ -1,11 +1,13 @@
 <div class="app-wrapper">
   <header class="app-header">
-    <a routerLink="/" class="logo">Haikupedias & Dodecaikus</a>
-    <button class="menu-button" (click)="toggleMenu()" [class.open]="menuOpen" aria-label="Toggle menu">
-      <span class="menu-icon"></span>
-      <span class="menu-icon"></span>
-      <span class="menu-icon"></span>
-    </button>
+    <div class="app-header-container">
+      <a routerLink="/" class="logo">Haikupedias & Dodecaikus</a>
+      <button class="menu-button" (click)="toggleMenu()" [class.open]="menuOpen" aria-label="Toggle menu">
+        <span class="menu-icon"></span>
+        <span class="menu-icon"></span>
+        <span class="menu-icon"></span>
+      </button>
+    </div>
   </header>
 
   <nav class="side-menu" [class.open]="menuOpen">
@@ -15,13 +17,13 @@
       <ul class="menu-list">
         <li>
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">
-            <span class="icon">🏠</span>
+            <span class="material-icons">home</span>
             Home
           </a>
         </li>
         <li>
           <a routerLink="/lexicon" routerLinkActive="active" (click)="closeMenu()">
-            <span class="icon">📖</span>
+            <span class="material-icons">menu_book</span>
             Lexicon
           </a>
         </li>
