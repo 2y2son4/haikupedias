@@ -1,7 +1,13 @@
 import { Component, output, signal, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Word } from '@haikupedias/core/types';
+import { Word, WordType } from '@haikupedias/core/types';
 import { WORD_SET_A, WORD_SET_B } from '@haikupedias/poetry/lexicon';
+
+type WordGroup = {
+  type: WordType;
+  label: string;
+  words: Word[];
+};
 
 @Component({
   selector: 'lib-word-selector',
@@ -24,6 +30,16 @@ export class WordSelectorComponent {
   readonly wordsSetB = [...WORD_SET_B].sort((a, b) =>
     a.label.localeCompare(b.label),
   );
+
+  readonly wordTypeOrder: WordType[] = ['noun', 'adjective', 'verb', 'adverb'];
+  readonly wordTypeLabels: Record<WordType, string> = {
+    noun: 'Nouns',
+    adjective: 'Adjectives',
+    verb: 'Verbs',
+    adverb: 'Adverbs',
+  };
+  readonly groupedWordsSetA = this.buildWordGroups(this.wordsSetA);
+  readonly groupedWordsSetB = this.buildWordGroups(this.wordsSetB);
 
   // Track last selected word for toast
   lastSelectedWord = signal<Word | null>(null);
@@ -52,5 +68,13 @@ export class WordSelectorComponent {
     if (this.selectedWords().length >= 8) return false;
 
     return this.selectedWords().some((w) => w.id === word.id);
+  }
+
+  private buildWordGroups(words: Word[]): WordGroup[] {
+    return this.wordTypeOrder.map((type) => ({
+      type,
+      label: this.wordTypeLabels[type],
+      words: words.filter((word) => word.type === type),
+    }));
   }
 }

@@ -6,26 +6,42 @@
   <div class="word-sets">
     <div class="word-set">
       <h4>Set A: Contemplative & Natural</h4>
-      <div class="word-grid">
-        @for (word of wordsSetA; track word.id) {
-          <button class="word-button" [class.selected]="isSelected(word)" [class.major]="word.tonalityGroup === 'major'"
-            [class.minor]="word.tonalityGroup === 'minor'" (click)="selectWord(word)">
-            <span class="word-text">{{ word.label }}</span>
-            <span class="word-tonality">{{ word.tonalityGroup }}</span>
-          </button>
+      <div class="word-type-groups">
+        @for (group of groupedWordsSetA; track group.type) {
+          <section class="word-type-group">
+            <h5 class="word-type-title">{{ group.label }}</h5>
+            <div class="word-grid">
+              @for (word of group.words; track word.id) {
+                <button class="word-button" [class.selected]="isSelected(word)"
+                  [class.major]="word.tonalityGroup === 'major'" [class.minor]="word.tonalityGroup === 'minor'"
+                  (click)="selectWord(word)">
+                  <span class="word-text">{{ word.label }}</span>
+                  <span class="word-tonality">{{ word.tonalityGroup }}</span>
+                </button>
+              }
+            </div>
+          </section>
         }
       </div>
     </div>
 
     <div class="word-set">
       <h4>Set B: Dynamic & Urban</h4>
-      <div class="word-grid">
-        @for (word of wordsSetB; track word.id) {
-          <button class="word-button" [class.selected]="isSelected(word)" [class.major]="word.tonalityGroup === 'major'"
-            [class.minor]="word.tonalityGroup === 'minor'" (click)="selectWord(word)">
-            <span class="word-text">{{ word.label }}</span>
-            <span class="word-tonality">{{ word.tonalityGroup }}</span>
-          </button>
+      <div class="word-type-groups">
+        @for (group of groupedWordsSetB; track group.type) {
+          <section class="word-type-group">
+            <h5 class="word-type-title">{{ group.label }}</h5>
+            <div class="word-grid">
+              @for (word of group.words; track word.id) {
+                <button class="word-button" [class.selected]="isSelected(word)"
+                  [class.major]="word.tonalityGroup === 'major'" [class.minor]="word.tonalityGroup === 'minor'"
+                  (click)="selectWord(word)">
+                  <span class="word-text">{{ word.label }}</span>
+                  <span class="word-tonality">{{ word.tonalityGroup }}</span>
+                </button>
+              }
+            </div>
+          </section>
         }
       </div>
     </div>
