@@ -51,11 +51,22 @@ export class DodecaphonicArranger implements CompositionArranger {
 
   /**
    * Builds a 12-tone row from the 8 composition notes by finding
-   * and inserting the 4 missing chromatic notes
+   * and inserting the missing chromatic notes
    */
   private buildToneRow(compositionNotes: number[]): number[] {
-    // Find which chromatic notes (0-11) are missing
-    const usedNotes = new Set(compositionNotes.map((n) => n % 12));
+    // Keep only the first occurrence of each pitch class so the row cannot repeat.
+    const toneRow: number[] = [];
+    const usedNotes = new Set<number>();
+
+    for (const note of compositionNotes) {
+      const pitchClass = note % 12;
+      if (!usedNotes.has(pitchClass)) {
+        usedNotes.add(pitchClass);
+        toneRow.push(pitchClass);
+      }
+    }
+
+    // Find which chromatic notes (0-11) are missing.
     const missingNotes: number[] = [];
 
     for (let i = 0; i < 12; i++) {
@@ -64,35 +75,12 @@ export class DodecaphonicArranger implements CompositionArranger {
       }
     }
 
-    // Sort missing notes for deterministic insertion
+    // Sort missing notes for deterministic completion of the row.
     missingNotes.sort((a, b) => a - b);
 
-    // Build the tone row by inserting missing notes strategically
-    // Pattern: bar1[step1, step2, MISSING1, step3, step4, MISSING2]
-    //          bar2[step1, step2, MISSING3, step3, step4, MISSING4]
-    const toneRow: number[] = [];
-    let missingIndex = 0;
-
-    for (let barIndex = 0; barIndex < 2; barIndex++) {
-      const barStart = barIndex * 4;
-
-      // Notes 1 and 2 from this bar
-      toneRow.push(compositionNotes[barStart]);
-      toneRow.push(compositionNotes[barStart + 1]);
-
-      // Insert first missing note for this bar
-      if (missingIndex < missingNotes.length) {
-        toneRow.push(missingNotes[missingIndex++]);
-      }
-
-      // Notes 3 and 4 from this bar
-      toneRow.push(compositionNotes[barStart + 2]);
-      toneRow.push(compositionNotes[barStart + 3]);
-
-      // Insert second missing note for this bar
-      if (missingIndex < missingNotes.length) {
-        toneRow.push(missingNotes[missingIndex++]);
-      }
+    // Append the missing notes to complete the 12-tone row.
+    for (const note of missingNotes) {
+      toneRow.push(note);
     }
 
     return toneRow;
