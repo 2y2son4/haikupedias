@@ -55,6 +55,33 @@
   flex-wrap: wrap;
 }
 
+.selection-title-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.lucky-button {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #667eea;
+  background: #eef1ff;
+  color: #4456bf;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #dde3ff;
+    transform: translateY(-1px);
+  }
+}
+
 .progress-text {
   font-size: 1rem;
   color: #666;
@@ -124,7 +151,7 @@
 }
 
 .step-title {
-  text-align: center;
+  text-align: left;
   color: #333;
   font-size: 1.8rem;
   font-weight: 400;
@@ -144,6 +171,11 @@
 }
 
 @media (max-width: 768px) {
+  .selection-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .hero {
     .title {
       font-size: 2.5rem;

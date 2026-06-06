@@ -7,6 +7,7 @@ import {
 } from '@haikupedias/ui/components';
 import { Word, NoteValue } from '@haikupedias/core/types';
 import { HaikuBuilder } from '@haikupedias/poetry/haiku-engine';
+import { WORD_SET_A, WORD_SET_B } from '@haikupedias/poetry/lexicon';
 import { CompositionGenerator } from '@haikupedias/music/composition-engine';
 import { DodecaphonicArranger } from '@haikupedias/music/arrangers/dodecaphonic-arranger';
 
@@ -82,6 +83,23 @@ export class HomeComponent {
     if (current.length < 8 && !current.find((w) => w.id === word.id)) {
       this.selectedWords.set([...current, word]);
     }
+  }
+
+  selectLuckyWords() {
+    const allWords = [...WORD_SET_A, ...WORD_SET_B];
+
+    if (allWords.length < 8) return;
+
+    const shuffled = [...allWords];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    this.selectedWords.set(shuffled.slice(0, 8));
+    this.selectedGenre.set(null);
+    this.isHaikuCompleted.set(false);
+    this.isHaikuCreated.set(false);
   }
 
   resetSelection() {

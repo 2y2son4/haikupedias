@@ -12,7 +12,12 @@
     <!-- Step 1: Word Selection -->
     <section class="step">
       <div class="selection-header">
-        <h2 class="step-title">Select 8 Seed Words</h2>
+        <div class="selection-title-row">
+          <h2 class="step-title">Select 8 Seed Words</h2>
+          @if (selectedWords().length < 8) {
+            <button class="lucky-button" (click)="selectLuckyWords()">I'm feeling lucky</button>
+          }
+        </div>
         <p class="progress-text selection-container">{{ selectedWords().length }} / 8 words selected:
           <span>
             @for (word of selectedWords(); track word.id) {
