@@ -52,6 +52,42 @@
   border-bottom-color: #2c3e50;
 }
 
+.blank-word.locked {
+  border-bottom-style: dashed;
+  opacity: 0.85;
+}
+
+.haiku-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.haiku-action {
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.haiku-action.create {
+  background: #1f6feb;
+  color: #fff;
+}
+
+.haiku-action.create:disabled {
+  background: #9db7e6;
+  cursor: not-allowed;
+}
+
+.haiku-action.change {
+  background: #e7edf7;
+  color: #1f3552;
+}
+
 .line-1 {
   animation: fadeInUp 0.6s ease-out;
 }

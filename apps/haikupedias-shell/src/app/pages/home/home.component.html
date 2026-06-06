@@ -39,9 +39,12 @@
     @if (haiku()) {
       <section class="step" id="haiku-section">
         <h2 class="step-title">Your Haiku</h2>
-        <lib-haiku-display [haiku]="haiku()!" (completionChanged)="onHaikuCompletionChanged($event)" />
+        <lib-haiku-display [haiku]="haiku()!" (completionChanged)="onHaikuCompletionChanged($event)"
+          (created)="onHaikuCreated()" (changed)="onHaikuChanged()" />
         @if (!isHaikuCompleted()) {
-          <p class="complete-message">Complete the missing words to unlock music creation.</p>
+          <p class="complete-message">Complete the missing words, then click CREATE to unlock music creation.</p>
+        } @else if (!isHaikuCreated()) {
+          <p class="complete-message">Click CREATE to lock your haiku and generate a new composition.</p>
         }
         @if (composition()) {
           <!-- Step 2.5: Composition Details (shown after genre selection) -->

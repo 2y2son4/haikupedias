@@ -20,8 +20,15 @@ export class HaikuDisplayComponent {
   // Emits true when all editable slots are completed
   completionChanged = output<boolean>();
 
+  // Emits when user confirms CREATE (locks edition)
+  created = output<void>();
+
+  // Emits when user clicks Change (unlocks edition)
+  changed = output<void>();
+
   private readonly targetLineLengths = [5, 7, 5] as const;
   private readonly blankValues = signal<Record<string, string>>({});
+  readonly isLocked = signal(false);
 
   readonly lineTemplates = computed(() => {
     const currentHaiku = this.haiku();
@@ -30,6 +37,21 @@ export class HaikuDisplayComponent {
       const fixedWords = line.words.map((word) => word.label);
       const targetLength = this.targetLineLengths[lineIndex];
       const blanksNeeded = Math.max(targetLength - fixedWords.length, 0);
+
+      if (
+        (lineIndex === 0 || lineIndex === 2) &&
+        fixedWords.length === 2 &&
+        blanksNeeded === 3
+      ) {
+        return [
+          { kind: 'blank', key: `${lineIndex}-0` },
+          { kind: 'fixed', label: fixedWords[0] },
+          { kind: 'blank', key: `${lineIndex}-1` },
+          { kind: 'fixed', label: fixedWords[1] },
+          { kind: 'blank', key: `${lineIndex}-2` },
+        ] as HaikuToken[];
+      }
+
       const tokens: HaikuToken[] = [];
 
       for (let fixedIndex = 0; fixedIndex < fixedWords.length; fixedIndex++) {
@@ -64,6 +86,10 @@ export class HaikuDisplayComponent {
   });
 
   onBlankInput(blankKey: string, event: Event): void {
+    if (this.isLocked()) {
+      return;
+    }
+
     const value = (event.target as HTMLInputElement).value;
     this.blankValues.update((current) => ({
       ...current,
@@ -75,6 +101,25 @@ export class HaikuDisplayComponent {
 
   getBlankValue(blankKey: string): string {
     return this.blankValues()[blankKey] ?? '';
+  }
+
+  get canCreate(): boolean {
+    return this.isComplete() && !this.isLocked();
+  }
+
+  onCreate(): void {
+    if (!this.canCreate) {
+      return;
+    }
+
+    this.isLocked.set(true);
+    this.created.emit();
+  }
+
+  onChange(): void {
+    this.isLocked.set(false);
+    this.changed.emit();
+    this.completionChanged.emit(this.isComplete());
   }
 
   private isComplete(): boolean {

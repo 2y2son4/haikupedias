@@ -26,6 +26,7 @@ export class HomeComponent {
   selectedWords = signal<Word[]>([]);
   selectedGenre = signal<'gymnopedie' | 'dodecaphonic' | null>(null);
   isHaikuCompleted = signal(false);
+  isHaikuCreated = signal(false);
 
   private dodecaArranger = new DodecaphonicArranger();
 
@@ -68,7 +69,7 @@ export class HomeComponent {
   });
 
   composition = computed(() => {
-    if (!this.isHaikuCompleted()) return null;
+    if (!this.isHaikuCreated()) return null;
 
     const currentHaiku = this.haiku();
     if (!currentHaiku) return null;
@@ -87,6 +88,7 @@ export class HomeComponent {
     this.selectedWords.set([]);
     this.selectedGenre.set(null);
     this.isHaikuCompleted.set(false);
+    this.isHaikuCreated.set(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -94,7 +96,19 @@ export class HomeComponent {
     this.isHaikuCompleted.set(isCompleted);
     if (!isCompleted) {
       this.selectedGenre.set(null);
+      this.isHaikuCreated.set(false);
     }
+  }
+
+  onHaikuCreated() {
+    if (this.isHaikuCompleted()) {
+      this.isHaikuCreated.set(true);
+    }
+  }
+
+  onHaikuChanged() {
+    this.isHaikuCreated.set(false);
+    this.selectedGenre.set(null);
   }
 
   onGenreSelected(genre: 'gymnopedie' | 'dodecaphonic') {

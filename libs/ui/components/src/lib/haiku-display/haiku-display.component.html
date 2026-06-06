@@ -8,10 +8,19 @@
               <span class="fixed-word">{{ token.label }}</span>
             } @else {
               <input class="blank-word" type="text" maxlength="20" [value]="getBlankValue(token.key)"
-                (input)="onBlankInput(token.key, $event)" aria-label="Fill in a haiku word" />
+                [readOnly]="isLocked()" [class.locked]="isLocked()" (input)="onBlankInput(token.key, $event)"
+                aria-label="Fill in a haiku word" />
             }
           }
         </p>
+      }
+    </div>
+
+    <div class="haiku-actions">
+      @if (!isLocked()) {
+        <button class="haiku-action create" [disabled]="!canCreate" (click)="onCreate()">CREATE</button>
+      } @else {
+        <button class="haiku-action change" (click)="onChange()">Change</button>
       }
     </div>
   </div>
