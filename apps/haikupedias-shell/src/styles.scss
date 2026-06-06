@@ -1,21 +1,7 @@
-@use "@haikupedias/design-tokens" as *;
+@use 'design-tokens/src/lib' as *;
+@use 'sass:map';
 
 /* Global reset / base */
-body {
-  background-color: $bg-app;
-  color: $text-primary;
-  font-family: map-get($text-body, font-family);
-  line-height: map-get($text-body, line-height);
-}
-
-/* Theme hooks */
-body.theme-dark {
-  background-color: $dm-bg-app;
-  color: $dm-text-primary;
-}
-
-
-/* Global styles */
 * {
   margin: 0;
   padding: 0;
@@ -23,9 +9,18 @@ body.theme-dark {
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
+  background-color: $bg-app;
+  color: $text-primary;
+  font-family: map.get($text-body, font-family);
+  line-height: map.get($text-body, line-height);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+body.theme-dark {
+  background-color: $dm-bg-app;
+  color: $dm-text-primary;
 }
 
 button {

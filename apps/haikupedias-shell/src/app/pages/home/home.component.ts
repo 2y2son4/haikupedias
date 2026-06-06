@@ -5,11 +5,9 @@ import {
   HaikuDisplayComponent,
   AudioControlsComponent,
 } from '@haikupedias/ui/components';
-import { Word, Haiku, Composition, NoteValue } from '@haikupedias/core/types';
+import { Word, NoteValue } from '@haikupedias/core/types';
 import { HaikuBuilder } from '@haikupedias/poetry/haiku-engine';
 import { CompositionGenerator } from '@haikupedias/music/composition-engine';
-import { WORD_SET_A, WORD_SET_B } from '@haikupedias/poetry/lexicon';
-import { GymnopedieArranger } from '@haikupedias/music/arrangers/gymnopedie-arranger';
 import { DodecaphonicArranger } from '@haikupedias/music/arrangers/dodecaphonic-arranger';
 
 @Component({
@@ -25,17 +23,11 @@ import { DodecaphonicArranger } from '@haikupedias/music/arrangers/dodecaphonic-
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  // Selected words (need 8 for haiku)
   selectedWords = signal<Word[]>([]);
-
-  // Selected musical genre
   selectedGenre = signal<'gymnopedie' | 'dodecaphonic' | null>(null);
 
-  // Arranger instances for getting composition details
-  private gymnoArranger = new GymnopedieArranger();
   private dodecaArranger = new DodecaphonicArranger();
 
-  // Note labels for display
   private readonly noteLabels = [
     'C',
     'C#',
@@ -52,11 +44,9 @@ export class HomeComponent {
   ];
 
   constructor() {
-    // Auto-scroll to haiku when 8 words are selected
     effect(() => {
       const words = this.selectedWords();
       if (words.length === 8) {
-        // Small delay to ensure DOM is updated
         setTimeout(() => {
           const haikuSection = document.getElementById('haiku-section');
           if (haikuSection) {
@@ -67,7 +57,6 @@ export class HomeComponent {
     });
   }
 
-  // Generated haiku based on selected words
   haiku = computed(() => {
     const words = this.selectedWords();
     if (words.length !== 8) return null;
@@ -77,7 +66,6 @@ export class HomeComponent {
     return result.success ? result.haiku : null;
   });
 
-  // Generated composition based on haiku
   composition = computed(() => {
     const currentHaiku = this.haiku();
     if (!currentHaiku) return null;
@@ -87,7 +75,6 @@ export class HomeComponent {
   onWordSelected(word: Word) {
     const current = this.selectedWords();
 
-    // Add word if not already selected and less than 8 words
     if (current.length < 8 && !current.find((w) => w.id === word.id)) {
       this.selectedWords.set([...current, word]);
     }
@@ -96,7 +83,6 @@ export class HomeComponent {
   resetSelection() {
     this.selectedWords.set([]);
     this.selectedGenre.set(null);
-    // Scroll to top smoothly
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -112,7 +98,6 @@ export class HomeComponent {
     return this.noteLabels[note];
   }
 
-  // Get 12-tone row for dodecaphonic display
   getDodecaphonicToneRow(): NoteValue[] {
     const comp = this.composition();
     if (!comp) return [];
@@ -121,7 +106,6 @@ export class HomeComponent {
     return notes.map((n) => n.note);
   }
 
-  // Get gymnopédie structure (bars with tonic + chord)
   getGymnopedieStructure(): Array<{ tonic: NoteValue; chord: NoteValue[] }> {
     const comp = this.composition();
     if (!comp) return [];

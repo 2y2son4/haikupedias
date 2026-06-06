@@ -10,11 +10,9 @@ import { WORD_SET_A, WORD_SET_B, Word } from '@haikupedias/poetry/lexicon';
   styleUrl: './lexicon.component.scss',
 })
 export class LexiconComponent {
-  // Word datasets
   wordSetA = WORD_SET_A;
   wordSetB = WORD_SET_B;
 
-  // Current active set
   activeSet: 'A' | 'B' = 'A';
 
   get currentWords(): Word[] {

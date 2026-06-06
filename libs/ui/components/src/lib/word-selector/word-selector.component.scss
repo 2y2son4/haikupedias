@@ -1,7 +1,7 @@
 .word-selector {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 2rem;
 }
 
 h3 {
@@ -13,13 +13,13 @@ h3 {
   color: #666;
   margin-bottom: 2rem;
   font-style: italic;
+  margin-bottom: 0.75rem;
 }
 
 .word-sets {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  margin-bottom: 2rem;
 }
 
 .word-set h4 {
@@ -69,7 +69,7 @@ h3 {
 }
 
 .word-text {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
@@ -83,7 +83,7 @@ h3 {
 }
 
 .word-tonality {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   color: #6c757d;
   text-transform: uppercase;
   letter-spacing: 0.5px;
