@@ -104,7 +104,14 @@
 
 .selection-complete {
   text-align: center;
-  padding: 3rem 2rem;
+}
+
+.selection-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
 }
 
 .complete-message {

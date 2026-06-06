@@ -13,17 +13,19 @@
     <section class="step">
       <div class="selection-header">
         <h2 class="step-title">Select 8 Seed Words</h2>
-        <p class="progress-text">{{ selectedWords().length }} / 8 words selected:
-          @for (word of selectedWords(); track word.id) {
-            <span class="selected-word" [class]="getWordSetClass(word)">{{ word.label }}</span>
-            @if (!$last){
-              <span class="separator"> | </span>
+        <p class="progress-text selection-container">{{ selectedWords().length }} / 8 words selected:
+          <span>
+            @for (word of selectedWords(); track word.id) {
+              <span class="selected-word" [class]="getWordSetClass(word)">{{ word.label }}</span>
+              @if (!$last){
+                <span class="separator"> | </span>
+              }
             }
+          </span>
+          @if (selectedWords().length >= 8) {
+            <button class="reset-button" (click)="resetSelection()">Start Over</button>
           }
         </p>
-        @if (selectedWords().length >= 8) {
-          <button class="reset-button" (click)="resetSelection()">Start Over</button>
-        }
       </div>
 
       @if (selectedWords().length < 8) {
