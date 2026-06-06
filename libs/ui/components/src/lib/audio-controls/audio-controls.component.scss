@@ -53,7 +53,7 @@
     display: flex;
     gap: 0.25rem;
     align-items: center;
-}
+  }
 
   &:disabled {
     opacity: 0.5;
@@ -254,11 +254,11 @@
 
 .dodeca-button {
   background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
-  color: #7b1fa2;
-  border-color: #7b1fa2;
+  color: #764ba2;
+  border-color: #764ba2;
 
   &:hover:not(:disabled) {
-    background: #7b1fa2;
+    background: #764ba2;
     color: white;
     transform: translateY(-3px) scale(1.05);
   }
@@ -330,7 +330,7 @@
 }
 
 .style-toggle-button {
-  background: #7b1fa2;
+  background: #764ba2;
   color: white;
 }
 

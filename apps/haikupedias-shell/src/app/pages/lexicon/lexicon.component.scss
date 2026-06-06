@@ -56,12 +56,12 @@
     }
 
     &:hover {
-      border-color: #667eea;
+      border-color: #1976d2;
       transform: translateY(-2px);
     }
 
     &.active {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: #764ba2;
       color: white;
       border-color: transparent;
 
@@ -96,16 +96,16 @@
 
 .word {
   display: inline-block;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
   transition: all 0.2s ease;
   cursor: default;
 
   &.major {
     background: #e3f2fd;
     color: #1976d2;
-    border: 1px solid #bbdefb;
+    border: 1px solid #1976d2;
 
     &:hover {
       background: #bbdefb;
@@ -115,8 +115,8 @@
 
   &.minor {
     background: #f3e5f5;
-    color: #7b1fa2;
-    border: 1px solid #e1bee7;
+    color: #764ba2;
+    border: 1px solid #764ba2;
 
     &:hover {
       background: #e1bee7;
@@ -155,7 +155,7 @@
 
     &.minor {
       background: #f3e5f5;
-      color: #7b1fa2;
+      color: #764ba2;
       border: 1px solid #e1bee7;
     }
   }

@@ -5,7 +5,7 @@
 .app {
   &-wrapper {
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1976d2 0%, #764ba2 100%);
   }
 
   &-header {
@@ -31,7 +31,7 @@
       font-size: 1.5rem;
       font-weight: 300;
       letter-spacing: 0.05em;
-      color: #667eea;
+      color: #1976d2;
       text-decoration: none;
       transition:
         color 0.3s ease,
@@ -64,7 +64,7 @@
       .menu-icon {
         width: 25px;
         height: 2px;
-        background: #667eea;
+        background: #1976d2;
         transition: all 0.3s ease;
         border-radius: 2px;
       }
@@ -182,7 +182,7 @@
       }
 
       &.active {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #1976d2 0%, #764ba2 100%);
         color: white;
       }
     }
