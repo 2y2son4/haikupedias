@@ -37,7 +37,7 @@
                   [class.major]="word.tonalityGroup === 'major'" [class.minor]="word.tonalityGroup === 'minor'"
                   (click)="selectWord(word)">
                   <span class="word-text">{{ word.label }}</span>
-                  <span class="word-tonality">{{ word.tonalityGroup }}</span>
+                  <span class="word-tonality" [class.major]="word.tonalityGroup === 'major'" [class.minor]="word.tonalityGroup === 'minor'">{{ word.tonalityGroup }}</span>
                 </button>
               }
             </div>

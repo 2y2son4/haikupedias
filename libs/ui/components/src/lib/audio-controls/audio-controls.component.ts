@@ -21,6 +21,21 @@ import { GymnopedieArranger } from '@haikupedias/music/arrangers/gymnopedie-arra
 import { DodecaphonicArranger } from '@haikupedias/music/arrangers/dodecaphonic-arranger';
 
 type PlaybackState = 'idle' | 'playing' | 'stopped';
+type HighlightKind = 'single' | 'chord' | 'generated' | 'none';
+
+export interface PlaybackHighlightEvent {
+  activeWordIndices: number[];
+  activeNoteIndices: number[];
+  kind: HighlightKind;
+}
+
+type HighlightCue = {
+  startMs: number;
+  endMs: number;
+  wordIndices: number[];
+  noteIndices: number[];
+  kind: Exclude<HighlightKind, 'none'>;
+};
 
 @Component({
   selector: 'lib-audio-controls',
@@ -38,6 +53,7 @@ export class AudioControlsComponent {
 
   // Output event when genre is selected
   genreSelectedEvent = output<'gymnopedie' | 'dodecaphonic'>();
+  playbackHighlightChanged = output<PlaybackHighlightEvent>();
 
   private audioManager: AudioContextManager | null = null;
   private player: CompositionPlayer | null = null;
@@ -45,6 +61,7 @@ export class AudioControlsComponent {
   private pianoSynthPlayer: INotePlayer | null = null;
   private pianoSamplesPlayer: INotePlayer | null = null;
   private instrumentPlayer: InstrumentNotePlayer | null = null;
+  private highlightTimeoutIds: number[] = [];
 
   // Arrangers for different musical interpretations (public for template access)
   gymnoArranger = new GymnopedieArranger();
@@ -102,23 +119,31 @@ export class AudioControlsComponent {
     if (!this.player || !comp) return;
 
     try {
+      this.clearHighlightSchedule();
       this.playbackState.set('playing');
       this.errorMessage.set(null);
       this.hasPlayed.set(true);
 
       // Arrange composition using current arranger
       const arranger = this.currentArranger();
-      const notes = arranger.arrange(comp, 1.2);
+      const noteDuration = 1.2;
+      const notes = arranger.arrange(comp, noteDuration);
+      const genre =
+        arranger === this.gymnoArranger ? 'gymnopedie' : 'dodecaphonic';
 
       // Play arranged notes
       this.player.play(notes);
+      this.scheduleHighlights(notes, genre);
 
       // Calculate duration and schedule state change
       const duration = this.calculateDuration(notes);
-      setTimeout(() => {
+      const stopTimer = window.setTimeout(() => {
         this.playbackState.set('stopped');
+        this.emitHighlight([], [], 'none');
       }, duration);
+      this.highlightTimeoutIds.push(stopTimer);
     } catch (error) {
+      this.clearHighlightSchedule();
       this.errorMessage.set('Playback failed. Please try again.');
       this.playbackState.set('stopped');
       console.error('Playback error:', error);
@@ -131,6 +156,7 @@ export class AudioControlsComponent {
   }
 
   replay() {
+    this.clearHighlightSchedule();
     this.play();
   }
 
@@ -229,7 +255,135 @@ export class AudioControlsComponent {
   }
 
   onRestart() {
+    this.clearHighlightSchedule();
     this.restart.emit();
+  }
+
+  private scheduleHighlights(
+    notes: ScheduledNote[],
+    genre: 'gymnopedie' | 'dodecaphonic',
+  ) {
+    const cues = this.buildHighlightCues(notes, genre);
+
+    this.emitHighlight([], [], 'none');
+
+    for (const cue of cues) {
+      const startTimer = window.setTimeout(() => {
+        this.emitHighlight(cue.wordIndices, cue.noteIndices, cue.kind);
+      }, cue.startMs);
+
+      const endTimer = window.setTimeout(() => {
+        this.emitHighlight([], [], 'none');
+      }, cue.endMs);
+
+      this.highlightTimeoutIds.push(startTimer, endTimer);
+    }
+  }
+
+  private buildHighlightCues(
+    notes: ScheduledNote[],
+    genre: 'gymnopedie' | 'dodecaphonic',
+  ): HighlightCue[] {
+    const groupedByStart = new Map<number, ScheduledNote[]>();
+
+    for (const note of notes) {
+      const key = Number(note.startTime.toFixed(6));
+      const existing = groupedByStart.get(key) ?? [];
+      existing.push(note);
+      groupedByStart.set(key, existing);
+    }
+
+    const orderedGroups = Array.from(groupedByStart.entries())
+      .sort((a, b) => a[0] - b[0])
+      .map(([, group]) => group);
+
+    return orderedGroups.map((group, groupIndex) => {
+      const startMs = Math.round(group[0].startTime * 1000);
+      const endMs = Math.round(
+        (group[0].startTime + Math.max(...group.map((item) => item.duration))) *
+          1000,
+      );
+
+      if (genre === 'gymnopedie') {
+        const slot = groupIndex % 4;
+
+        if (slot === 0) {
+          return {
+            startMs,
+            endMs,
+            wordIndices: [0],
+            noteIndices: [0],
+            kind: 'single',
+          };
+        }
+
+        if (slot === 1) {
+          return {
+            startMs,
+            endMs,
+            wordIndices: [1, 2, 3],
+            noteIndices: [1, 2, 3],
+            kind: 'chord',
+          };
+        }
+
+        if (slot === 2) {
+          return {
+            startMs,
+            endMs,
+            wordIndices: [4],
+            noteIndices: [4],
+            kind: 'single',
+          };
+        }
+
+        return {
+          startMs,
+          endMs,
+          wordIndices: [5, 6, 7],
+          noteIndices: [5, 6, 7],
+          kind: 'chord',
+        };
+      }
+
+      if (groupIndex < 8) {
+        return {
+          startMs,
+          endMs,
+          wordIndices: [groupIndex],
+          noteIndices: [groupIndex],
+          kind: 'single',
+        };
+      }
+
+      return {
+        startMs,
+        endMs,
+        wordIndices: [],
+        noteIndices: [groupIndex],
+        kind: 'generated',
+      };
+    });
+  }
+
+  private emitHighlight(
+    activeWordIndices: number[],
+    activeNoteIndices: number[],
+    kind: HighlightKind,
+  ) {
+    this.playbackHighlightChanged.emit({
+      activeWordIndices,
+      activeNoteIndices,
+      kind,
+    });
+  }
+
+  private clearHighlightSchedule() {
+    for (const timeoutId of this.highlightTimeoutIds) {
+      window.clearTimeout(timeoutId);
+    }
+    this.highlightTimeoutIds = [];
+    this.emitHighlight([], [], 'none');
   }
 
   get canPlay(): boolean {

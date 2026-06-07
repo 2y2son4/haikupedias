@@ -47,7 +47,8 @@
       <section class="step" id="haiku-section">
         <h2 class="step-title">Your Haiku</h2>
         <lib-haiku-display [haiku]="haiku()!" (completionChanged)="onHaikuCompletionChanged($event)"
-          (created)="onHaikuCreated()" (changed)="onHaikuChanged()" />
+          [activeWordIndices]="activeWordIndices()" [highlightKind]="activeHighlightKind()" (created)="onHaikuCreated()"
+          (changed)="onHaikuChanged()" />
         @if (!isHaikuCompleted()) {
           <p class="complete-message selection-complete">Complete the missing words, then click CREATE to unlock music
             creation.</p>
@@ -67,7 +68,8 @@
                   <p class="structure-label">12-Tone Row:</p>
                   <div class="tone-row">
                     @for (note of getDodecaphonicToneRow(); track $index) {
-                      <span class="note-label">{{ getNoteLabel(note) }}</span>
+                      <span class="note-label" [class.active-note]="isToneRowNoteActive($index)">{{ getNoteLabel(note)
+                        }}</span>
                     }
                   </div>
                 </div>
@@ -78,18 +80,21 @@
                 <div class="gymnopedie-structure">
                   <p class="structure-label">Pattern (played twice):</p>
                   <div class="bars-container">
-                    @for (barStructure of getGymnopedieStructure(); track $index) {
+                    @for (barStructure of getGymnopedieStructure(); track $index; let barIndex = $index) {
                       <div class="bar-structure">
-                        <div class="bar-label">Bar {{ $index + 1 }}</div>
+                        <div class="bar-label">Bar {{ barIndex + 1 }}</div>
                         <div class="notes-structure">
                           <div class="tonic-section">
-                            <span class="note-label solo">{{ getNoteLabel(barStructure.tonic) }}</span>
+                            <span class="note-label solo" [class.active-note]="isGymnopedieNoteActive(barIndex, 0)">{{
+                              getNoteLabel(barStructure.tonic) }}</span>
                             <span class="play-style">solo</span>
                           </div>
                           <div class="chord-section">
                             <div class="chord-notes">
-                              @for (note of barStructure.chord; track $index) {
-                                <span class="note-label chord">{{ getNoteLabel(note) }}</span>
+                              @for (note of barStructure.chord; track $index; let chordIndex = $index) {
+                                <span class="note-label chord"
+                                  [class.active-note]="isGymnopedieNoteActive(barIndex, chordIndex + 1)">{{
+                                  getNoteLabel(note) }}</span>
                               }
                             </div>
                             <span class="play-style">chord</span>
@@ -104,7 +109,8 @@
           }
           <!-- Step 3: Audio Controls (shown after haiku generation) -->
           <lib-audio-controls [composition]="composition()" (restart)="resetSelection()"
-            (genreSelectedEvent)="onGenreSelected($event)" />
+            (genreSelectedEvent)="onGenreSelected($event)"
+            (playbackHighlightChanged)="onPlaybackHighlightChanged($event)" />
         }
       </section>
     }

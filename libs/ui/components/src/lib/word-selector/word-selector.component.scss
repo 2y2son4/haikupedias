@@ -83,16 +83,25 @@ h3 {
   border-color: #bbdefb;
 }
 
+.major {
+  color: #1976d2;
+}
+
 .word-button.selected.minor {
   background: #f3e5f5;
   color: #764ba2;
   border-color: #e1bee7;
 }
 
+.minor {
+  color: #764ba2;
+}
+
 .word-text {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
+  color: #6c757d;
 }
 
 .word-button.selected.major .word-text {
@@ -105,17 +114,16 @@ h3 {
 
 .word-tonality {
   font-size: 0.75rem;
-  color: #6c757d;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .word-button.selected.major .word-tonality {
-  color: rgba(25, 118, 210, 0.7);
+  color: #1976d2b3;
 }
 
 .word-button.selected.minor .word-tonality {
-  color: rgba(123, 31, 162, 0.7);
+  color: #7b1fa2b3;
 }
 
 .toast-message {

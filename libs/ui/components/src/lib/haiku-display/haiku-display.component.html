@@ -1,11 +1,14 @@
 <div class="haiku-display">
-  <div class="haiku-container">
+  <div class="haiku-container" [class.generated-active]="hasGeneratedToneHighlight">
     <div class="haiku-content">
       @for (lineTokens of lineTemplates(); track $index; let i = $index) {
         <p class="haiku-line" [class]="'line-' + (i + 1)">
           @for (token of lineTokens; track $index) {
             @if (token.kind === 'fixed') {
-              <span class="fixed-word">{{ token.label }}</span>
+              <span class="fixed-word" [class.active-playback]="isWordActive(token.wordIndex)"
+                [class.chord-active]="isWordActive(token.wordIndex) && isChordHighlight"
+                [class.major-tonality]="token.tonalityGroup === 'major'"
+                [class.minor-tonality]="token.tonalityGroup === 'minor'">{{ token.label }}</span>
             } @else {
               <input class="blank-word" type="text" maxlength="20" [value]="getBlankValue(token.key)"
                 [readOnly]="isLocked()" [class.locked]="isLocked()" (input)="onBlankInput(token.key, $event)"

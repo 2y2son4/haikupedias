@@ -13,6 +13,12 @@
   border-radius: 12px;
   padding: 1rem;
   width: 100%;
+
+  &.generated-active {
+    box-shadow:
+      0 0 0 2px rgba(118, 75, 162, 0.24),
+      0 0 22px rgba(118, 75, 162, 0.25);
+  }
 }
 
 .haiku-content {
@@ -36,6 +42,33 @@
 
 .fixed-word {
   display: inline-block;
+  border-radius: 6px;
+  padding: 0.05rem 0.3rem;
+  transition: all 0.18s ease;
+
+  &.active-playback.major-tonality {
+    background: #d8f0ff;
+    color: #0f4f78;
+    box-shadow: 0 0 0 1px rgba(15, 79, 120, 0.18);
+    transform: translateY(-1px);
+  }
+
+  &.active-playback.minor-tonality {
+    background: #efe4ff;
+    color: #4c2a73;
+    box-shadow: 0 0 0 1px rgba(76, 42, 115, 0.22);
+    transform: translateY(-1px);
+  }
+
+  &.chord-active.major-tonality {
+    background: #c6e5ff;
+    box-shadow: 0 0 0 1px rgba(15, 79, 120, 0.24);
+  }
+
+  &.chord-active.minor-tonality {
+    background: #e6d5ff;
+    box-shadow: 0 0 0 1px rgba(76, 42, 115, 0.28);
+  }
 }
 
 .blank-word {

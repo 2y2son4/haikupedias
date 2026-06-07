@@ -4,6 +4,7 @@ import {
   WordSelectorComponent,
   HaikuDisplayComponent,
   AudioControlsComponent,
+  PlaybackHighlightEvent,
 } from '@haikupedias/ui/components';
 import { Word, NoteValue } from '@haikupedias/core/types';
 import { HaikuBuilder } from '@haikupedias/poetry/haiku-engine';
@@ -28,6 +29,11 @@ export class HomeComponent {
   selectedGenre = signal<'gymnopedie' | 'dodecaphonic' | null>(null);
   isHaikuCompleted = signal(false);
   isHaikuCreated = signal(false);
+  activeWordIndices = signal<number[]>([]);
+  activeNoteIndices = signal<number[]>([]);
+  activeHighlightKind = signal<'single' | 'chord' | 'generated' | 'none'>(
+    'none',
+  );
 
   private dodecaArranger = new DodecaphonicArranger();
 
@@ -100,6 +106,7 @@ export class HomeComponent {
     this.selectedGenre.set(null);
     this.isHaikuCompleted.set(false);
     this.isHaikuCreated.set(false);
+    this.clearPlaybackHighlight();
   }
 
   resetSelection() {
@@ -107,6 +114,7 @@ export class HomeComponent {
     this.selectedGenre.set(null);
     this.isHaikuCompleted.set(false);
     this.isHaikuCreated.set(false);
+    this.clearPlaybackHighlight();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -127,10 +135,26 @@ export class HomeComponent {
   onHaikuChanged() {
     this.isHaikuCreated.set(false);
     this.selectedGenre.set(null);
+    this.clearPlaybackHighlight();
   }
 
   onGenreSelected(genre: 'gymnopedie' | 'dodecaphonic') {
     this.selectedGenre.set(genre);
+  }
+
+  onPlaybackHighlightChanged(event: PlaybackHighlightEvent) {
+    this.activeWordIndices.set(event.activeWordIndices);
+    this.activeNoteIndices.set(event.activeNoteIndices);
+    this.activeHighlightKind.set(event.kind);
+  }
+
+  isToneRowNoteActive(noteIndex: number): boolean {
+    return this.activeNoteIndices().includes(noteIndex);
+  }
+
+  isGymnopedieNoteActive(barIndex: number, noteOffset: number): boolean {
+    const noteIndex = barIndex * 4 + noteOffset;
+    return this.activeNoteIndices().includes(noteIndex);
   }
 
   getWordSetClass(word: Word): string {
@@ -157,5 +181,11 @@ export class HomeComponent {
       tonic: bar.steps[0].root,
       chord: [bar.steps[1].root, bar.steps[2].root, bar.steps[3].root],
     }));
+  }
+
+  private clearPlaybackHighlight() {
+    this.activeWordIndices.set([]);
+    this.activeNoteIndices.set([]);
+    this.activeHighlightKind.set('none');
   }
 }
