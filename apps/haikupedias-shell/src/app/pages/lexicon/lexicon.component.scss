@@ -1,3 +1,5 @@
+@use 'design-tokens/src/lib' as *;
+
 .lexicon-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -6,7 +8,7 @@
 
 .page-header {
   text-align: center;
-  color: white;
+  color: $color-white;
   margin-bottom: 2rem;
 
   h1 {
@@ -25,7 +27,7 @@
 }
 
 .word-sets {
-  background: white;
+  background: $color-white;
   border-radius: 6px;
   padding: 2rem;
 }
@@ -38,8 +40,8 @@
   button {
     flex: 1;
     padding: 1rem;
-    border: 2px solid #e0e0e0;
-    background: white;
+    border: 1px solid $color-grey-300;
+    background: $color-white;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -51,22 +53,22 @@
 
     .theme {
       font-size: 0.85rem;
-      color: #666;
+      color: $color-grey-600;
       font-weight: 400;
     }
 
     &:hover {
-      border-color: #1976d2;
+      border-color: $color-grey-700;
       transform: translateY(-2px);
     }
 
     &.active {
-      background: #764ba2;
-      color: white;
+      background: $color-grey-900;
+      color: $color-white;
       border-color: transparent;
 
       .theme {
-        color: rgba(255, 255, 255, 0.9);
+        color: rgba($color-white, 0.9);
       }
     }
   }
@@ -79,12 +81,12 @@
 
 .word-category {
   h3 {
-    color: #333;
+    color: $color-grey-900;
     font-size: 1.2rem;
     font-weight: 500;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid #f0f0f0;
+    border-bottom: 2px solid $color-grey-100;
   }
 }
 
@@ -103,23 +105,23 @@
   cursor: default;
 
   &.major {
-    background: #e3f2fd;
-    color: #1976d2;
-    border: 1px solid #1976d2;
+    background: $tonality-major-bg;
+    color: $tonality-major-text;
+    border: 1px solid $tonality-major-border;
 
     &:hover {
-      background: #bbdefb;
+      background: $tonality-major-hover;
       transform: scale(1.05);
     }
   }
 
   &.minor {
-    background: #f3e5f5;
-    color: #764ba2;
-    border: 1px solid #764ba2;
+    background: $tonality-minor-bg;
+    color: $tonality-minor-text;
+    border: 1px solid $tonality-minor-border;
 
     &:hover {
-      background: #e1bee7;
+      background: $tonality-minor-hover;
       transform: scale(1.05);
     }
   }
@@ -130,7 +132,7 @@
   gap: 2rem;
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 2px solid #f0f0f0;
+  border-top: 2px solid $color-grey-100;
   justify-content: center;
 
   .legend-item {
@@ -138,7 +140,7 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.9rem;
-    color: #666;
+    color: $color-grey-600;
   }
 
   .badge {
@@ -148,15 +150,15 @@
     font-weight: 500;
 
     &.major {
-      background: #e3f2fd;
-      color: #1976d2;
-      border: 1px solid #bbdefb;
+      background: $tonality-major-bg;
+      color: $tonality-major-text;
+      border: 1px solid $tonality-major-border-soft;
     }
 
     &.minor {
-      background: #f3e5f5;
-      color: #764ba2;
-      border: 1px solid #e1bee7;
+      background: $tonality-minor-bg;
+      color: $tonality-minor-text;
+      border: 1px solid $tonality-minor-border-soft;
     }
   }
 }

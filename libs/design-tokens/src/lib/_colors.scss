@@ -11,20 +11,63 @@
    Light Theme (Default)
    -------------------------------------------------------------------------- */
 
-$bg-app: light.$color-cream;
-$bg-surface: lighten(light.$color-cream, 1%);
-$bg-subtle: rgba(light.$color-charcoal, 0.04);
+$bg-app: light.$bg-app;
+$bg-surface: light.$bg-surface;
+$bg-subtle: light.$bg-subtle;
 
-$text-primary: light.$color-charcoal;
-$text-secondary: rgba(light.$color-charcoal, 0.7);
-$text-muted: rgba(light.$color-charcoal, 0.45);
-$text-inverse: light.$color-cream;
+$text-primary: light.$text-primary;
+$text-secondary: light.$text-secondary;
+$text-muted: light.$text-muted;
+$text-inverse: light.$text-inverse;
 
-$accent-primary: light.$color-carafe;
-$accent-secondary: light.$color-celadon;
+$accent-primary: light.$accent-primary;
+$accent-secondary: light.$accent-secondary;
 
-$border-default: rgba(light.$color-charcoal, 0.15);
-$border-muted: rgba(light.$color-charcoal, 0.08);
+$border-default: light.$border-default;
+$border-muted: light.$border-muted;
+
+/* Tonality — re-exported for component use */
+$tonality-major-bg: light.$tonality-major-bg;
+$tonality-major-text: light.$tonality-major-text;
+$tonality-major-border: light.$tonality-major-border;
+$tonality-major-border-soft: light.$tonality-major-border-soft;
+$tonality-major-hover: light.$tonality-major-hover;
+$tonality-major-glow: light.$tonality-major-glow;
+
+$tonality-minor-bg: light.$tonality-minor-bg;
+$tonality-minor-text: light.$tonality-minor-text;
+$tonality-minor-border: light.$tonality-minor-border;
+$tonality-minor-border-soft: light.$tonality-minor-border-soft;
+$tonality-minor-hover: light.$tonality-minor-hover;
+$tonality-minor-text-muted: light.$tonality-minor-text-muted;
+$tonality-minor-glow: light.$tonality-minor-glow;
+
+$tonality-major-playback-bg: light.$tonality-major-playback-bg;
+$tonality-major-playback-text: light.$tonality-major-playback-text;
+$tonality-major-chord-bg: light.$tonality-major-chord-bg;
+
+$tonality-minor-playback-bg: light.$tonality-minor-playback-bg;
+$tonality-minor-playback-text: light.$tonality-minor-playback-text;
+$tonality-minor-chord-bg: light.$tonality-minor-chord-bg;
+
+/* Greyscale shortcuts */
+$color-white: light.$color-white;
+$color-grey-50: light.$color-grey-50;
+$color-grey-100: light.$color-grey-100;
+$color-grey-200: light.$color-grey-200;
+$color-grey-300: light.$color-grey-300;
+$color-grey-400: light.$color-grey-400;
+$color-grey-500: light.$color-grey-500;
+$color-grey-600: light.$color-grey-600;
+$color-grey-700: light.$color-grey-700;
+$color-grey-800: light.$color-grey-800;
+$color-grey-900: light.$color-grey-900;
+$color-black: light.$color-black;
+
+$state-hover: light.$state-hover;
+$state-active: light.$state-active;
+$feedback-error: light.$feedback-error;
+$shadow-medium: light.$shadow-medium;
 
 /* --------------------------------------------------------------------------
    Dark Theme
@@ -44,4 +87,3 @@ $dm-accent-secondary: dark.$dm-accent-secondary;
 
 $dm-border-default: rgba(dark.$dm-text-primary, 0.12);
 $dm-border-muted: rgba(dark.$dm-text-primary, 0.08);
-

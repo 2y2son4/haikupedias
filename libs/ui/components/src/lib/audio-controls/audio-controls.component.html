@@ -11,7 +11,7 @@
       <div class="sound-type-selection">
         <p class="selection-prompt">Choose your sound:</p>
         <div class="sound-type-buttons">
-          <button class="sound-type-button synthetic-button" [disabled]="!canSelectSoundType"
+          <button class="sound-type-button" [disabled]="!canSelectSoundType"
             (click)="selectSoundType('synthetic')">
             <div class="sound-type-button__title">
               <span class="material-icons">library_music</span>
@@ -19,7 +19,7 @@
             </div>
             <span class="sound-description">Classic sine waves</span>
           </button>
-          <button class="sound-type-button piano-synth-button" [disabled]="!canSelectSoundType"
+          <button class="sound-type-button" [disabled]="!canSelectSoundType"
             (click)="selectSoundType('piano-synth')">
             <div class="sound-type-button__title">
               <span class="material-icons">piano</span>
@@ -27,7 +27,7 @@
             </div>
             <span class="sound-description">Rich FM synthesis</span>
           </button>
-          <button class="sound-type-button piano-samples-button" [disabled]="!canSelectSoundType"
+          <button class="sound-type-button" [disabled]="!canSelectSoundType"
             (click)="selectSoundType('piano-samples')">
             <div class="sound-type-button__title">
               <span class="material-icons">piano</span>
@@ -35,7 +35,7 @@
             </div>
             <span class="sound-description">Real recordings</span>
           </button>
-          <button class="sound-type-button instruments-button" [disabled]="!canSelectSoundType"
+          <button class="sound-type-button" [disabled]="!canSelectSoundType"
             (click)="selectSoundType('instruments')">
             <div class="sound-type-button__title">
               <span class="material-icons">post_add</span>

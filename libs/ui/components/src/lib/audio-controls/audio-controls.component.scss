@@ -1,7 +1,9 @@
+@use 'design-tokens/src/lib' as *;
+
 .audio-controls {
   text-align: center;
   padding: 1.5rem;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: $color-grey-100;
   border-radius: 6px;
 }
 
@@ -12,7 +14,7 @@
   .selection-prompt {
     font-size: 1.2rem;
     font-weight: 500;
-    color: #333;
+    color: $color-grey-900;
     margin-bottom: 1.5rem;
   }
 
@@ -31,7 +33,9 @@
   gap: 0.5rem;
   padding: 1rem;
   font-size: 1rem;
-  border: 3px solid transparent;
+  background: $color-white;
+  color: $color-grey-800;
+  border: 1px solid $color-grey-700;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -53,61 +57,23 @@
 
   &__title {
     display: flex;
-    gap: 0.25rem;
+    gap: 0.5rem;
     align-items: center;
+
+    .material-icons {
+      font-size: 1.75rem;
+    }
+  }
+
+  &:hover:not(:disabled) {
+    background: $color-grey-900;
+    color: $color-white;
+    transform: translateY(-3px) scale(1.05);
   }
 
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-  }
-}
-
-.synthetic-button {
-  background: #e0f7fa;
-  color: #00838f;
-  border-color: #00838f;
-
-  &:hover:not(:disabled) {
-    background: #00838f;
-    color: white;
-    transform: translateY(-3px) scale(1.05);
-  }
-}
-
-.piano-synth-button {
-  background: #fff3e0;
-  color: #e65100;
-  border-color: #e65100;
-
-  &:hover:not(:disabled) {
-    background: #e65100;
-    color: white;
-    transform: translateY(-3px) scale(1.05);
-  }
-}
-
-.piano-samples-button {
-  background: #fce4ec;
-  color: #c2185b;
-  border-color: #c2185b;
-
-  &:hover:not(:disabled) {
-    background: #c2185b;
-    color: white;
-    transform: translateY(-3px) scale(1.05);
-  }
-}
-
-.instruments-button {
-  background: #e8f5e9;
-  color: #2e7d32;
-  border-color: #2e7d32;
-
-  &:hover:not(:disabled) {
-    background: #2e7d32;
-    color: white;
-    transform: translateY(-3px) scale(1.05);
   }
 }
 
@@ -118,7 +84,7 @@
   .selection-prompt {
     font-size: 1.2rem;
     font-weight: 500;
-    color: #333;
+    color: $color-grey-900;
     margin-bottom: 1rem;
   }
 }
@@ -135,19 +101,19 @@
     padding: 1rem 1.5rem;
     font-size: 1.1rem;
     font-weight: 500;
-    background: white;
-    border: 2px solid #2e7d32;
+    background: $color-white;
+    border: 1px solid $color-grey-700;
     border-radius: 8px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #2e7d32;
+    color: $color-grey-800;
     transition: all 0.2s ease;
 
     &:hover {
-      background: #f1f8f4;
-      border-color: #1b5e20;
+      background: $color-grey-100;
+      border-color: $color-grey-900;
     }
 
     .dropdown-arrow {
@@ -162,38 +128,38 @@
     left: 0;
     right: 0;
     margin-top: 0.5rem;
-    background: white;
-    border: 2px solid #2e7d32;
+    background: $color-white;
+    border: 1px solid $color-grey-700;
     border-radius: 8px;
     max-height: 160px;
     overflow-y: auto;
     z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: $shadow-medium;
 
     .instrument-option {
       width: 100%;
       padding: 0.5rem;
       border: none;
-      background: white;
+      background: $color-white;
       text-align: left;
       cursor: pointer;
       font-size: 1rem;
-      color: #333;
+      color: $color-grey-900;
       transition: background 0.2s ease;
       min-height: 40px;
 
       &:hover {
-        background: #f1f8f4;
+        background: $color-grey-100;
       }
 
       &.selected {
-        background: #c8e6c9;
-        color: #1b5e20;
+        background: $color-grey-200;
+        color: $color-grey-900;
         font-weight: 600;
       }
 
       &:not(:last-child) {
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid $color-grey-300;
       }
     }
   }
@@ -206,7 +172,7 @@
   .selection-prompt {
     font-size: 1.2rem;
     font-weight: 500;
-    color: #333;
+    color: $color-grey-900;
     margin-bottom: 1.5rem;
   }
 
@@ -243,25 +209,25 @@
 }
 
 .gymno-button {
-  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-  color: #1976d2;
-  border-color: #1976d2;
+  background: $color-grey-200;
+  color: $color-grey-900;
+  border-color: $color-grey-700;
 
   &:hover:not(:disabled) {
-    background: #1976d2;
-    color: white;
+    background: $color-grey-900;
+    color: $color-white;
     transform: translateY(-3px) scale(1.05);
   }
 }
 
 .dodeca-button {
-  background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
-  color: #764ba2;
-  border-color: #764ba2;
+  background: $color-grey-100;
+  color: $color-grey-800;
+  border-color: $color-grey-600;
 
   &:hover:not(:disabled) {
-    background: #764ba2;
-    color: white;
+    background: $color-grey-800;
+    color: $color-white;
     transform: translateY(-3px) scale(1.05);
   }
 }
@@ -272,9 +238,9 @@
 }
 
 .error-message {
-  background: #f8d7da;
-  border: 1px solid #f5c6cb;
-  color: #721c24;
+  background: $color-grey-200;
+  border: 1px solid $color-grey-400;
+  color: $color-grey-900;
   padding: 1rem;
   border-radius: 4px;
   margin-bottom: 1rem;
@@ -300,73 +266,74 @@
 }
 
 .play-button {
-  background: #e3f2fd;
-  color: #1976d2;
+  background: $color-grey-200;
+  color: $color-grey-900;
 }
 
 .play-button:hover:not(:disabled) {
-  background: #1976d2;
-  color: white;
+  background: $color-grey-900;
+  color: $color-white;
   transform: translateY(-2px);
 }
 
 .replay-button {
-  background: #e3f2fd;
-  color: #1976d2;
+  background: $color-grey-200;
+  color: $color-grey-900;
 }
 
 .replay-button:hover:not(:disabled) {
-  background: #1976d2;
-  color: white;
+  background: $color-grey-900;
+  color: $color-white;
   transform: translateY(-2px);
 }
 
 .restart-button {
-  background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
-  color: white;
+  background: $color-grey-700;
+  color: $color-white;
 }
 
 .restart-button:hover:not(:disabled) {
+  background: $color-grey-900;
   transform: translateY(-2px);
 }
 
 .style-toggle-button {
-  background: #764ba2;
-  color: white;
+  background: $color-grey-600;
+  color: $color-white;
 }
 
 .style-toggle-button:hover:not(:disabled) {
-  background: #6a1b9a;
+  background: $color-grey-800;
   transform: translateY(-2px);
 }
 
 .sound-toggle-button {
-  background: #f57c00;
-  color: white;
+  background: $color-grey-500;
+  color: $color-white;
 }
 
 .sound-toggle-button:hover:not(:disabled) {
-  background: #ef6c00;
+  background: $color-grey-700;
   transform: translateY(-2px);
 }
 
 .instrument-change-button {
-  background: linear-gradient(135deg, #00897b 0%, #4db6ac 100%);
-  color: white;
+  background: $color-grey-800;
+  color: $color-white;
 }
 
 .instrument-change-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #00695c 0%, #00897b 100%);
+  background: $color-grey-900;
   transform: translateY(-2px);
 }
 
 .download-button {
-  background: #2e7d32;
-  color: white;
+  background: $color-grey-900;
+  color: $color-white;
 }
 
 .download-button:hover:not(:disabled) {
-  background: #1b5e20;
+  background: $color-black;
   transform: translateY(-2px);
 }
 
@@ -376,28 +343,28 @@
   align-items: center;
   gap: 0.25rem;
   padding: 0.75rem 1.5rem;
-  background: #fff3cd;
-  border: 2px solid #ffc107;
+  background: $color-grey-100;
+  border: 1px solid $color-grey-400;
   border-radius: 8px;
 
   .info-text {
     font-size: 0.95rem;
-    color: #856404;
+    color: $color-grey-800;
     font-weight: 500;
     margin: 0;
   }
 
   .info-subtext {
     font-size: 0.8rem;
-    color: #856404;
+    color: $color-grey-600;
     opacity: 0.8;
     margin: 0;
   }
 }
 
 .control-button:disabled {
-  background: #e9ecef;
-  color: #6c757d;
+  background: $color-grey-200;
+  color: $color-grey-500;
   cursor: not-allowed;
 }
 
@@ -411,7 +378,7 @@
 
 .status-message {
   margin-top: 1rem;
-  color: #6c757d;
+  color: $color-grey-500;
   font-style: italic;
 }
 

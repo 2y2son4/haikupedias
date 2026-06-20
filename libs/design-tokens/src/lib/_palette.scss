@@ -1,17 +1,62 @@
 /* ==========================================================================
    Haikupedias Color Palette
    --------------------------------------------------------------------------
-   Base mood: calm, poetic, warm, restrained
+   Base mood: monochrome with blue/purple reserved for musical tonality
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Base Colors
+   Greyscale
    -------------------------------------------------------------------------- */
 
-$color-carafe:   #683326; // deep warm brown-red, anchor color
-$color-cream:    #fcfcfa; // soft off-white, main background
-$color-charcoal: #343841; // dark neutral, primary text
-$color-celadon:  #9ab19a; // muted green, organic accent
+$color-white:    #ffffff;
+$color-grey-50:  #fafafa;
+$color-grey-100: #f5f5f5;
+$color-grey-200: #eeeeee;
+$color-grey-300: #e0e0e0;
+$color-grey-400: #bdbdbd;
+$color-grey-500: #9e9e9e;
+$color-grey-600: #757575;
+$color-grey-700: #616161;
+$color-grey-800: #424242;
+$color-grey-900: #212121;
+$color-black:    #000000;
+
+/* --------------------------------------------------------------------------
+   Semantic Neutrals
+   -------------------------------------------------------------------------- */
+
+$color-cream:    $color-grey-50;
+$color-charcoal: $color-grey-900;
+$color-carafe:   $color-grey-900;
+$color-celadon:  $color-grey-500;
+
+/* --------------------------------------------------------------------------
+   Tonality (Major / Minor) — the only chromatic accents
+   -------------------------------------------------------------------------- */
+
+$tonality-major-bg:          #e3f2fd;
+$tonality-major-text:        #1976d2;
+$tonality-major-border:      #1976d2;
+$tonality-major-border-soft: #bbdefb;
+$tonality-major-hover:       #bbdefb;
+$tonality-major-glow:        rgba(25, 118, 210, 0.45);
+
+$tonality-minor-bg:          #f3e5f5;
+$tonality-minor-text:        #764ba2;
+$tonality-minor-border:      #764ba2;
+$tonality-minor-border-soft: #e1bee7;
+$tonality-minor-hover:       #e1bee7;
+$tonality-minor-text-muted:  rgba(123, 31, 162, 0.7);
+$tonality-minor-glow:        rgba(118, 75, 162, 0.45);
+
+/* Playback highlights on tonality words */
+$tonality-major-playback-bg:   #d8f0ff;
+$tonality-major-playback-text: #0f4f78;
+$tonality-major-chord-bg:      #c6e5ff;
+
+$tonality-minor-playback-bg:   #efe4ff;
+$tonality-minor-playback-text: #4c2a73;
+$tonality-minor-chord-bg:      #e6d5ff;
 
 /* --------------------------------------------------------------------------
    Text Colors
@@ -20,27 +65,26 @@ $color-celadon:  #9ab19a; // muted green, organic accent
 $text-primary:   $color-charcoal;
 $text-secondary: rgba($color-charcoal, 0.7);
 $text-muted:     rgba($color-charcoal, 0.45);
-$text-inverse:   $color-cream;
+$text-inverse:   $color-white;
 
 /* --------------------------------------------------------------------------
    Background Colors
    -------------------------------------------------------------------------- */
 
 $bg-app:         $color-cream;
-$bg-surface:     lighten($color-cream, 1%);
+$bg-surface:     $color-white;
 $bg-subtle:      rgba($color-charcoal, 0.04);
-$bg-overlay:     rgba($color-charcoal, 0.6);
+$bg-overlay:     rgba($color-black, 0.5);
 
 /* --------------------------------------------------------------------------
-   Brand / Accent Colors
+   Brand / Accent Colors (monochrome)
    -------------------------------------------------------------------------- */
 
-$accent-primary:   $color-carafe;
-$accent-secondary: $color-celadon;
+$accent-primary:   $color-grey-900;
+$accent-secondary: $color-grey-500;
 
-/* Softer accent variants */
-$accent-primary-soft:   rgba($color-carafe, 0.15);
-$accent-secondary-soft: rgba($color-celadon, 0.2);
+$accent-primary-soft:   rgba($color-grey-900, 0.08);
+$accent-secondary-soft: rgba($color-grey-500, 0.15);
 
 /* --------------------------------------------------------------------------
    Border Colors
@@ -56,39 +100,38 @@ $border-strong:  rgba($color-charcoal, 0.3);
 
 $state-hover:   rgba($color-charcoal, 0.06);
 $state-active:  rgba($color-charcoal, 0.12);
-$state-focus:   rgba($color-celadon, 0.6);
+$state-focus:   rgba($color-grey-700, 0.45);
 
 /* --------------------------------------------------------------------------
-   Semantic Feedback (Very Subtle)
+   Semantic Feedback (Greyscale)
    -------------------------------------------------------------------------- */
 
-$feedback-success: mix($color-celadon, $color-cream, 70%);
-$feedback-warning: mix(#d4a373, $color-cream, 70%);
-$feedback-error:   mix(#b65c5c, $color-cream, 70%);
+$feedback-success: $color-grey-200;
+$feedback-warning: $color-grey-300;
+$feedback-error:   $color-grey-300;
 
-/* Text on feedback */
 $text-on-feedback: $color-charcoal;
 
 /* --------------------------------------------------------------------------
-   Shadows (Soft, Paper-like)
+   Shadows
    -------------------------------------------------------------------------- */
 
-$shadow-soft:  0 2px 6px rgba($color-charcoal, 0.08);
-$shadow-medium: 0 4px 12px rgba($color-charcoal, 0.12);
+$shadow-soft:   0 2px 6px rgba($color-black, 0.08);
+$shadow-medium: 0 4px 12px rgba($color-black, 0.12);
 
 /* --------------------------------------------------------------------------
    Disabled States
    -------------------------------------------------------------------------- */
 
-$disabled-bg:   rgba($color-charcoal, 0.06);
-$disabled-text: rgba($color-charcoal, 0.4);
+$disabled-bg:     rgba($color-charcoal, 0.06);
+$disabled-text:   rgba($color-charcoal, 0.4);
 $disabled-border: rgba($color-charcoal, 0.12);
 
 /* --------------------------------------------------------------------------
    Selection & Highlights
    -------------------------------------------------------------------------- */
 
-$selection-bg:   rgba($color-celadon, 0.35);
+$selection-bg:   rgba($color-grey-500, 0.25);
 $selection-text: $color-charcoal;
 
 /* --------------------------------------------------------------------------
@@ -96,8 +139,8 @@ $selection-text: $color-charcoal;
    -------------------------------------------------------------------------- */
 
 $palette: (
-  carafe:   $color-carafe,
+  white:    $color-white,
   cream:    $color-cream,
   charcoal: $color-charcoal,
-  celadon:  $color-celadon
+  grey-500: $color-grey-500
 );
