@@ -217,6 +217,10 @@ export class HomeComponent {
     }));
   }
 
+  getWordTonality(wordIndex: number): 'major' | 'minor' {
+    return this.selectedWords()[wordIndex]?.tonalityGroup ?? 'major';
+  }
+
   getWordSetClass(word: Word): string {
     return word.tonalityGroup === 'major' ? 'major' : 'minor';
   }
