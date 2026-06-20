@@ -1,4 +1,11 @@
-import { Component, computed, input, output, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Haiku, TonalityGroup } from '@haikupedias/core/types';
 
@@ -10,7 +17,7 @@ type HaikuToken =
       wordIndex: number;
       tonalityGroup: TonalityGroup;
     }
-  | { kind: 'blank'; key: string };
+  | { kind: 'blank'; key: string; required: boolean };
 
 @Component({
   selector: 'lib-haiku-display',
@@ -22,6 +29,7 @@ type HaikuToken =
 export class HaikuDisplayComponent {
   // Input haiku to display
   haiku = input.required<Haiku>();
+  variant = input<'haikupedia' | 'dodecaiku'>('haikupedia');
   activeWordIndices = input<number[]>([]);
   highlightKind = input<'single' | 'chord' | 'generated' | 'none'>('none');
 
@@ -34,9 +42,17 @@ export class HaikuDisplayComponent {
   // Emits when user clicks Change (unlocks edition)
   changed = output<void>();
 
-  private readonly targetLineLengths = [5, 7, 5] as const;
+  private readonly haikupediaLineLengths = [5, 7, 5] as const;
   private readonly blankValues = signal<Record<string, string>>({});
   readonly isLocked = signal(false);
+
+  constructor() {
+    effect(() => {
+      this.lineTemplates();
+      this.blankValues();
+      this.completionChanged.emit(this.isComplete());
+    });
+  }
 
   readonly lineTemplates = computed(() => {
     const currentHaiku = this.haiku();
@@ -49,16 +65,14 @@ export class HaikuDisplayComponent {
         tonalityGroup: word.tonalityGroup,
         wordIndex: globalWordIndex++,
       }));
-      const targetLength = this.targetLineLengths[lineIndex];
-      const blanksNeeded = Math.max(targetLength - fixedWords.length, 0);
 
       if (
+        this.variant() === 'haikupedia' &&
         (lineIndex === 0 || lineIndex === 2) &&
-        fixedWords.length === 2 &&
-        blanksNeeded === 3
+        fixedWords.length === 2
       ) {
         return [
-          { kind: 'blank', key: `${lineIndex}-0` },
+          { kind: 'blank', key: `${lineIndex}-0`, required: true },
           {
             kind: 'fixed',
             label: fixedWords[0].label,
@@ -66,7 +80,7 @@ export class HaikuDisplayComponent {
             wordIndex: fixedWords[0].wordIndex,
             tonalityGroup: fixedWords[0].tonalityGroup,
           },
-          { kind: 'blank', key: `${lineIndex}-1` },
+          { kind: 'blank', key: `${lineIndex}-1`, required: true },
           {
             kind: 'fixed',
             label: fixedWords[1].label,
@@ -74,10 +88,36 @@ export class HaikuDisplayComponent {
             wordIndex: fixedWords[1].wordIndex,
             tonalityGroup: fixedWords[1].tonalityGroup,
           },
-          { kind: 'blank', key: `${lineIndex}-2` },
+          { kind: 'blank', key: `${lineIndex}-2`, required: true },
         ] as HaikuToken[];
       }
 
+      if (this.variant() === 'dodecaiku') {
+        // Dodecaiku: interleave a blank input between each selected word
+        const tokens: HaikuToken[] = [];
+        for (let i = 0; i < fixedWords.length; i++) {
+          const fixed = fixedWords[i];
+          tokens.push({
+            kind: 'fixed',
+            label: fixed.label,
+            wordId: fixed.id,
+            wordIndex: fixed.wordIndex,
+            tonalityGroup: fixed.tonalityGroup,
+          });
+          if (i < fixedWords.length - 1) {
+            tokens.push({
+              kind: 'blank',
+              key: `${lineIndex}-${i}`,
+              required: true,
+            });
+          }
+        }
+        return tokens;
+      }
+
+      // Haikupedia middle line: interleave blanks between fixed words
+      const targetLength = this.haikupediaLineLengths[lineIndex];
+      const blanksNeeded = Math.max(targetLength - fixedWords.length, 0);
       const tokens: HaikuToken[] = [];
 
       for (let fixedIndex = 0; fixedIndex < fixedWords.length; fixedIndex++) {
@@ -95,6 +135,7 @@ export class HaikuDisplayComponent {
           tokens.push({
             kind: 'blank',
             key: `${lineIndex}-${fixedIndex}`,
+            required: true,
           });
         }
       }
@@ -111,6 +152,7 @@ export class HaikuDisplayComponent {
         tokens.push({
           kind: 'blank',
           key: `${lineIndex}-${extraBlank}`,
+          required: true,
         });
       }
 
@@ -173,6 +215,10 @@ export class HaikuDisplayComponent {
     for (const line of this.lineTemplates()) {
       for (const token of line) {
         if (token.kind === 'blank') {
+          if (!token.required) {
+            continue;
+          }
+
           const raw = values[token.key] ?? '';
           if (!raw.trim()) {
             return false;

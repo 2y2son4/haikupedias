@@ -19,6 +19,7 @@ type WordGroup = {
 export class WordSelectorComponent {
   // Input: selected words from parent
   selectedWords = input<Word[]>([]);
+  maxWords = input<number>(8);
 
   // Output event when a word is selected
   wordSelected = output<Word>();
@@ -48,8 +49,8 @@ export class WordSelectorComponent {
   showToast = signal<boolean>(false);
 
   selectWord(word: Word) {
-    // Don't allow selection if already at 8 words
-    if (this.selectedWords().length >= 8) return;
+    // Don't allow selection if already at max words
+    if (this.selectedWords().length >= this.maxWords()) return;
 
     this.lastSelectedWord.set(word);
     this.wordSelected.emit(word);
@@ -64,9 +65,6 @@ export class WordSelectorComponent {
   }
 
   isSelected(word: Word): boolean {
-    // Don't show any highlighting if 8 words are selected
-    if (this.selectedWords().length >= 8) return false;
-
     return this.selectedWords().some((w) => w.id === word.id);
   }
 

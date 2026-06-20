@@ -1,84 +1,101 @@
 # Haikupedias
 
-Haikupedias is an experimental web-based poetry and music generator.
+Haikupedias is an Nx monorepo for generating short poems and turning them into playable music.
 
-Users compose a short poem by selecting words, and the system translates those choices into musical compositions with multiple arrangement styles and sound options.
+The current application includes two creation modes:
 
-This project explores:
+- Haikupedia mode: 8 words arranged as 2-4-2
+- Dodecaiku mode: 12 words arranged as 3-6-3
 
-- Algorithmic composition
-- Constraint-based creativity
-- Scalable frontend architecture
-- Multiple musical interpretation systems
+Each generated poem can be rendered as a musical composition with selectable arrangement and sound engines.
+
+## Current Features
+
+### Creation Modes
+
+- Haikupedia (2-4-2 word structure)
+- Dodecaiku (3-6-3 word structure)
+- Random word selection via "I'm feeling lucky"
+- Editable poem review before locking final creation
+
+### Musical Interpretation
+
+- Gymnopedie arranger
+- Dodecaphonic arranger (12-tone completion)
+- Visual composition structure preview in the UI
+- Playback highlighting synced between words and notes
+
+### Audio Engines
+
+- Synthetic (Web Audio API)
+- Piano Synth
+- Piano Samples
+- Instruments (multiple sampled instruments)
+
+### Application Pages
+
+- Home: end-to-end poem and composition workflow
+- Lexicon: browse both vocabulary sets by part of speech and tonality group
 
 ## Tech Stack
 
 - Angular 21 (standalone APIs)
-- NX Monorepo
-- Web Audio API
-- Tone.js (for advanced synthesis and real instrument samples)
+- Nx 22 workspace
+- TypeScript (strict mode)
+- Sass
+- Jest + ESLint
+- Web Audio API + Tone.js
 
-## Concept
+## Workspace Structure
 
-Each generated piece — a _Haikupedia_ — is both:
-
-- A textual micro-poem (haiku structure)
-- A musical composition with multiple interpretations
-
-The system offers two distinct musical arrangement styles:
-
-### Gymnopédie Style
-
-Inspired by Erik Satie's _Gymnopédies_, this arrangement creates:
-
-- Sparse, contemplative texture
-- First note played alone (tonic)
-- Following notes as a simultaneous chord
-- Dreamy, atmospheric character
-
-### Dodecaphonic Style
-
-Inspired by twelve-tone technique, this arrangement creates:
-
-- Sequential, melodic texture
-- All notes played one after another
-- Linear, atonal character
-- Completes the chromatic scale by inserting missing notes
-
-## Sound Options
-
-The application provides four distinct sound engines:
-
-1. **Synthetic**: Pure sine wave synthesis using Web Audio API
-   - Classic electronic sound
-   - Supports offline rendering (downloadable)
-
-2. **Piano (Synth)**: FM synthesis using Tone.js
-   - Rich, piano-like timbres
-   - Real-time synthesis
-
-3. **Piano (Samples)**: Real piano recordings
-   - Authentic piano sound
-   - Samples from tonejs-instruments library
-
-4. **Instruments**: 19 orchestral and band instruments
-   - Bass Electric, Bassoon, Cello, Clarinet, Contrabass
-   - Flute, French Horn, Acoustic Guitar, Electric Guitar
-   - Harmonium, Harp, Organ, Piano, Saxophone
-   - Trombone, Trumpet, Tuba, Violin, Xylophone
-   - High-quality samples from tonejs-instruments CDN
-
-## Project Structure
-
-```
+```text
 apps/
-  haikupedias-shell/      # Main Angular application
+   haikupedias-shell/                Main Angular application
 
 libs/
-  core/
-    types/               # Shared TypeScript interfaces
-    utils/               # Pure utility functions
+   core/
+      types/                          Shared domain types
+      utils/                          Shared constants and note helpers
+
+   poetry/
+      lexicon/                        Word sets and lexicon exports
+      haiku-engine/                   Haiku and dodecaiku builders/validation
+
+   music/
+      theory/                         Music theory primitives
+      composition-engine/             Composition generators/formatters
+      audio/                          Playback engine and note players
+      arrangers/
+         base-arranger/                Arranger contracts and scheduled-note model
+         gymnopedie-arranger/          Chordal interpretation
+         dodecaphonic-arranger/        12-tone row interpretation
+
+   ui/
+      components/                     Reusable standalone UI components
+
+   design-tokens/                    Shared style tokens and Sass utilities
 ```
+
+## Nx Projects
+
+Application:
+
+- haikupedias-shell
+
+Libraries:
+
+- core-types
+- core-utils
+- poetry-lexicon
+- haiku-engine
+- theory
+- composition-engine
+- audio
+- base-arranger
+- gymnopedie-arranger
+- dodecaphonic-arranger
+- components
+- design-tokens
 
 ## Getting Started
 
@@ -87,287 +104,62 @@ libs/
 - Node.js 22+
 - npm
 
-### Installation
+### Install
 
 ```bash
 npm install
 ```
 
-### Development
+### Run the app
 
 ```bash
 npm start
-# Application will be available at http://localhost:4200
 ```
 
-### Build
+The dev server runs the `haikupedias-shell` app (default: http://localhost:4200).
+
+## Useful Commands
+
+Root npm scripts:
 
 ```bash
+npm start
 npm run build
+npm run build:all
+npm test
+npm run lint
 ```
 
-## Status
+Direct Nx examples:
 
-V1 — Multiple arrangement styles (Gymnopédie & Dodecaphonic) with 4 sound engines
-
-## Musical Features
-
-### Composition Algorithm
-
-- Maps word tonality groups to musical intervals
-- Two-bar structure with harmonic progressions
-- Deterministic: same words always produce the same composition
-
-### Arrangement Styles
-
-- **Gymnopédie**: Chordal texture with bass note + chord pattern
-- **Dodecaphonic**: Linear melodic texture with complete 12-tone rows
-
-### Sound Engines
-
-- **Web Audio API**: Native browser synthesis for core functionality
-- **Tone.js**: Advanced FM synthesis and sample playback
-- **tonejs-instruments**: High-quality instrument sample library
-
-## Disclaimer
-
-This project is inspired by classical music but does not attempt faithful reproduction.
-It is an artistic and technical exploration.
-
-## Architecture Principles
-
-1. **Domain separation**: UI, poetry, and music logic are strictly separated
-2. **NX boundaries**: Each library has clear responsibility and dependencies
-3. **Deterministic generation**: Same word selection always produces same output
-4. **Standalone Angular**: No NgModules, uses modern Angular patterns
-5. **Type safety**: Strict TypeScript configuration throughout
-
-## Future Plans
-
-- Additional poetic universes
-- More musical arrangement styles
-- Module Federation for dynamic universe loading
-- Additional instruments and sound libraries
-
----
-
-_An exploration of constraint, code, and composition._
-
+```bash
+nx serve haikupedias-shell
+nx build haikupedias-shell
+nx run-many --target=build --all
+nx test
+nx lint
+nx show projects
 ```
-haikupedias
-├─ .nx
-│  └─ nxw.js
-├─ .prettierignore
-├─ .prettierrc
-├─ apps
-│  └─ haikupedias-shell
-│     ├─ project.json
-│     ├─ src
-│     │  ├─ app
-│     │  │  ├─ app.component.html
-│     │  │  ├─ app.component.scss
-│     │  │  ├─ app.component.ts
-│     │  │  ├─ app.config.ts
-│     │  │  ├─ app.routes.ts
-│     │  │  └─ pages
-│     │  │     ├─ home
-│     │  │     │  ├─ home.component.html
-│     │  │     │  ├─ home.component.scss
-│     │  │     │  └─ home.component.ts
-│     │  │     └─ lexicon
-│     │  │        ├─ lexicon.component.html
-│     │  │        ├─ lexicon.component.scss
-│     │  │        └─ lexicon.component.ts
-│     │  ├─ index.html
-│     │  ├─ main.ts
-│     │  └─ styles.scss
-│     ├─ tsconfig.app.json
-│     └─ tsconfig.json
-├─ eslint.config.mjs
-├─ jest.config.ts
-├─ jest.preset.js
-├─ libs
-│  ├─ core
-│  │  ├─ types
-│  │  │  ├─ project.json
-│  │  │  ├─ README.md
-│  │  │  ├─ src
-│  │  │  │  ├─ index.ts
-│  │  │  │  └─ lib
-│  │  │  │     ├─ haikupedia.types.ts
-│  │  │  │     ├─ music.types.ts
-│  │  │  │     └─ poetry.types.ts
-│  │  │  ├─ tsconfig.json
-│  │  │  └─ tsconfig.lib.json
-│  │  └─ utils
-│  │     ├─ project.json
-│  │     ├─ README.md
-│  │     ├─ src
-│  │     │  ├─ index.ts
-│  │     │  └─ lib
-│  │     │     ├─ constants.ts
-│  │     │     └─ note-utils.ts
-│  │     ├─ tsconfig.json
-│  │     └─ tsconfig.lib.json
-│  ├─ design-tokens
-│  │  ├─ eslint.config.mjs
-│  │  ├─ jest.config.cts
-│  │  ├─ project.json
-│  │  ├─ README.md
-│  │  ├─ src
-│  │  │  ├─ index.ts
-│  │  │  ├─ lib
-│  │  │  │  ├─ _colors.scss
-│  │  │  │  ├─ _elevation.scss
-│  │  │  │  ├─ _index.scss
-│  │  │  │  ├─ _motion.scss
-│  │  │  │  ├─ _palette-dark.scss
-│  │  │  │  ├─ _palette.scss
-│  │  │  │  ├─ _spacing.scss
-│  │  │  │  └─ _typography.scss
-│  │  │  └─ test-setup.ts
-│  │  ├─ tsconfig.json
-│  │  ├─ tsconfig.lib.json
-│  │  └─ tsconfig.spec.json
-│  ├─ music
-│  │  ├─ arrangers
-│  │  │  ├─ base-arranger
-│  │  │  │  ├─ project.json
-│  │  │  │  ├─ README.md
-│  │  │  │  ├─ src
-│  │  │  │  │  ├─ index.ts
-│  │  │  │  │  └─ lib
-│  │  │  │  │     └─ composition-arranger.interface.ts
-│  │  │  │  ├─ tsconfig.json
-│  │  │  │  └─ tsconfig.lib.json
-│  │  │  ├─ dodecaphonic-arranger
-│  │  │  │  ├─ project.json
-│  │  │  │  ├─ README.md
-│  │  │  │  ├─ src
-│  │  │  │  │  ├─ index.ts
-│  │  │  │  │  └─ lib
-│  │  │  │  │     └─ dodecaphonic-arranger.ts
-│  │  │  │  ├─ tsconfig.json
-│  │  │  │  └─ tsconfig.lib.json
-│  │  │  └─ gymnopedie-arranger
-│  │  │     ├─ project.json
-│  │  │     ├─ README.md
-│  │  │     ├─ src
-│  │  │     │  ├─ index.ts
-│  │  │     │  └─ lib
-│  │  │     │     └─ gymnopedie-arranger.ts
-│  │  │     ├─ tsconfig.json
-│  │  │     └─ tsconfig.lib.json
-│  │  ├─ audio
-│  │  │  ├─ eslint.config.mjs
-│  │  │  ├─ package.json
-│  │  │  ├─ project.json
-│  │  │  ├─ README.md
-│  │  │  ├─ src
-│  │  │  │  ├─ index.ts
-│  │  │  │  └─ lib
-│  │  │  │     ├─ audio-context.ts
-│  │  │  │     ├─ composition-player.ts
-│  │  │  │     ├─ instrument-note-player.ts
-│  │  │  │     ├─ models
-│  │  │  │     │  └─ music-audio.model.ts
-│  │  │  │     ├─ note-frequency.ts
-│  │  │  │     ├─ note-player.ts
-│  │  │  │     ├─ piano-note-player.ts
-│  │  │  │     ├─ piano-synth-note-player.ts
-│  │  │  │     ├─ static
-│  │  │  │     │  └─ notes.ts
-│  │  │  │     └─ synthetic-note-player.ts
-│  │  │  ├─ tsconfig.json
-│  │  │  └─ tsconfig.lib.json
-│  │  ├─ composition-engine
-│  │  │  ├─ eslint.config.mjs
-│  │  │  ├─ project.json
-│  │  │  ├─ README.md
-│  │  │  ├─ src
-│  │  │  │  ├─ index.ts
-│  │  │  │  └─ lib
-│  │  │  │     ├─ composition-engine.ts
-│  │  │  │     ├─ composition-formatter.ts
-│  │  │  │     └─ composition-generator.ts
-│  │  │  ├─ tsconfig.json
-│  │  │  └─ tsconfig.lib.json
-│  │  └─ theory
-│  │     ├─ eslint.config.mjs
-│  │     ├─ project.json
-│  │     ├─ README.md
-│  │     ├─ src
-│  │     │  ├─ index.ts
-│  │     │  └─ lib
-│  │     │     ├─ intervals.ts
-│  │     │     ├─ note-arithmetic.ts
-│  │     │     └─ theory.ts
-│  │     ├─ tsconfig.json
-│  │     └─ tsconfig.lib.json
-│  ├─ poetry
-│  │  ├─ haiku-engine
-│  │  │  ├─ eslint.config.mjs
-│  │  │  ├─ project.json
-│  │  │  ├─ README.md
-│  │  │  ├─ src
-│  │  │  │  ├─ index.ts
-│  │  │  │  └─ lib
-│  │  │  │     ├─ haiku-builder.ts
-│  │  │  │     ├─ haiku-engine.ts
-│  │  │  │     └─ haiku-validator.ts
-│  │  │  ├─ tsconfig.json
-│  │  │  └─ tsconfig.lib.json
-│  │  └─ lexicon
-│  │     ├─ project.json
-│  │     ├─ README.md
-│  │     ├─ README.pdf
-│  │     ├─ src
-│  │     │  ├─ index.ts
-│  │     │  └─ lib
-│  │     │     ├─ word-set-a.ts
-│  │     │     └─ word-set-b.ts
-│  │     ├─ tsconfig.json
-│  │     └─ tsconfig.lib.json
-│  ├─ design-tokens
-│  └─ ui
-│     └─ components
-│        ├─ eslint.config.mjs
-│        ├─ jest.config.cts
-│        ├─ eslint.config.mjs
-│        ├─ jest.config.cts
-│        ├─ ng-package.json
-│        ├─ package.json
-│        ├─ project.json
-│        ├─ README.md
-│        ├─ src
-│        │  ├─ index.ts
-│        │  ├─ lib
-│        │  │  ├─ audio-controls
-│        │  │  │  ├─ audio-controls.component.html
-│        │  │  │  ├─ audio-controls.component.scss
-│        │  │  │  └─ audio-controls.component.ts
-│        │  │  ├─ components
-│        │  │  │  ├─ components.css
-│        │  │  │  ├─ components.html
-│        │  │  │  └─ components.ts
-│        │  │  ├─ haiku-display
-│        │  │  │  ├─ haiku-display.component.html
-│        │  │  │  ├─ haiku-display.component.scss
-│        │  │  │  └─ haiku-display.component.ts
-│        │  │  └─ word-selector
-│        │  │     ├─ word-selector.component.html
-│        │  │     ├─ word-selector.component.scss
-│        │  │     └─ word-selector.component.ts
-│        │  └─ test-setup.ts
-│        ├─ tsconfig.json
-│        ├─ tsconfig.lib.json
-│        ├─ tsconfig.lib.prod.json
-│        └─ tsconfig.spec.json
-├─ nx.json
-├─ package-lock.json
-├─ package.json
-├─ README.md
-├─ STRUCTURE.md
-└─ tsconfig.base.json
 
-```
+## Path Aliases
+
+Common aliases from `tsconfig.base.json`:
+
+- @haikupedias/core/types
+- @haikupedias/core/utils
+- @haikupedias/poetry/lexicon
+- @haikupedias/poetry/haiku-engine
+- @haikupedias/music/theory
+- @haikupedias/music/composition-engine
+- @haikupedias/music/audio
+- @haikupedias/music/arrangers/base-arranger
+- @haikupedias/music/arrangers/gymnopedie-arranger
+- @haikupedias/music/arrangers/dodecaphonic-arranger
+- @haikupedias/ui/components
+- @haikupedias/design-tokens
+
+## Notes
+
+- Architecture follows domain separation: `poetry`, `music`, `ui`, and shared `core`.
+- The workspace is organized as an Nx monorepo with clear library boundaries.
+- `tmp/` contains temporary/generated workspace artifacts and is not part of the public API surface.

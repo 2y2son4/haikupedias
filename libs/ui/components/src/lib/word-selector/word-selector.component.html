@@ -1,7 +1,6 @@
 <div class="word-selector">
   <h3>Select Your Words</h3>
-  <p class="instructions">Choose <strong>8 unique words</strong> to create your haiku (2-4-2 pattern: 2 words, then 4
-    words, then 2 words)</p>
+  <p class="instructions">Choose <strong>{{ maxWords() }} unique words</strong> to create your poem.</p>
 
   <div class="word-sets">
     <div class="word-set">
@@ -37,7 +36,8 @@
                   [class.major]="word.tonalityGroup === 'major'" [class.minor]="word.tonalityGroup === 'minor'"
                   (click)="selectWord(word)">
                   <span class="word-text">{{ word.label }}</span>
-                  <span class="word-tonality" [class.major]="word.tonalityGroup === 'major'" [class.minor]="word.tonalityGroup === 'minor'">{{ word.tonalityGroup }}</span>
+                  <span class="word-tonality" [class.major]="word.tonalityGroup === 'major'"
+                    [class.minor]="word.tonalityGroup === 'minor'">{{ word.tonalityGroup }}</span>
                 </button>
               }
             </div>

@@ -1,23 +1,20 @@
 {
-  "servers": {
-    "github": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/"
-    },
-    "angular-cli": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@angular/cli"
-      ],
-      "type": "stdio"
-    },
-    "angular-docs": {
-      "command": "npx",
-      "args": [
-        "angular-mcp-server"
-      ]
-    }
-  },
-  "inputs": []
+	"inputs": [],
+	"servers": {
+		"angular-cli": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@angular/cli"
+			],
+			"type": "stdio"
+		},
+		"angular-docs": {
+			"command": "npx",
+			"args": [
+				"angular-mcp-server"
+			],
+			"type": "stdio"
+		}
+	}
 }

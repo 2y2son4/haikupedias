@@ -10,3 +10,4 @@
 
 export * from './composition-generator';
 export * from './composition-formatter';
+export * from './dodecaiku-composition-generator';

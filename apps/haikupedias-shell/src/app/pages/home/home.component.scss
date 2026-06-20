@@ -46,6 +46,14 @@
   animation: fadeIn 0.5s ease-out;
 }
 
+.selection-header-genre {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+  margin: auto;
+}
+
 .selection-header {
   display: flex;
   flex-direction: column;
@@ -64,9 +72,48 @@
   margin-bottom: 0.5rem;
 }
 
+.genre-picker {
+  display: flex;
+  gap: 0.75rem;
+  margin: 0.5rem 0;
+
+  .genre-pick-button {
+    padding: 0.55rem 1.1rem;
+    border: 2px solid #ddd;
+    background: #f9f9f9;
+    color: #555;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    .genre-pick-sub {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: #888;
+    }
+
+    &:hover {
+      border-color: #667eea;
+      color: #4456bf;
+      background: #f0f3ff;
+    }
+
+    &.active {
+      border-color: #667eea;
+      background: #eef1ff;
+      color: #4456bf;
+
+      .genre-pick-sub {
+        color: #7a8ee8;
+      }
+    }
+  }
+}
+
 .lucky-button {
-  padding: 0.6rem 1.2rem;
-  border: 1px solid #667eea;
+  padding: 0.6rem 1.2rem;  border: 1px solid #667eea;
   background: #eef1ff;
   color: #4456bf;
   border-radius: 999px;
@@ -196,7 +243,6 @@
 }
 
 .composition-details {
-  margin: 1rem 0;
   padding: 1.5rem;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   border-radius: 12px;
@@ -346,6 +392,125 @@
   .composition-details {
     .gymnopedie-structure .bars-container {
       grid-template-columns: 1fr;
+    }
+  }
+}
+
+// ── Dodecaiku poem display ────────────────────────────────────────────────────
+
+.dodecaiku-poem {
+  margin: 1rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #1a0533 0%, #2d1054 100%);
+  border-radius: 12px;
+
+  h3 {
+    font-size: 1.4rem;
+    color: white;
+    margin: 0 0 0.4rem 0;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 0.08em;
+  }
+
+  .dodecaiku-description {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.55);
+    text-align: center;
+    margin: 0 0 1.25rem 0;
+    font-style: italic;
+  }
+
+  .dodecaiku-stanzas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .dodecaiku-stanza {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+
+    &.generated-stanza {
+      margin-top: 0.25rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      opacity: 0.8;
+    }
+  }
+
+  .dodecaiku-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.65rem 0.4rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    transition:
+      transform 0.18s,
+      box-shadow 0.18s,
+      background 0.18s;
+
+    &.major-card {
+      background: rgba(25, 118, 210, 0.22);
+      border-color: rgba(25, 118, 210, 0.45);
+    }
+
+    &.minor-card {
+      background: rgba(118, 75, 162, 0.22);
+      border-color: rgba(118, 75, 162, 0.45);
+    }
+
+    &.generated-card {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.1);
+      border-style: dashed;
+    }
+
+    &.active-card {
+      transform: translateY(-3px) scale(1.06);
+      box-shadow: 0 4px 18px rgba(255, 255, 255, 0.15);
+
+      &.major-card {
+        background: rgba(25, 118, 210, 0.6);
+        box-shadow: 0 4px 18px rgba(25, 118, 210, 0.45);
+      }
+
+      &.minor-card {
+        background: rgba(118, 75, 162, 0.6);
+        box-shadow: 0 4px 18px rgba(118, 75, 162, 0.45);
+      }
+
+      &.generated-card {
+        background: rgba(255, 255, 255, 0.14);
+        box-shadow: 0 4px 18px rgba(255, 255, 255, 0.12);
+      }
+    }
+
+    .card-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: white;
+      font-family: 'Georgia', serif;
+      text-align: center;
+    }
+
+    .card-type {
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.45);
+      margin-top: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .dodecaiku-poem {
+    .dodecaiku-stanza {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 }

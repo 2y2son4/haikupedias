@@ -1,4 +1,4 @@
-import { Component, input, signal, output } from '@angular/core';
+import { Component, input, signal, output, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Composition } from '@haikupedias/core/types';
 import {
@@ -48,11 +48,12 @@ export class AudioControlsComponent {
   // Input composition to play
   composition = input.required<Composition | null>();
 
+  // Genre is chosen by the parent before audio controls are shown
+  genre = input<'gymnopedie' | 'dodecaphonic' | null>(null);
+
   // Output event for restarting the entire process
   restart = output<void>();
 
-  // Output event when genre is selected
-  genreSelectedEvent = output<'gymnopedie' | 'dodecaphonic'>();
   playbackHighlightChanged = output<PlaybackHighlightEvent>();
 
   private audioManager: AudioContextManager | null = null;
@@ -87,6 +88,20 @@ export class AudioControlsComponent {
 
   constructor() {
     this.initializeAudio();
+
+    // Auto-configure arranger from the genre chosen by the parent
+    effect(() => {
+      const g = this.genre();
+      if (g === 'gymnopedie') {
+        this.currentArranger.set(this.gymnoArranger);
+        this.genreSelected.set(true);
+      } else if (g === 'dodecaphonic') {
+        this.currentArranger.set(this.dodecaArranger);
+        this.genreSelected.set(true);
+      } else {
+        this.genreSelected.set(false);
+      }
+    });
   }
 
   private async initializeAudio() {
@@ -163,10 +178,6 @@ export class AudioControlsComponent {
   selectGenre(arranger: CompositionArranger) {
     this.currentArranger.set(arranger);
     this.genreSelected.set(true);
-    // Emit which genre was selected
-    const genreType =
-      arranger === this.gymnoArranger ? 'gymnopedie' : 'dodecaphonic';
-    this.genreSelectedEvent.emit(genreType);
   }
 
   selectSoundType(
@@ -215,18 +226,6 @@ export class AudioControlsComponent {
     return SORTED_INSTRUMENTS;
   }
 
-  togglePlaybackStyle() {
-    const current = this.currentArranger();
-    const newArranger =
-      current === this.gymnoArranger ? this.dodecaArranger : this.gymnoArranger;
-    this.currentArranger.set(newArranger);
-
-    // Emit the genre change event
-    const genreType =
-      newArranger === this.gymnoArranger ? 'gymnopedie' : 'dodecaphonic';
-    this.genreSelectedEvent.emit(genreType);
-  }
-
   toggleSoundType() {
     const current = this.soundType();
     let newType: 'synthetic' | 'piano-synth' | 'piano-samples' | 'instruments';
@@ -248,7 +247,6 @@ export class AudioControlsComponent {
   changeInstrumentSelection() {
     // Reset to instrument selection state without restarting everything
     this.hasPlayed.set(false);
-    this.genreSelected.set(false);
     this.showInstrumentMenu.set(false);
     // Keep soundType as 'instruments' and soundTypeSelected as true
     // This will show the instrument dropdown again
@@ -346,7 +344,7 @@ export class AudioControlsComponent {
         };
       }
 
-      if (groupIndex < 8) {
+      if (groupIndex < 12) {
         return {
           startMs,
           endMs,
@@ -429,10 +427,7 @@ export class AudioControlsComponent {
   }
 
   get currentGenre(): 'gymnopedie' | 'dodecaphonic' | null {
-    if (!this.genreSelected()) return null;
-    return this.currentArranger() === this.gymnoArranger
-      ? 'gymnopedie'
-      : 'dodecaphonic';
+    return this.genre();
   }
 
   async downloadComposition() {

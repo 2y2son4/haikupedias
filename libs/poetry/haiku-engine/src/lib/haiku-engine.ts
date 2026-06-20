@@ -9,3 +9,4 @@
 
 export * from './haiku-validator';
 export * from './haiku-builder';
+export * from './dodecaiku-builder';

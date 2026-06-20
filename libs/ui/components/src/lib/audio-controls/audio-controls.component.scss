@@ -1,6 +1,8 @@
 .audio-controls {
-  padding: 1rem;
   text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
 }
 
 .sound-type-selection {
@@ -62,7 +64,7 @@
 }
 
 .synthetic-button {
-  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+  background: #e0f7fa;
   color: #00838f;
   border-color: #00838f;
 
@@ -74,7 +76,7 @@
 }
 
 .piano-synth-button {
-  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  background: #fff3e0;
   color: #e65100;
   border-color: #e65100;
 
@@ -86,7 +88,7 @@
 }
 
 .piano-samples-button {
-  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+  background: #fce4ec;
   color: #c2185b;
   border-color: #c2185b;
 
@@ -98,7 +100,7 @@
 }
 
 .instruments-button {
-  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  background: #e8f5e9;
   color: #2e7d32;
   border-color: #2e7d32;
 
@@ -288,14 +290,13 @@
 .control-button {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
+  padding: 0 1rem;
+  font-size: 1rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .play-button {

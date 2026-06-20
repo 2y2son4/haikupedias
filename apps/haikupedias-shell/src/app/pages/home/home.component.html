@@ -2,53 +2,71 @@
   <header class="hero">
     <h1 id="home-main-title" class="title">Haikupedias & Dodecaikus</h1>
     <p class="tagline">Where poetry meets algorithmic music</p>
-    <!-- <p class="description">
-      Select a word, watch it transform into a haiku, and hear it come alive
-      as a musical composition inspired by Erik Satie's Gymnopédies or with an atonal dodecaphonic composition.
-    </p> -->
   </header>
 
   <main class="experience">
-    <!-- Step 1: Word Selection -->
+    <!-- Step 1: Genre Selection - ALWAYS VISIBLE -->
     <section class="step">
-      <div class="selection-header">
-        <div class="selection-title-row">
-          <h2 class="step-title">Select 8 Seed Words</h2>
-          @if (selectedWords().length < 8) {
-            <button class="lucky-button" (click)="selectLuckyWords()">I'm feeling lucky</button>
-          }
+      <div class="selection-header-genre">
+        <h2 class="step-title">Choose Your Musical Style</h2>
+        <div class="genre-picker">
+          <button class="genre-pick-button" [class.active]="selectedGenre() === 'gymnopedie'"
+            (click)="onGenreSelected('gymnopedie')">
+            Haikupedia <span class="genre-pick-sub">Gymnopédie</span>
+          </button>
+          <button class="genre-pick-button" [class.active]="selectedGenre() === 'dodecaphonic'"
+            (click)="onGenreSelected('dodecaphonic')">
+            Dodecaiku <span class="genre-pick-sub">12-Tone</span>
+          </button>
         </div>
-        <p class="progress-text selection-container">{{ selectedWords().length }} / 8 words selected:
-          <span>
-            @for (word of selectedWords(); track word.id) {
-              <span class="selected-word" [class]="getWordSetClass(word)">{{ word.label }}</span>
-              @if (!$last){
-                <span class="separator"> | </span>
-              }
-            }
-          </span>
-          @if (selectedWords().length >= 8) {
-            <button class="reset-button" (click)="resetSelection()">Start Over</button>
-          }
-        </p>
       </div>
-
-      @if (selectedWords().length < 8) {
-        <lib-word-selector [selectedWords]="selectedWords()" (wordSelected)="onWordSelected($event)" />
-      } @else {
-        <div class="selection-complete">
-          <p class="complete-message">✓ Selection complete! Scroll down and finish a 5-7-5 haiku.</p>
-        </div>
-      }
     </section>
 
-    <!-- Step 2: Haiku Display (shown after word selection) -->
+    <!-- Step 2: Word Selection - Only shown after genre is selected -->
+    @if (selectedGenre()) {
+      <section class="step">
+        <div class="selection-header">
+          <div class="selection-title-row">
+            <h2 class="step-title">Select {{ selectedGenre() === 'dodecaphonic' ? '12' : '8' }} Seed Words</h2>
+            @if (selectedWords().length < (selectedGenre() === 'dodecaphonic' ? 12 : 8) && !isHaikuCreated()) {
+              <button class="lucky-button" (click)="selectLuckyWords()">I'm feeling lucky</button>
+            }
+          </div>
+
+          <p class="progress-text selection-container">{{ selectedWords().length }} /
+            {{ selectedGenre() === 'dodecaphonic' ? '12' : '8' }} words selected:
+            <span>
+              @for (word of selectedWords(); track word.id) {
+                <span class="selected-word" [class]="getWordSetClass(word)">{{ word.label }}</span>
+                @if (!$last){
+                  <span class="separator"> | </span>
+                }
+              }
+            </span>
+            @if (selectedWords().length >= (selectedGenre() === 'dodecaphonic' ? 12 : 8)) {
+              <button class="reset-button" (click)="resetSelection()">Start Over</button>
+            }
+          </p>
+        </div>
+
+        @if (selectedWords().length < (selectedGenre() === 'dodecaphonic' ? 12 : 8)) {
+          <lib-word-selector [selectedWords]="selectedWords()" [maxWords]="selectedGenre() === 'dodecaphonic' ? 12 : 8"
+            (wordSelected)="onWordSelected($event)" />
+        } @else {
+          <div class="selection-complete">
+            <p class="complete-message">✓ Selection complete! Scroll down and finish your haiku.</p>
+          </div>
+        }
+      </section>
+    }
+
+    <!-- Step 3: Haiku Display - Only shown after all words selected -->
     @if (haiku()) {
       <section class="step" id="haiku-section">
         <h2 class="step-title">Your Haiku</h2>
         <lib-haiku-display [haiku]="haiku()!" (completionChanged)="onHaikuCompletionChanged($event)"
           [activeWordIndices]="activeWordIndices()" [highlightKind]="activeHighlightKind()" (created)="onHaikuCreated()"
-          (changed)="onHaikuChanged()" />
+          [variant]="selectedGenre() === 'dodecaphonic' ? 'dodecaiku' : 'haikupedia'" (changed)="onHaikuChanged()" />
         @if (!isHaikuCompleted()) {
           <p class="complete-message selection-complete">Complete the missing words, then click CREATE to unlock music
             creation.</p>
@@ -56,63 +74,63 @@
           <p class="complete-message selection-complete">Click CREATE to lock your haiku and generate a new composition.
           </p>
         }
-        @if (composition()) {
-          <!-- Step 2.5: Composition Details (shown after genre selection) -->
-          @if (selectedGenre()) {
-            <div class="composition-details">
-              <h3>Composition Structure</h3>
+      </section>
+    }
 
-              @if (selectedGenre() === 'dodecaphonic') {
-                <!-- Dodecaphonic: Show all 12 notes in tone row -->
-                <div class="dodecaphonic-structure">
-                  <p class="structure-label">12-Tone Row:</p>
-                  <div class="tone-row">
-                    @for (note of getDodecaphonicToneRow(); track $index) {
-                      <span class="note-label" [class.active-note]="isToneRowNoteActive($index)">{{ getNoteLabel(note)
-                        }}</span>
-                    }
-                  </div>
-                </div>
+    <!-- Composition Details -->
+    @if (isHaikuCreated()) {
+      <section class="composition-details" id="composition-details-section">
+        <h3>Composition structure</h3>
+
+        @if (selectedGenre() === 'dodecaphonic') {
+          <!-- Dodecaphonic: Show all 12 notes in tone row -->
+          <div class="dodecaphonic-structure">
+            <p class="structure-label">12-Tone Row:</p>
+            <div class="tone-row">
+              @for (note of getDodecaphonicToneRow(); track $index) {
+                <span class="note-label"
+                  [class.active-note]="isToneRowNoteActive($index)">{{ getNoteLabel(note) }}</span>
               }
+            </div>
+          </div>
+        }
 
-              @if (selectedGenre() === 'gymnopedie') {
-                <!-- Gymnopédie: Show tonic + chord structure (played twice) -->
-                <div class="gymnopedie-structure">
-                  <p class="structure-label">Pattern (played twice):</p>
-                  <div class="bars-container">
-                    @for (barStructure of getGymnopedieStructure(); track $index; let barIndex = $index) {
-                      <div class="bar-structure">
-                        <div class="bar-label">Bar {{ barIndex + 1 }}</div>
-                        <div class="notes-structure">
-                          <div class="tonic-section">
-                            <span class="note-label solo" [class.active-note]="isGymnopedieNoteActive(barIndex, 0)">{{
-                              getNoteLabel(barStructure.tonic) }}</span>
-                            <span class="play-style">solo</span>
-                          </div>
-                          <div class="chord-section">
-                            <div class="chord-notes">
-                              @for (note of barStructure.chord; track $index; let chordIndex = $index) {
-                                <span class="note-label chord"
-                                  [class.active-note]="isGymnopedieNoteActive(barIndex, chordIndex + 1)">{{
-                                  getNoteLabel(note) }}</span>
-                              }
-                            </div>
-                            <span class="play-style">chord</span>
-                          </div>
-                        </div>
+        @if (selectedGenre() === 'gymnopedie') {
+          <!-- Gymnopédie: Show tonic + chord structure (played twice) -->
+          <div class="gymnopedie-structure">
+            <p class="structure-label">Pattern (played twice):</p>
+            <div class="bars-container">
+              @for (barStructure of getGymnopedieStructure(); track $index; let barIndex = $index) {
+                <div class="bar-structure">
+                  <div class="bar-label">Bar {{ barIndex + 1 }}</div>
+                  <div class="notes-structure">
+                    <div class="tonic-section">
+                      <span class="note-label solo"
+                        [class.active-note]="isGymnopedieNoteActive(barIndex, 0)">{{ getNoteLabel(barStructure.tonic) }}</span>
+                      <span class="play-style">solo</span>
+                    </div>
+                    <div class="chord-section">
+                      <div class="chord-notes">
+                        @for (note of barStructure.chord; track $index; let chordIndex = $index) {
+                          <span class="note-label chord"
+                            [class.active-note]="isGymnopedieNoteActive(barIndex, chordIndex + 1)">{{ getNoteLabel(note) }}</span>
+                        }
                       </div>
-                    }
+                      <span class="play-style">chord</span>
+                    </div>
                   </div>
                 </div>
               }
             </div>
-          }
-          <!-- Step 3: Audio Controls (shown after haiku generation) -->
-          <lib-audio-controls [composition]="composition()" (restart)="resetSelection()"
-            (genreSelectedEvent)="onGenreSelected($event)"
-            (playbackHighlightChanged)="onPlaybackHighlightChanged($event)" />
+          </div>
         }
       </section>
+    }
+
+    <!-- Step 4: Audio Controls - Only shown after CREATE is clicked -->
+    @if (isHaikuCreated()) {
+      <lib-audio-controls [composition]="composition()" [genre]="selectedGenre()" (restart)="resetSelection()"
+        (playbackHighlightChanged)="onPlaybackHighlightChanged($event)" />
     }
   </main>
 </div>

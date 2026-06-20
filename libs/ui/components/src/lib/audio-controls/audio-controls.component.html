@@ -13,7 +13,7 @@
         <div class="sound-type-buttons">
           <button class="sound-type-button synthetic-button" [disabled]="!canSelectSoundType"
             (click)="selectSoundType('synthetic')">
-             <div class="sound-type-button__title">
+            <div class="sound-type-button__title">
               <span class="material-icons">library_music</span>
               <span class="sound-name">Synthetic</span>
             </div>
@@ -21,7 +21,7 @@
           </button>
           <button class="sound-type-button piano-synth-button" [disabled]="!canSelectSoundType"
             (click)="selectSoundType('piano-synth')">
-             <div class="sound-type-button__title">
+            <div class="sound-type-button__title">
               <span class="material-icons">piano</span>
               <span class="sound-name">Piano (Synth)</span>
             </div>
@@ -29,7 +29,7 @@
           </button>
           <button class="sound-type-button piano-samples-button" [disabled]="!canSelectSoundType"
             (click)="selectSoundType('piano-samples')">
-             <div class="sound-type-button__title">
+            <div class="sound-type-button__title">
               <span class="material-icons">piano</span>
               <span class="sound-name">Piano (Samples)</span>
             </div>
@@ -37,7 +37,7 @@
           </button>
           <button class="sound-type-button instruments-button" [disabled]="!canSelectSoundType"
             (click)="selectSoundType('instruments')">
-             <div class="sound-type-button__title">
+            <div class="sound-type-button__title">
               <span class="material-icons">post_add</span>
               <span class="sound-name">Instruments</span>
             </div>
@@ -47,8 +47,8 @@
       </div>
     }
 
-    <!-- Instrument selector (shown when instruments sound type is selected) -->
-    @if (soundType() === 'instruments' && soundTypeSelected() && !genreSelected() && !hasPlayed()) {
+    <!-- Instrument selector (shown when instruments sound type is selected, before first play) -->
+    @if (soundType() === 'instruments' && soundTypeSelected() && !hasPlayed()) {
       <div class="instrument-selector-container">
         <p class="selection-prompt">Select an instrument:</p>
         <div class="instrument-selector">
@@ -71,24 +71,10 @@
     }
 
     <!-- Genre Selection (after sound type, before first play) -->
-    @if (soundTypeSelected() && !genreSelected() && !hasPlayed()) {
-      <div class="genre-selection">
-        <p class="selection-prompt">Choose your musical style:</p>
-        <div class="genre-buttons">
-          <button class="genre-button gymno-button" [disabled]="!canSelectGenre" (click)="selectGenre(gymnoArranger)">
-            <span class="genre-name">{{ gymnoArranger.getName() }}</span>
-            <span class="genre-description">Chordal, dreamy</span>
-          </button>
-          <button class="genre-button dodeca-button" [disabled]="!canSelectGenre" (click)="selectGenre(dodecaArranger)">
-            <span class="genre-name">{{ dodecaArranger.getName() }}</span>
-            <span class="genre-description">Sequential, atonal</span>
-          </button>
-        </div>
-      </div>
-    }
+    <!-- Genre is chosen in the word-selection step; nothing shown here -->
 
-    <!-- Play Button (after both selections, before first play) -->
-    @if (soundTypeSelected() && genreSelected() && !hasPlayed()) {
+    <!-- Play Button (after sound type selection, before first play) -->
+    @if (soundTypeSelected() && !hasPlayed()) {
       <button class="control-button play-button" [disabled]="!canPlay" (click)="play()">
         @if (isPlaying) {
           <span class="icon playing">🎵</span>
@@ -103,12 +89,6 @@
     @if (hasPlayed() && playbackState() !== 'playing') {
       <button class="control-button replay-button" [disabled]="!canPlay" (click)="replay()">
         <span>Replay ({{ styleLabel }} - {{ soundLabel }})</span>
-      </button>
-
-      <button class="control-button style-toggle-button" (click)="togglePlaybackStyle()">
-        <span>
-          Switch to {{ currentArranger() === gymnoArranger ? dodecaArranger.getName() : gymnoArranger.getName() }}
-        </span>
       </button>
 
       <button class="control-button sound-toggle-button" (click)="toggleSoundType()">

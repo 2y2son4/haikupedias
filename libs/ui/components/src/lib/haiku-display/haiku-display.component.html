@@ -11,8 +11,9 @@
                 [class.minor-tonality]="token.tonalityGroup === 'minor'">{{ token.label }}</span>
             } @else {
               <input class="blank-word" type="text" maxlength="20" [value]="getBlankValue(token.key)"
-                [readOnly]="isLocked()" [class.locked]="isLocked()" (input)="onBlankInput(token.key, $event)"
-                aria-label="Fill in a haiku word" />
+                [readOnly]="isLocked()" [class.locked]="isLocked()" [class.optional-blank]="!token.required"
+                (input)="onBlankInput(token.key, $event)"
+                [attr.aria-label]="token.required ? 'Fill in a haiku word' : 'Add an optional connector word'" />
             }
           }
         </p>

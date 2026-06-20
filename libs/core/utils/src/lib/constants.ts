@@ -17,3 +17,9 @@ export const BARS_TOTAL = 2;
  * Haiku structure constants
  */
 export const HAIKU_LINE_LENGTHS = [2, 4, 2] as const;
+
+/**
+ * Dodecaiku structure constants
+ */
+export const DODECAIKU_LINE_LENGTHS = [3, 6, 3] as const; // Word counts per line (3+6+3=12)
+export const DODECAIKU_WORDS_TOTAL = 12;
