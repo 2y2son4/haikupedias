@@ -8,7 +8,7 @@
     <!-- Step 1: Genre Selection - ALWAYS VISIBLE -->
     <section class="step">
       <div class="selection-header-genre">
-        <h2 class="step-title">Choose Your Musical Style</h2>
+        <h2 class="step-title">Choose your musical style</h2>
         <div class="genre-picker">
           <button class="genre-pick-button" [class.active]="selectedGenre() === 'gymnopedie'"
             (click)="onGenreSelected('gymnopedie')">
@@ -27,7 +27,7 @@
       <section class="step">
         <div class="selection-header">
           <div class="selection-title-row">
-            <h2 class="step-title">Select {{ selectedGenre() === 'dodecaphonic' ? '12' : '8' }} Seed Words</h2>
+            <h2 class="step-title">Select {{ selectedGenre() === 'dodecaphonic' ? '12' : '8' }} seed words</h2>
             @if (selectedWords().length < (selectedGenre() === 'dodecaphonic' ? 12 : 8) && !isHaikuCreated()) {
               <button class="lucky-button" (click)="selectLuckyWords()">I'm feeling lucky</button>
             }
@@ -80,12 +80,13 @@
     <!-- Composition Details -->
     @if (isHaikuCreated()) {
       <section class="composition-details" id="composition-details-section">
-        <h3>Composition structure</h3>
-
+        <div class="composition-details-title">
+          <h3>Composition structure: </h3>
+          <p class="structure-label">{{selectedGenre() === 'dodecaphonic' ? '12-Tone Row' : 'pattern played twice'}}</p>
+        </div>
         @if (selectedGenre() === 'dodecaphonic') {
           <!-- Dodecaphonic: Show all 12 notes in tone row -->
           <div class="dodecaphonic-structure">
-            <p class="structure-label">12-Tone Row:</p>
             <div class="tone-row">
               @for (note of getDodecaphonicToneRow(); track $index) {
                 <span class="note-label" [class.active-note]="isToneRowNoteActive($index)"
@@ -99,7 +100,6 @@
         @if (selectedGenre() === 'gymnopedie') {
           <!-- Gymnopédie: Show tonic + chord structure (played twice) -->
           <div class="gymnopedie-structure">
-            <p class="structure-label">Pattern (played twice):</p>
             <div class="bars-container">
               @for (barStructure of getGymnopedieStructure(); track $index; let barIndex = $index) {
                 <div class="bar-structure">
