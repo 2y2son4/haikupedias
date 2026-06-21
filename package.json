@@ -6,6 +6,8 @@
     "start": "nx serve haikupedias-shell --open",
     "build": "nx build haikupedias-shell",
     "build:all": "nx run-many --target=build --all",
+    "build:prod:stats": "nx build haikupedias-shell --configuration production --stats-json",
+    "bundle:report": "node scripts/report-bundle-stats.mjs",
     "test": "nx test",
     "lint": "nx lint"
   },
