@@ -27,13 +27,14 @@
       justify-content: space-between;
       max-width: 1800px;
       margin: auto;
+      height: 60px;
     }
 
     .logo {
       font-size: 1.5rem;
       font-weight: 300;
       letter-spacing: 0.05em;
-      color: $color-grey-900;
+      color: $color-grey-800;
       text-decoration: none;
       transition:
         color 0.3s ease,
@@ -66,7 +67,7 @@
       .menu-icon {
         width: 25px;
         height: 2px;
-        background: $color-grey-900;
+        background: $color-grey-800;
         transition: all 0.3s ease;
         border-radius: 2px;
       }
@@ -147,8 +148,8 @@
     transition: all 0.2s ease;
 
     &:hover {
-      background: $color-grey-100;
-      color: $color-grey-900;
+      background: $color-grey-50;
+      color: $color-grey-800;
       width: 60px;
       height: 60px;
     }
@@ -170,7 +171,7 @@
       padding: 1rem;
       border-radius: 8px;
       text-decoration: none;
-      color: $color-grey-900;
+      color: $color-grey-800;
       font-size: 1.1rem;
       transition: all 0.2s ease;
 
@@ -179,12 +180,12 @@
       }
 
       &:hover {
-        background: $color-grey-100;
+        background: $color-grey-50;
         transform: translateX(5px);
       }
 
       &.active {
-        background: $color-grey-900;
+        background: $color-grey-800;
         color: $color-white;
       }
     }

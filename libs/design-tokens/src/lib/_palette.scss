@@ -10,15 +10,15 @@
 
 $color-white:    #ffffff;
 $color-grey-50:  #fafafa;
-$color-grey-100: #f5f5f5;
+$color-grey-50: #f5f5f5;
 $color-grey-200: #eeeeee;
-$color-grey-300: #e0e0e0;
+$color-grey-200: #e0e0e0;
 $color-grey-400: #bdbdbd;
-$color-grey-500: #9e9e9e;
+$color-grey-400: #9e9e9e;
 $color-grey-600: #757575;
-$color-grey-700: #616161;
+$color-grey-600: #616161;
 $color-grey-800: #424242;
-$color-grey-900: #212121;
+$color-grey-800: #212121;
 $color-black:    #000000;
 
 /* --------------------------------------------------------------------------
@@ -26,9 +26,9 @@ $color-black:    #000000;
    -------------------------------------------------------------------------- */
 
 $color-cream:    $color-grey-50;
-$color-charcoal: $color-grey-900;
-$color-carafe:   $color-grey-900;
-$color-celadon:  $color-grey-500;
+$color-charcoal: $color-grey-800;
+$color-carafe:   $color-grey-800;
+$color-celadon:  $color-grey-400;
 
 /* --------------------------------------------------------------------------
    Tonality (Major / Minor) — the only chromatic accents
@@ -80,11 +80,11 @@ $bg-overlay:     rgba($color-black, 0.5);
    Brand / Accent Colors (monochrome)
    -------------------------------------------------------------------------- */
 
-$accent-primary:   $color-grey-900;
-$accent-secondary: $color-grey-500;
+$accent-primary:   $color-grey-800;
+$accent-secondary: $color-grey-400;
 
-$accent-primary-soft:   rgba($color-grey-900, 0.08);
-$accent-secondary-soft: rgba($color-grey-500, 0.15);
+$accent-primary-soft:   rgba($color-grey-800, 0.08);
+$accent-secondary-soft: rgba($color-grey-400, 0.15);
 
 /* --------------------------------------------------------------------------
    Border Colors
@@ -100,15 +100,15 @@ $border-strong:  rgba($color-charcoal, 0.3);
 
 $state-hover:   rgba($color-charcoal, 0.06);
 $state-active:  rgba($color-charcoal, 0.12);
-$state-focus:   rgba($color-grey-700, 0.45);
+$state-focus:   rgba($color-grey-600, 0.45);
 
 /* --------------------------------------------------------------------------
    Semantic Feedback (Greyscale)
    -------------------------------------------------------------------------- */
 
 $feedback-success: $color-grey-200;
-$feedback-warning: $color-grey-300;
-$feedback-error:   $color-grey-300;
+$feedback-warning: $color-grey-200;
+$feedback-error:   $color-grey-200;
 
 $text-on-feedback: $color-charcoal;
 
@@ -131,7 +131,7 @@ $disabled-border: rgba($color-charcoal, 0.12);
    Selection & Highlights
    -------------------------------------------------------------------------- */
 
-$selection-bg:   rgba($color-grey-500, 0.25);
+$selection-bg:   rgba($color-grey-400, 0.25);
 $selection-text: $color-charcoal;
 
 /* --------------------------------------------------------------------------
@@ -142,5 +142,5 @@ $palette: (
   white:    $color-white,
   cream:    $color-cream,
   charcoal: $color-charcoal,
-  grey-500: $color-grey-500
+  grey-500: $color-grey-400
 );

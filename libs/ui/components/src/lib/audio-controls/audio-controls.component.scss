@@ -3,7 +3,7 @@
 .audio-controls {
   text-align: center;
   padding: 1.5rem;
-  background: $color-grey-100;
+  background: $color-grey-50;
   border-radius: 6px;
 }
 
@@ -14,7 +14,7 @@
   .selection-prompt {
     font-size: 1.2rem;
     font-weight: 500;
-    color: $color-grey-900;
+    color: $color-grey-800;
     margin-bottom: 1.5rem;
   }
 
@@ -35,7 +35,7 @@
   font-size: 1rem;
   background: $color-white;
   color: $color-grey-800;
-  border: 1px solid $color-grey-700;
+  border: 1px solid $color-grey-600;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -66,7 +66,7 @@
   }
 
   &:hover:not(:disabled) {
-    background: $color-grey-900;
+    background: $color-grey-800;
     color: $color-white;
     transform: translateY(-3px) scale(1.05);
   }
@@ -84,7 +84,7 @@
   .selection-prompt {
     font-size: 1.2rem;
     font-weight: 500;
-    color: $color-grey-900;
+    color: $color-grey-800;
     margin-bottom: 1rem;
   }
 }
@@ -102,7 +102,7 @@
     font-size: 1.1rem;
     font-weight: 500;
     background: $color-white;
-    border: 1px solid $color-grey-700;
+    border: 1px solid $color-grey-600;
     border-radius: 8px;
     cursor: pointer;
     display: flex;
@@ -112,8 +112,8 @@
     transition: all 0.2s ease;
 
     &:hover {
-      background: $color-grey-100;
-      border-color: $color-grey-900;
+      background: $color-grey-50;
+      border-color: $color-grey-800;
     }
 
     .dropdown-arrow {
@@ -129,7 +129,7 @@
     right: 0;
     margin-top: 0.5rem;
     background: $color-white;
-    border: 1px solid $color-grey-700;
+    border: 1px solid $color-grey-600;
     border-radius: 8px;
     max-height: 160px;
     overflow-y: auto;
@@ -144,22 +144,22 @@
       text-align: left;
       cursor: pointer;
       font-size: 1rem;
-      color: $color-grey-900;
+      color: $color-grey-800;
       transition: background 0.2s ease;
       min-height: 40px;
 
       &:hover {
-        background: $color-grey-100;
+        background: $color-grey-50;
       }
 
       &.selected {
         background: $color-grey-200;
-        color: $color-grey-900;
+        color: $color-grey-800;
         font-weight: 600;
       }
 
       &:not(:last-child) {
-        border-bottom: 1px solid $color-grey-300;
+        border-bottom: 1px solid $color-grey-200;
       }
     }
   }
@@ -172,7 +172,7 @@
   .selection-prompt {
     font-size: 1.2rem;
     font-weight: 500;
-    color: $color-grey-900;
+    color: $color-grey-800;
     margin-bottom: 1.5rem;
   }
 
@@ -210,18 +210,18 @@
 
 .gymno-button {
   background: $color-grey-200;
-  color: $color-grey-900;
-  border-color: $color-grey-700;
+  color: $color-grey-800;
+  border-color: $color-grey-600;
 
   &:hover:not(:disabled) {
-    background: $color-grey-900;
+    background: $color-grey-800;
     color: $color-white;
     transform: translateY(-3px) scale(1.05);
   }
 }
 
 .dodeca-button {
-  background: $color-grey-100;
+  background: $color-grey-50;
   color: $color-grey-800;
   border-color: $color-grey-600;
 
@@ -240,7 +240,7 @@
 .error-message {
   background: $color-grey-200;
   border: 1px solid $color-grey-400;
-  color: $color-grey-900;
+  color: $color-grey-800;
   padding: 1rem;
   border-radius: 4px;
   margin-bottom: 1rem;
@@ -267,33 +267,33 @@
 
 .play-button {
   background: $color-grey-200;
-  color: $color-grey-900;
+  color: $color-grey-800;
 }
 
 .play-button:hover:not(:disabled) {
-  background: $color-grey-900;
+  background: $color-grey-800;
   color: $color-white;
   transform: translateY(-2px);
 }
 
 .replay-button {
   background: $color-grey-200;
-  color: $color-grey-900;
+  color: $color-grey-800;
 }
 
 .replay-button:hover:not(:disabled) {
-  background: $color-grey-900;
+  background: $color-grey-800;
   color: $color-white;
   transform: translateY(-2px);
 }
 
 .restart-button {
-  background: $color-grey-700;
+  background: $color-grey-600;
   color: $color-white;
 }
 
 .restart-button:hover:not(:disabled) {
-  background: $color-grey-900;
+  background: $color-grey-800;
   transform: translateY(-2px);
 }
 
@@ -308,12 +308,12 @@
 }
 
 .sound-toggle-button {
-  background: $color-grey-500;
+  background: $color-grey-400;
   color: $color-white;
 }
 
 .sound-toggle-button:hover:not(:disabled) {
-  background: $color-grey-700;
+  background: $color-grey-600;
   transform: translateY(-2px);
 }
 
@@ -323,12 +323,12 @@
 }
 
 .instrument-change-button:hover:not(:disabled) {
-  background: $color-grey-900;
+  background: $color-grey-800;
   transform: translateY(-2px);
 }
 
 .download-button {
-  background: $color-grey-900;
+  background: $color-grey-800;
   color: $color-white;
 }
 
@@ -343,7 +343,7 @@
   align-items: center;
   gap: 0.25rem;
   padding: 0.75rem 1.5rem;
-  background: $color-grey-100;
+  background: $color-grey-50;
   border: 1px solid $color-grey-400;
   border-radius: 8px;
 
@@ -364,7 +364,7 @@
 
 .control-button:disabled {
   background: $color-grey-200;
-  color: $color-grey-500;
+  color: $color-grey-400;
   cursor: not-allowed;
 }
 
@@ -378,7 +378,7 @@
 
 .status-message {
   margin-top: 1rem;
-  color: $color-grey-500;
+  color: $color-grey-400;
   font-style: italic;
 }
 

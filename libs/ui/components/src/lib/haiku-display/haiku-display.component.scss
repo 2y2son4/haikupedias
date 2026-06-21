@@ -11,15 +11,15 @@
   display: flex;
   align-items: center;
   gap: 3rem;
-  background: $color-grey-100;
+  background: $color-grey-50;
   border-radius: 6px;
   padding: 1rem;
   width: 100%;
 
   &.generated-active {
     box-shadow:
-      0 0 0 2px rgba($color-grey-700, 0.24),
-      0 0 22px rgba($color-grey-500, 0.2);
+      0 0 0 2px rgba($color-grey-600, 0.24),
+      0 0 22px rgba($color-grey-400, 0.2);
   }
 }
 
@@ -32,7 +32,7 @@
   font-family: 'Georgia', 'Times New Roman', serif;
   font-size: 1.5rem;
   line-height: 2;
-  color: $color-grey-900;
+  color: $color-grey-800;
   margin: 0.5rem 0;
   font-style: italic;
   display: flex;
@@ -82,7 +82,7 @@
   font-family: inherit;
   font-size: 1.1rem;
   font-style: normal;
-  color: $color-grey-900;
+  color: $color-grey-800;
   padding: 0.15rem 0.2rem;
 }
 
@@ -95,7 +95,7 @@
 
 .blank-word:focus {
   outline: none;
-  border-bottom-color: $color-grey-900;
+  border-bottom-color: $color-grey-800;
 }
 
 .blank-word.locked {
@@ -120,7 +120,7 @@
 }
 
 .haiku-action.create {
-  background: $color-grey-900;
+  background: $color-grey-800;
   color: $color-white;
 }
 
@@ -131,7 +131,7 @@
 
 .haiku-action.change {
   background: $color-grey-200;
-  color: $color-grey-900;
+  color: $color-grey-800;
 }
 
 .line-1 {
@@ -170,7 +170,7 @@
 }
 
 .tonality-badge {
-  background: $color-grey-500;
+  background: $color-grey-400;
   color: $color-white;
   text-transform: uppercase;
   letter-spacing: 0.5px;
