@@ -1,0 +1,143 @@
+@use 'design-tokens/src/lib' as *;
+
+.project-container {
+    max-width: 1000px;
+    margin: 1.5rem 1.5rem 0;
+    padding: 1rem 2rem;
+    background-color: $color-white;
+    color: $color-grey-800;
+    border-radius: 6px;
+}
+
+/* ==========================================================================
+   Markdown Typography
+   ========================================================================== */
+
+markdown ::ng-deep {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: $font-serif;
+        color: $accent-primary;
+        line-height: 1.2;
+        margin-top: $space-5;
+        margin-bottom: $space-3;
+    }
+
+    h1 {
+        font-size: $font-size-xxl;
+        text-align: center;
+        margin-bottom: $space-5;
+    }
+
+    h2 {
+        font-size: $font-size-xl;
+        border-bottom: 1px solid $border-default;
+        padding-bottom: $space-2;
+    }
+
+    h3 {
+        font-size: $font-size-lg;
+    }
+
+    p {
+        font-family: $font-serif;
+        font-size: $font-size-md;
+        line-height: $line-height-poetry;
+        margin-bottom: $space-4;
+    }
+
+    a {
+        color: $accent-primary;
+        text-decoration: none;
+        border-bottom: 1px solid rgba($accent-primary, 0.3);
+
+        &:hover {
+            color: $accent-secondary;
+        }
+    }
+
+    ul,
+    ol {
+        margin-bottom: $space-4;
+        padding-left: $space-5;
+    }
+
+    li {
+        margin-bottom: $space-2;
+    }
+
+    blockquote {
+        margin: $space-5 auto;
+        padding: $space-3 $space-4;
+
+        border-left: 3px solid $accent-secondary;
+
+        color: $text-secondary;
+        font-style: italic;
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid $border-default;
+        margin: $space-6 0;
+    }
+
+    code {
+        background-color: $bg-subtle;
+        padding: 0.15rem 0.35rem;
+        border-radius: 4px;
+        font-size: 0.9em;
+    }
+
+    pre {
+        background-color: $bg-subtle;
+        border: 1px solid $border-default;
+        padding: $space-2 $space-4;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: $space-4 0;
+
+        code {
+            background: transparent;
+            padding: 0;
+        }
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: $space-5 0;
+    }
+
+    th {
+        font-family: $font-sans;
+        text-align: left;
+        border-bottom: 2px solid $border-default;
+        padding: $space-2;
+    }
+
+    td {
+        padding: $space-2;
+        border-bottom: 1px solid $border-muted;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+        margin: $space-5 auto;
+        border-radius: 8px;
+    }
+
+    strong {
+        color: $accent-primary;
+    }
+
+    em {
+        color: $text-secondary;
+    }
+}
