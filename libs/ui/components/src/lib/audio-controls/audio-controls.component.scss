@@ -308,12 +308,12 @@
 }
 
 .sound-toggle-button {
-  background: $color-grey-400;
+  background: $color-grey-800;
   color: $color-white;
 }
 
 .sound-toggle-button:hover:not(:disabled) {
-  background: $color-grey-600;
+  background: $color-black;
   transform: translateY(-2px);
 }
 
