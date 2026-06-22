@@ -1,3 +1,3 @@
-<div class="project-container">
-    <markdown [src]="'./assets/project.md'"></markdown>
+<div class="project-container" (click)="handleAnchorClick($event)">
+    <markdown [src]="'./assets/project.md'" (ready)="onMarkdownReady()"></markdown>
 </div>
