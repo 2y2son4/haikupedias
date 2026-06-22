@@ -1,5 +1,5 @@
 {
-  "name": "@haikupedias/music/audio",
+  "name": "@haikupedias/music/theory",
   "version": "1.0.0",
   "type": "commonjs",
   "main": "./src/index.js",

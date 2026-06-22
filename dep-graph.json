@@ -1,0 +1,1158 @@
+{
+  "graph": {
+    "nodes": {
+      "dodecaphonic-arranger": {
+        "name": "dodecaphonic-arranger",
+        "type": "lib",
+        "data": {
+          "root": "libs/music/arrangers/dodecaphonic-arranger",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "libs/music/arrangers/dodecaphonic-arranger",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "pnpm exec eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/js:tsc",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/libs/music/arrangers/dodecaphonic-arranger",
+                "main": "libs/music/arrangers/dodecaphonic-arranger/src/index.ts",
+                "tsConfig": "libs/music/arrangers/dodecaphonic-arranger/tsconfig.lib.json",
+                "assets": [
+                  "libs/music/arrangers/dodecaphonic-arranger/*.md"
+                ]
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "default",
+                "^default"
+              ]
+            }
+          },
+          "name": "dodecaphonic-arranger",
+          "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/music/arrangers/dodecaphonic-arranger/src",
+          "projectType": "library",
+          "tags": [
+            "type:library",
+            "domain:music"
+          ],
+          "implicitDependencies": []
+        }
+      },
+      "gymnopedie-arranger": {
+        "name": "gymnopedie-arranger",
+        "type": "lib",
+        "data": {
+          "root": "libs/music/arrangers/gymnopedie-arranger",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "libs/music/arrangers/gymnopedie-arranger",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "pnpm exec eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/js:tsc",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/libs/music/arrangers/gymnopedie-arranger",
+                "main": "libs/music/arrangers/gymnopedie-arranger/src/index.ts",
+                "tsConfig": "libs/music/arrangers/gymnopedie-arranger/tsconfig.lib.json",
+                "assets": [
+                  "libs/music/arrangers/gymnopedie-arranger/*.md"
+                ]
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "default",
+                "^default"
+              ]
+            }
+          },
+          "name": "gymnopedie-arranger",
+          "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/music/arrangers/gymnopedie-arranger/src",
+          "projectType": "library",
+          "tags": [
+            "type:library",
+            "domain:music"
+          ],
+          "implicitDependencies": []
+        }
+      },
+      "base-arranger": {
+        "name": "base-arranger",
+        "type": "lib",
+        "data": {
+          "root": "libs/music/arrangers/base-arranger",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "libs/music/arrangers/base-arranger",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "pnpm exec eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/js:tsc",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/libs/music/arrangers/base-arranger",
+                "main": "libs/music/arrangers/base-arranger/src/index.ts",
+                "tsConfig": "libs/music/arrangers/base-arranger/tsconfig.lib.json",
+                "assets": [
+                  "libs/music/arrangers/base-arranger/*.md"
+                ]
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "default",
+                "^default"
+              ]
+            }
+          },
+          "name": "base-arranger",
+          "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/music/arrangers/base-arranger/src",
+          "projectType": "library",
+          "tags": [
+            "type:library",
+            "domain:music"
+          ],
+          "implicitDependencies": []
+        }
+      },
+      "composition-engine": {
+        "name": "composition-engine",
+        "type": "lib",
+        "data": {
+          "root": "libs/music/composition-engine",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "libs/music/composition-engine",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/libs/music/composition-engine/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "pnpm exec eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "composition-engine",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/music/composition-engine/src",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "haiku-engine": {
+        "name": "haiku-engine",
+        "type": "lib",
+        "data": {
+          "root": "libs/poetry/haiku-engine",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true
+            },
+            "build": {
+              "executor": "@nx/js:tsc",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/libs/poetry/haiku-engine",
+                "main": "libs/poetry/haiku-engine/src/index.ts",
+                "tsConfig": "libs/poetry/haiku-engine/tsconfig.lib.json",
+                "assets": [
+                  "libs/poetry/haiku-engine/*.md"
+                ]
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "default",
+                "^default"
+              ]
+            }
+          },
+          "name": "haiku-engine",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/poetry/haiku-engine/src",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "haikupedias-shell": {
+        "name": "haikupedias-shell",
+        "type": "app",
+        "data": {
+          "root": "apps/haikupedias-shell",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "apps/haikupedias-shell",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "pnpm exec eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/angular:webpack-browser",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/apps/haikupedias-shell",
+                "index": "apps/haikupedias-shell/src/index.html",
+                "main": "apps/haikupedias-shell/src/main.ts",
+                "polyfills": [
+                  "zone.js"
+                ],
+                "tsConfig": "apps/haikupedias-shell/tsconfig.app.json",
+                "assets": [
+                  {
+                    "glob": "**/*",
+                    "input": "apps/haikupedias-shell/src",
+                    "output": "/"
+                  }
+                ],
+                "styles": [
+                  "apps/haikupedias-shell/src/styles.scss"
+                ],
+                "scripts": [],
+                "inlineStyleLanguage": "scss",
+                "stylePreprocessorOptions": {
+                  "includePaths": [
+                    "libs"
+                  ]
+                }
+              },
+              "configurations": {
+                "production": {
+                  "budgets": [
+                    {
+                      "type": "initial",
+                      "maximumWarning": "500kb",
+                      "maximumError": "1mb"
+                    },
+                    {
+                      "type": "anyComponentStyle",
+                      "maximumWarning": "2kb",
+                      "maximumError": "4kb"
+                    }
+                  ],
+                  "outputHashing": "all"
+                },
+                "development": {
+                  "buildOptimizer": false,
+                  "optimization": false,
+                  "vendorChunk": true,
+                  "extractLicenses": false,
+                  "sourceMap": true,
+                  "namedChunks": true
+                }
+              },
+              "defaultConfiguration": "production",
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ]
+            },
+            "serve": {
+              "executor": "@nx/angular:dev-server",
+              "configurations": {
+                "production": {
+                  "buildTarget": "haikupedias-shell:build:production"
+                },
+                "development": {
+                  "buildTarget": "haikupedias-shell:build:development"
+                }
+              },
+              "defaultConfiguration": "development",
+              "options": {},
+              "parallelism": true,
+              "continuous": true
+            }
+          },
+          "name": "haikupedias-shell",
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "projectType": "application",
+          "sourceRoot": "apps/haikupedias-shell/src",
+          "prefix": "app",
+          "tags": [
+            "type:app"
+          ],
+          "implicitDependencies": []
+        }
+      },
+      "poetry-lexicon": {
+        "name": "poetry-lexicon",
+        "type": "lib",
+        "data": {
+          "root": "libs/poetry/lexicon",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "libs/poetry/lexicon",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "pnpm exec eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/js:tsc",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/libs/poetry/lexicon",
+                "main": "libs/poetry/lexicon/src/index.ts",
+                "tsConfig": "libs/poetry/lexicon/tsconfig.lib.json"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "default",
+                "^default"
+              ]
+            }
+          },
+          "name": "poetry-lexicon",
+          "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+          "projectType": "library",
+          "sourceRoot": "libs/poetry/lexicon/src",
+          "tags": [
+            "scope:poetry",
+            "type:data"
+          ],
+          "implicitDependencies": []
+        }
+      },
+      "components": {
+        "name": "components",
+        "type": "lib",
+        "data": {
+          "root": "libs/ui/components",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true
+            },
+            "nx-release-publish": {
+              "executor": "@nx/js:release-publish",
+              "dependsOn": [
+                "^nx-release-publish"
+              ],
+              "options": {},
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/angular:ng-packagr-lite",
+              "outputs": [
+                "{workspaceRoot}/dist/{projectRoot}"
+              ],
+              "options": {
+                "project": "libs/ui/components/ng-package.json",
+                "tsConfig": "libs/ui/components/tsconfig.lib.json"
+              },
+              "configurations": {
+                "production": {
+                  "tsConfig": "libs/ui/components/tsconfig.lib.prod.json"
+                },
+                "development": {}
+              },
+              "defaultConfiguration": "production",
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "default",
+                "^default"
+              ]
+            },
+            "test": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{projectRoot}"
+              ],
+              "options": {
+                "jestConfig": "libs/ui/components/jest.config.cts",
+                "tsConfig": "libs/ui/components/tsconfig.spec.json",
+                "passWithNoTests": true
+              },
+              "configurations": {
+                "ci": {
+                  "ci": true,
+                  "codeCoverage": true
+                }
+              },
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/jest.preset.js"
+              ]
+            }
+          },
+          "name": "components",
+          "tags": [
+            "npm:public"
+          ],
+          "metadata": {
+            "targetGroups": {},
+            "js": {
+              "packageName": "components",
+              "packageVersion": "0.0.1",
+              "isInPackageManagerWorkspaces": false
+            }
+          },
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/ui/components/src",
+          "prefix": "lib",
+          "projectType": "library",
+          "implicitDependencies": []
+        }
+      },
+      "design-tokens": {
+        "name": "design-tokens",
+        "type": "lib",
+        "data": {
+          "root": "libs/design-tokens",
+          "targets": {
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "options": {},
+              "configurations": {},
+              "parallelism": true,
+              "cache": true
+            },
+            "test": {
+              "executor": "@nx/jest:jest",
+              "outputs": [
+                "{workspaceRoot}/coverage/{projectRoot}"
+              ],
+              "options": {
+                "jestConfig": "libs/design-tokens/jest.config.cts",
+                "tsConfig": "libs/design-tokens/tsconfig.spec.json",
+                "passWithNoTests": true
+              },
+              "configurations": {
+                "ci": {
+                  "ci": true,
+                  "codeCoverage": true
+                }
+              },
+              "parallelism": true,
+              "cache": true,
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/jest.preset.js"
+              ]
+            }
+          },
+          "name": "design-tokens",
+          "$schema": "../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/design-tokens/src",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "theory": {
+        "name": "theory",
+        "type": "lib",
+        "data": {
+          "root": "libs/music/theory",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "libs/music/theory",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/libs/music/theory/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "pnpm exec eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            }
+          },
+          "name": "theory",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/music/theory/src",
+          "projectType": "library",
+          "tags": [],
+          "implicitDependencies": []
+        }
+      },
+      "audio": {
+        "name": "audio",
+        "type": "lib",
+        "data": {
+          "root": "libs/music/audio",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "libs/music/audio",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/libs/music/audio/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "pnpm exec eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/js:tsc",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/libs/music/audio",
+                "main": "libs/music/audio/src/index.ts",
+                "tsConfig": "libs/music/audio/tsconfig.lib.json",
+                "assets": [
+                  "libs/music/audio/*.md"
+                ]
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "default",
+                "^default"
+              ]
+            }
+          },
+          "name": "audio",
+          "tags": [
+            "npm:private"
+          ],
+          "metadata": {
+            "targetGroups": {},
+            "js": {
+              "packageName": "audio",
+              "packageVersion": "0.0.1",
+              "packageMain": "./src/index.js",
+              "isInPackageManagerWorkspaces": false
+            }
+          },
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "sourceRoot": "libs/music/audio/src",
+          "projectType": "library",
+          "implicitDependencies": []
+        }
+      },
+      "core-types": {
+        "name": "core-types",
+        "type": "lib",
+        "data": {
+          "root": "libs/core/types",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "libs/core/types",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "pnpm exec eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/js:tsc",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/libs/core/types",
+                "main": "libs/core/types/src/index.ts",
+                "tsConfig": "libs/core/types/tsconfig.lib.json"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "default",
+                "^default"
+              ]
+            }
+          },
+          "name": "core-types",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "projectType": "library",
+          "sourceRoot": "libs/core/types/src",
+          "tags": [
+            "scope:core",
+            "type:types"
+          ],
+          "implicitDependencies": []
+        }
+      },
+      "core-utils": {
+        "name": "core-utils",
+        "type": "lib",
+        "data": {
+          "root": "libs/core/utils",
+          "targets": {
+            "lint": {
+              "cache": true,
+              "options": {
+                "cwd": "libs/core/utils",
+                "command": "eslint ."
+              },
+              "inputs": [
+                "default",
+                "^default",
+                "{workspaceRoot}/eslint.config.mjs",
+                "{workspaceRoot}/tools/eslint-rules/**/*",
+                {
+                  "externalDependencies": [
+                    "eslint"
+                  ]
+                }
+              ],
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "metadata": {
+                "technologies": [
+                  "eslint"
+                ],
+                "description": "Runs ESLint on project",
+                "help": {
+                  "command": "pnpm exec eslint --help",
+                  "example": {
+                    "options": {
+                      "max-warnings": 0
+                    }
+                  }
+                }
+              },
+              "executor": "nx:run-commands",
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "@nx/js:tsc",
+              "outputs": [
+                "{options.outputPath}"
+              ],
+              "options": {
+                "outputPath": "dist/libs/core/utils",
+                "main": "libs/core/utils/src/index.ts",
+                "tsConfig": "libs/core/utils/tsconfig.lib.json"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "inputs": [
+                "default",
+                "^default"
+              ]
+            }
+          },
+          "name": "core-utils",
+          "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+          "projectType": "library",
+          "sourceRoot": "libs/core/utils/src",
+          "tags": [
+            "scope:core",
+            "type:utils"
+          ],
+          "implicitDependencies": []
+        }
+      }
+    },
+    "dependencies": {
+      "dodecaphonic-arranger": [
+        {
+          "source": "dodecaphonic-arranger",
+          "target": "core-types",
+          "type": "static"
+        },
+        {
+          "source": "dodecaphonic-arranger",
+          "target": "base-arranger",
+          "type": "static"
+        }
+      ],
+      "gymnopedie-arranger": [
+        {
+          "source": "gymnopedie-arranger",
+          "target": "core-types",
+          "type": "static"
+        },
+        {
+          "source": "gymnopedie-arranger",
+          "target": "base-arranger",
+          "type": "static"
+        }
+      ],
+      "base-arranger": [
+        {
+          "source": "base-arranger",
+          "target": "core-types",
+          "type": "static"
+        }
+      ],
+      "composition-engine": [
+        {
+          "source": "composition-engine",
+          "target": "core-types",
+          "type": "static"
+        },
+        {
+          "source": "composition-engine",
+          "target": "core-utils",
+          "type": "static"
+        },
+        {
+          "source": "composition-engine",
+          "target": "theory",
+          "type": "static"
+        }
+      ],
+      "haiku-engine": [
+        {
+          "source": "haiku-engine",
+          "target": "core-types",
+          "type": "static"
+        },
+        {
+          "source": "haiku-engine",
+          "target": "core-utils",
+          "type": "static"
+        }
+      ],
+      "haikupedias-shell": [
+        {
+          "source": "haikupedias-shell",
+          "target": "components",
+          "type": "static"
+        },
+        {
+          "source": "haikupedias-shell",
+          "target": "core-types",
+          "type": "static"
+        },
+        {
+          "source": "haikupedias-shell",
+          "target": "haiku-engine",
+          "type": "static"
+        },
+        {
+          "source": "haikupedias-shell",
+          "target": "poetry-lexicon",
+          "type": "static"
+        },
+        {
+          "source": "haikupedias-shell",
+          "target": "composition-engine",
+          "type": "static"
+        },
+        {
+          "source": "haikupedias-shell",
+          "target": "dodecaphonic-arranger",
+          "type": "static"
+        }
+      ],
+      "poetry-lexicon": [
+        {
+          "source": "poetry-lexicon",
+          "target": "core-types",
+          "type": "static"
+        }
+      ],
+      "components": [
+        {
+          "source": "components",
+          "target": "core-types",
+          "type": "static"
+        },
+        {
+          "source": "components",
+          "target": "audio",
+          "type": "static"
+        },
+        {
+          "source": "components",
+          "target": "base-arranger",
+          "type": "static"
+        },
+        {
+          "source": "components",
+          "target": "gymnopedie-arranger",
+          "type": "static"
+        },
+        {
+          "source": "components",
+          "target": "dodecaphonic-arranger",
+          "type": "static"
+        },
+        {
+          "source": "components",
+          "target": "poetry-lexicon",
+          "type": "static"
+        }
+      ],
+      "design-tokens": [],
+      "theory": [
+        {
+          "source": "theory",
+          "target": "core-types",
+          "type": "static"
+        },
+        {
+          "source": "theory",
+          "target": "core-utils",
+          "type": "static"
+        }
+      ],
+      "audio": [
+        {
+          "source": "audio",
+          "target": "base-arranger",
+          "type": "static"
+        },
+        {
+          "source": "audio",
+          "target": "core-types",
+          "type": "static"
+        }
+      ],
+      "core-types": [],
+      "core-utils": [
+        {
+          "source": "core-utils",
+          "target": "core-types",
+          "type": "static"
+        }
+      ]
+    }
+  }
+}

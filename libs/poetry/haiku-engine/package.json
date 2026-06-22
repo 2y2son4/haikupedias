@@ -1,5 +1,5 @@
 {
-  "name": "@haikupedias/music/audio",
+  "name": "@haikupedias/poetry/haiku-engine",
   "version": "1.0.0",
   "type": "commonjs",
   "main": "./src/index.js",

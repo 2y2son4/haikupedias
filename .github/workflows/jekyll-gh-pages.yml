@@ -52,7 +52,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: bundle-stats
-          path: docs/browser/stats.json
+          path: dist/apps/haikupedias-shell/stats.json
 
       - name: Run tests
         run: pnpm test
@@ -88,8 +88,8 @@ jobs:
 
       - name: Flatten build output
         run: |
-          mv ./docs/browser/* ./docs/
-          rm -rf ./docs/browser
+          mv ./dist/apps/haikupedias-shell/browser/* ./dist/apps/haikupedias-shell/
+          rm -rf ./dist/apps/haikupedias-shell/browser
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -97,7 +97,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/
+          path: dist/apps/haikupedias-shell/
 
       - name: Deploy to GitHub Pages
         id: deployment

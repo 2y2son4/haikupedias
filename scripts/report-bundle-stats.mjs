@@ -1,6 +1,8 @@
 import { existsSync, readFileSync } from "node:fs";
 
 const candidateStatsFiles = [
+  "dist/apps/haikupedias-shell/browser/stats.json",
+  "dist/apps/haikupedias-shell/stats.json",
   "docs/browser/stats.json",
   "docs/stats.json",
   "dist/browser/stats.json",
@@ -17,57 +19,28 @@ if (!statsPath) {
 }
 
 const stats = JSON.parse(readFileSync(statsPath, "utf8"));
-const outputs = stats?.outputs ?? {};
+const entrypoints = stats?.entrypoints ?? {};
 
-if (Object.keys(outputs).length === 0) {
-  console.error(`No outputs section found in ${statsPath}.`);
+const entrypointNames = Object.keys(entrypoints);
+if (entrypointNames.length === 0) {
+  console.error(`No entrypoints found in ${statsPath}.`);
   process.exit(1);
 }
 
-const entryPoints = new Set([
-  "src/main.ts",
-  "angular:polyfills:angular:polyfills",
-  "angular:styles/global:styles",
-]);
-
-const initialRoots = Object.entries(outputs)
-  .filter(([, value]) => entryPoints.has(value?.entryPoint))
-  .map(([name]) => name);
-
-if (initialRoots.length === 0) {
-  console.error(`No initial entry outputs found in ${statsPath}.`);
-  process.exit(1);
-}
-
+const seen = new Set();
 const measuredAssets = [];
-const queue = [...initialRoots];
-const visited = new Set();
 
-while (queue.length > 0) {
-  const name = queue.shift();
-  if (!name || visited.has(name)) {
-    continue;
-  }
-
-  visited.add(name);
-  const output = outputs[name];
-  if (!output) {
-    continue;
-  }
-
-  if (
-    (name.endsWith(".js") || name.endsWith(".css")) &&
-    typeof output.bytes === "number"
-  ) {
-    measuredAssets.push({ name, size: output.bytes });
-  }
-
-  const imports = Array.isArray(output.imports) ? output.imports : [];
-  for (const imported of imports) {
-    if (!imported?.path || imported.kind !== "import-statement") {
-      continue;
+for (const name of entrypointNames) {
+  const assets = entrypoints[name]?.assets ?? [];
+  for (const asset of assets) {
+    if (seen.has(asset.name)) continue;
+    seen.add(asset.name);
+    if (
+      (asset.name.endsWith(".js") || asset.name.endsWith(".css")) &&
+      typeof asset.size === "number"
+    ) {
+      measuredAssets.push({ name: asset.name, size: asset.size });
     }
-    queue.push(imported.path);
   }
 }
 
