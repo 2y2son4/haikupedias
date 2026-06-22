@@ -263,6 +263,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 700;
+  height: 90px;
 }
 
 .play-button {
@@ -352,6 +353,9 @@
     color: $color-grey-800;
     font-weight: 500;
     margin: 0;
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
   }
 
   .info-subtext {

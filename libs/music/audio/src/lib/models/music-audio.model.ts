@@ -17,7 +17,7 @@ export type InstrumentType =
   | 'organ'
   | 'piano'
   | 'saxophone'
-  | 'violin'
+  // | 'violin'
   | 'xylophone';
 
   import { NoteValue } from '@haikupedias/core/types';

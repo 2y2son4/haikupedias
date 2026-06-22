@@ -86,6 +86,8 @@ export class AudioControlsComponent {
   hasPlayed = signal(false);
   genreSelected = signal(false);
 
+  $selectedInstrumentName = signal('')
+
   constructor() {
     this.initializeAudio();
 
@@ -193,10 +195,13 @@ export class AudioControlsComponent {
 
       if (type === 'synthetic') {
         notePlayer = this.syntheticPlayer;
+        this.$selectedInstrumentName.set('');
       } else if (type === 'piano-synth') {
         notePlayer = this.pianoSynthPlayer;
+        this.$selectedInstrumentName.set('');
       } else if (type === 'piano-samples') {
         notePlayer = this.pianoSamplesPlayer;
+        this.$selectedInstrumentName.set('');
       } else if (type === 'instruments') {
         notePlayer = this.instrumentPlayer;
       }
@@ -211,6 +216,7 @@ export class AudioControlsComponent {
   }
 
   selectInstrument(instrument: InstrumentType) {
+    this.$selectedInstrumentName.set(instrument);
     this.selectedInstrument.set(instrument);
     if (this.instrumentPlayer) {
       this.instrumentPlayer.changeInstrument(instrument);
