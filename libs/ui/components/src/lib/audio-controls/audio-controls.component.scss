@@ -12,10 +12,10 @@
   margin-bottom: 1.5rem;
 
   .selection-prompt {
-    font-size: 1.2rem;
+    font-size: $font-size-lg;
     font-weight: 500;
     color: $color-grey-800;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .sound-type-buttons {
@@ -31,27 +31,27 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  padding: 1rem;
-  font-size: 1rem;
+  padding: 0.5rem;
+  font-size: $font-size-md;
   background: $color-white;
   color: $color-grey-800;
   border: 1px solid $color-grey-600;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 280px;
+  width: 200px;
 
   .sound-icon {
-    font-size: 2rem;
+    font-size: $font-size-lg2;
   }
 
   .sound-name {
-    font-size: 1.3rem;
+    font-size: $font-size-sm;
     font-weight: 600;
   }
 
   .sound-description {
-    font-size: 0.9rem;
+    font-size: $font-size-xs;
     opacity: 0.85;
   }
 
@@ -61,7 +61,7 @@
     align-items: center;
 
     .material-icons {
-      font-size: 1.75rem;
+      font-size: $font-size-lg2;
     }
   }
 
@@ -82,7 +82,7 @@
   text-align: center;
 
   .selection-prompt {
-    font-size: 1.2rem;
+    font-size: $font-size-lg;
     font-weight: 500;
     color: $color-grey-800;
     margin-bottom: 1rem;
@@ -99,7 +99,7 @@
   .instrument-menu-toggle {
     width: 100%;
     padding: 1rem 1.5rem;
-    font-size: 1.1rem;
+    font-size: $font-size-md;
     font-weight: 500;
     background: $color-white;
     border: 1px solid $color-grey-600;
@@ -117,7 +117,7 @@
     }
 
     .dropdown-arrow {
-      font-size: 0.8rem;
+      font-size: $font-size-sm;
       transition: transform 0.2s ease;
     }
   }
@@ -143,7 +143,7 @@
       background: $color-white;
       text-align: left;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: $font-size-md;
       color: $color-grey-800;
       transition: background 0.2s ease;
       min-height: 40px;
@@ -170,7 +170,7 @@
   margin-bottom: 1.5rem;
 
   .selection-prompt {
-    font-size: 1.2rem;
+    font-size: $font-size-lg;
     font-weight: 500;
     color: $color-grey-800;
     margin-bottom: 1.5rem;
@@ -190,7 +190,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 1.5rem 2.5rem;
-  font-size: 1rem;
+  font-size: $font-size-md;
   border: 3px solid transparent;
   border-radius: 6px;
   cursor: pointer;
@@ -198,12 +198,12 @@
   min-width: 200px;
 
   .genre-name {
-    font-size: 1.3rem;
+    font-size: $font-size-lg;
     font-weight: 600;
   }
 
   .genre-description {
-    font-size: 0.9rem;
+    font-size: $font-size-md;
     opacity: 0.85;
   }
 }
@@ -257,7 +257,7 @@
   display: flex;
   align-items: center;
   padding: 0 1rem;
-  font-size: 1rem;
+  font-size: $font-size-md;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -348,14 +348,14 @@
   border-radius: 8px;
 
   .info-text {
-    font-size: 0.95rem;
+    font-size: $font-size-md;
     color: $color-grey-800;
     font-weight: 500;
     margin: 0;
   }
 
   .info-subtext {
-    font-size: 0.8rem;
+    font-size: $font-size-sm;
     color: $color-grey-600;
     opacity: 0.8;
     margin: 0;
@@ -369,7 +369,7 @@
 }
 
 .icon {
-  font-size: 1.3rem;
+  font-size: $font-size-lg;
 }
 
 .icon.playing {
@@ -383,10 +383,12 @@
 }
 
 @keyframes pulse {
+
   0%,
   100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.2);
   }

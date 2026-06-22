@@ -12,14 +12,14 @@
   margin-bottom: 2rem;
 
   h1 {
-    font-size: 2.5rem;
+    font-size: $font-size-xxl;
     font-weight: 300;
     margin: 0 0 0.5rem 0;
     letter-spacing: 0.05em;
   }
 
   .subtitle {
-    font-size: 1.1rem;
+    font-size: $font-size-md;
     opacity: 0.9;
     font-weight: 300;
     margin: 0;
@@ -48,11 +48,11 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    font-size: 1rem;
+    font-size: $font-size-md;
     font-weight: 500;
 
     .theme {
-      font-size: 0.85rem;
+      font-size: $font-size-sm;
       color: $color-grey-600;
       font-weight: 400;
     }
@@ -82,7 +82,7 @@
 .word-category {
   h3 {
     color: $color-grey-800;
-    font-size: 1.2rem;
+    font-size: $font-size-lg;
     font-weight: 500;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
@@ -100,7 +100,7 @@
   display: inline-block;
   padding: 0.5rem;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: $font-size-md;
   transition: all 0.2s ease;
   cursor: default;
 
@@ -139,14 +139,14 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.9rem;
+    font-size: $font-size-md;
     color: $color-grey-600;
   }
 
   .badge {
     padding: 0.25rem 0.75rem;
     border-radius: 6px;
-    font-size: 0.85rem;
+    font-size: $font-size-sm;
     font-weight: 500;
 
     &.major {

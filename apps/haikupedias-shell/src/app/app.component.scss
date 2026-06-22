@@ -31,7 +31,7 @@
     }
 
     .logo {
-      font-size: 1.5rem;
+      font-size: $font-size-lg2;
       font-weight: 300;
       letter-spacing: 0.05em;
       color: $color-grey-800;
@@ -49,6 +49,7 @@
         color: $color-grey-600;
       }
     }
+
     .menu-button {
       background: none;
       border: none;
@@ -76,9 +77,11 @@
         .menu-icon:nth-child(1) {
           transform: rotate(45deg) translate(7px, 7px);
         }
+
         .menu-icon:nth-child(2) {
           opacity: 0;
         }
+
         .menu-icon:nth-child(3) {
           transform: rotate(-45deg) translate(7px, -7px);
         }
@@ -136,7 +139,7 @@
     right: 1rem;
     background: none;
     border: none;
-    font-size: 2rem;
+    font-size: $font-size-xl;
     color: $color-grey-600;
     cursor: pointer;
     width: 60px;
@@ -172,11 +175,11 @@
       border-radius: 8px;
       text-decoration: none;
       color: $color-grey-800;
-      font-size: 1.1rem;
+      font-size: $font-size-md;
       transition: all 0.2s ease;
 
       .icon {
-        font-size: 1.5rem;
+        font-size: $font-size-lg2;
       }
 
       &:hover {

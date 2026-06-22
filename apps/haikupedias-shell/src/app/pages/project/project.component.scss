@@ -2,7 +2,7 @@
 
 .project-container {
     max-width: 1000px;
-    margin: 1.5rem 1.5rem 0;
+    margin: 1.5rem auto 0;
     padding: 1rem 2rem;
     background-color: $color-white;
     color: $color-grey-800;
@@ -23,8 +23,8 @@ markdown ::ng-deep {
     h6 {
         font-family: $font-serif;
         color: $accent-primary;
-        line-height: 1.2;
-        margin-top: $space-5;
+        line-height: $line-height-small;
+        margin-top: $space-4;
         margin-bottom: $space-3;
     }
 
@@ -47,8 +47,8 @@ markdown ::ng-deep {
     p {
         font-family: $font-serif;
         font-size: $font-size-md;
-        line-height: $line-height-poetry;
-        margin-bottom: $space-4;
+        line-height: $line-height-ui;
+        margin-bottom: $space-2;
     }
 
     a {
@@ -91,7 +91,7 @@ markdown ::ng-deep {
         background-color: $bg-subtle;
         padding: 0.15rem 0.35rem;
         border-radius: 4px;
-        font-size: 0.9em;
+        font-size: $font-size-md;
     }
 
     pre {

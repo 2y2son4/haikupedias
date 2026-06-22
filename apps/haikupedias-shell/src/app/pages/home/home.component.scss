@@ -11,7 +11,7 @@
   margin-bottom: 2rem;
 
   .title {
-    font-size: 3.5rem;
+    font-size: $font-size-xxxl;
     font-weight: 300;
     margin: 0;
     letter-spacing: 0.1em;
@@ -20,14 +20,14 @@
   }
 
   .tagline {
-    font-size: 1.4rem;
+    font-size: $font-size-lg2;
     color: rgba($color-white, 0.95);
     margin: 0;
     font-weight: 300;
   }
 
   .description {
-    font-size: 1.05rem;
+    font-size: $font-size-md;
     color: rgba($color-white, 0.9);
     line-height: 1.7;
     max-width: 700px;
@@ -85,13 +85,13 @@
     background: $color-grey-50;
     color: $color-grey-600;
     border-radius: 6px;
-    font-size: 0.9rem;
+    font-size: $font-size-md;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
 
     .genre-pick-sub {
-      font-size: 0.75rem;
+      font-size: $font-size-xs;
       font-weight: 400;
       color: $color-grey-400;
     }
@@ -120,7 +120,7 @@
   background: $color-grey-50;
   color: $color-grey-800;
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: $font-size-md;
   font-weight: 700;
   letter-spacing: 0.02em;
   cursor: pointer;
@@ -133,7 +133,7 @@
 }
 
 .progress-text {
-  font-size: 1rem;
+  font-size: $font-size-md;
   color: $color-grey-600;
   margin: 0;
   font-weight: 500;
@@ -168,7 +168,7 @@
   color: $color-white;
   border: none;
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: $font-size-md;
   font-weight: 700;
   transition: all 0.2s;
   letter-spacing: 0.04em;
@@ -193,7 +193,7 @@
 }
 
 .complete-message {
-  font-size: 1.3rem;
+  font-size: $font-size-lg;
   color: $color-grey-600;
   font-weight: 500;
   margin: 0;
@@ -202,7 +202,6 @@
 .step-title {
   text-align: left;
   color: $color-grey-800;
-  font-size: 1.8rem;
   font-weight: 400;
   margin: 0;
   letter-spacing: 0.05em;
@@ -213,6 +212,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -227,15 +227,15 @@
 
   .hero {
     .title {
-      font-size: 2.5rem;
+      font-size: $font-size-xxl;
     }
 
     .tagline {
-      font-size: 1.2rem;
+      font-size: $font-size-lg;
     }
 
     .description {
-      font-size: 1rem;
+      font-size: $font-size-md;
     }
   }
 
@@ -256,15 +256,15 @@
     margin: 0 0 1rem;
 
     h3 {
-      font-size: 1.3rem;
+      font-size: $font-size-lg;
       color: $color-grey-800;
-      margin:0;
+      margin: 0;
       font-weight: 500;
     }
   }
 
   .structure-label {
-    font-size: 1.1rem;
+    font-size: $font-size-md;
     color: $color-grey-800;
     margin: 0;
     font-weight: 500;
@@ -287,7 +287,7 @@
         padding: 0.6rem 1rem;
         background: $color-grey-600;
         border-radius: 6px;
-        font-size: 1.1rem;
+        font-size: $font-size-md;
         font-family: 'Courier New', monospace;
         transition:
           transform 0.2s,
@@ -342,7 +342,7 @@
         padding: 1.5rem;
 
         .bar-label {
-          font-size: 1rem;
+          font-size: $font-size-md;
           color: $color-grey-600;
           margin-bottom: 1rem;
           font-weight: 500;
@@ -363,7 +363,7 @@
             gap: 0.5rem;
 
             .play-style {
-              font-size: 0.85rem;
+              font-size: $font-size-sm;
               color: $color-grey-400;
               font-style: italic;
             }
@@ -382,7 +382,7 @@
             color: $color-white;
             padding: 0.6rem 1rem;
             border-radius: 6px;
-            font-size: 1rem;
+            font-size: $font-size-md;
             font-family: 'Courier New', monospace;
             text-align: center;
             min-width: 50px;
@@ -447,7 +447,7 @@
   border-radius: 6px;
 
   h3 {
-    font-size: 1.4rem;
+    font-size: $font-size-lg2;
     color: $color-white;
     margin: 0 0 0.4rem 0;
     font-weight: 400;
@@ -456,7 +456,7 @@
   }
 
   .dodecaiku-description {
-    font-size: 0.88rem;
+    font-size: $font-size-sm;
     color: rgba($color-white, 0.55);
     text-align: center;
     margin: 0 0 1.25rem 0;
@@ -532,7 +532,7 @@
     }
 
     .card-label {
-      font-size: 0.95rem;
+      font-size: $font-size-md;
       font-weight: 600;
       color: $color-white;
       font-family: 'Georgia', serif;
@@ -540,7 +540,7 @@
     }
 
     .card-type {
-      font-size: 0.65rem;
+      font-size: $font-size-xs;
       color: rgba($color-white, 0.45);
       margin-top: 0.25rem;
       text-transform: uppercase;

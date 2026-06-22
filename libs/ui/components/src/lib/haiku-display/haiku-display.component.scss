@@ -30,7 +30,7 @@
 
 .haiku-line {
   font-family: 'Georgia', 'Times New Roman', serif;
-  font-size: 1.5rem;
+  font-size: $font-size-lg2;
   line-height: 2;
   color: $color-grey-800;
   margin: 0.5rem 0;
@@ -80,7 +80,7 @@
   background: transparent;
   text-align: center;
   font-family: inherit;
-  font-size: 1.1rem;
+  font-size: $font-size-md;
   font-style: normal;
   color: $color-grey-800;
   padding: 0.15rem 0.2rem;
@@ -113,7 +113,7 @@
   border: none;
   border-radius: 6px;
   padding: 0.6rem 1.2rem;
-  font-size: 0.9rem;
+  font-size: $font-size-md;
   font-weight: 700;
   letter-spacing: 0.04em;
   cursor: pointer;
@@ -160,7 +160,7 @@
 .tonality-badge {
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  font-size: 0.9rem;
+  font-size: $font-size-md;
   font-weight: 500;
 }
 
@@ -181,6 +181,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -193,11 +194,11 @@
   }
 
   .haiku-line {
-    font-size: 1.2rem;
+    font-size: $font-size-lg;
   }
 
   .blank-word {
     width: 4.8rem;
-    font-size: 1rem;
+    font-size: $font-size-md;
   }
 }
