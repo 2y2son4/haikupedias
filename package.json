@@ -9,7 +9,7 @@
     "build:prod": "nx build haikupedias-shell --configuration production",
     "build:prod:stats": "nx build haikupedias-shell --configuration production --stats-json",
     "bundle:report": "node scripts/report-bundle-stats.mjs",
-    "test": "nx test",
+    "test": "nx run-many --target=test --projects=components,design-tokens",
     "lint": "nx lint"
   },
   "keywords": [
