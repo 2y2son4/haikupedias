@@ -86,7 +86,7 @@ export class AudioControlsComponent {
   hasPlayed = signal(false);
   genreSelected = signal(false);
 
-  $selectedInstrumentName = signal('')
+  $selectedInstrumentName = signal('');
 
   constructor() {
     this.initializeAudio();
@@ -310,13 +310,14 @@ export class AudioControlsComponent {
 
       if (genre === 'gymnopedie') {
         const slot = groupIndex % 4;
+        const repeatOffset = Math.floor(groupIndex / 4) * 8;
 
         if (slot === 0) {
           return {
             startMs,
             endMs,
             wordIndices: [0],
-            noteIndices: [0],
+            noteIndices: [repeatOffset],
             kind: 'single',
           };
         }
@@ -326,7 +327,7 @@ export class AudioControlsComponent {
             startMs,
             endMs,
             wordIndices: [1, 2, 3],
-            noteIndices: [1, 2, 3],
+            noteIndices: [repeatOffset + 1, repeatOffset + 2, repeatOffset + 3],
             kind: 'chord',
           };
         }
@@ -336,7 +337,7 @@ export class AudioControlsComponent {
             startMs,
             endMs,
             wordIndices: [4],
-            noteIndices: [4],
+            noteIndices: [repeatOffset + 4],
             kind: 'single',
           };
         }
@@ -345,7 +346,7 @@ export class AudioControlsComponent {
           startMs,
           endMs,
           wordIndices: [5, 6, 7],
-          noteIndices: [5, 6, 7],
+          noteIndices: [repeatOffset + 5, repeatOffset + 6, repeatOffset + 7],
           kind: 'chord',
         };
       }

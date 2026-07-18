@@ -332,21 +332,22 @@
 
   .gymnopedie-structure {
     .bars-container {
+      width: 100%;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 1.5rem;
 
       .bar-structure {
+        width: 100%;
         background: $color-grey-50;
         border-radius: 8px;
         padding: 1.5rem;
 
         .bar-label {
-          font-size: $font-size-md;
+          font-size: $font-size-lg;
           color: $color-grey-600;
           margin-bottom: 1rem;
           font-weight: 500;
-          text-align: center;
         }
 
         .notes-structure {

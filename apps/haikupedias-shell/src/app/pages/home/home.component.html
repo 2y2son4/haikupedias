@@ -101,25 +101,25 @@
           <!-- Gymnopédie: Show tonic + chord structure (played twice) -->
           <div class="gymnopedie-structure">
             <div class="bars-container">
-              @for (barStructure of getGymnopedieStructure(); track $index; let barIndex = $index) {
+              @for (barStructure of getGymnopedieStructure(); track $index; let sequenceIndex = $index) {
                 <div class="bar-structure">
-                  <div class="bar-label">Bar {{ barIndex + 1 }}</div>
+                  <div class="bar-label">Bar {{ sequenceIndex + 1 }}</div>
                   <div class="notes-structure">
                     <div class="tonic-section">
-                      <span class="note-label solo" [class.active-note]="isGymnopedieNoteActive(barIndex, 0)"
-                        [class.major]="getWordTonality(barIndex * 4) === 'major'"
-                        [class.minor]="getWordTonality(barIndex * 4) === 'minor'">{{ getNoteLabel(barStructure.tonic) }}</span>
+                      <span class="note-label solo" [class.active-note]="isGymnopedieNoteActive(sequenceIndex, 0)"
+                        [class.major]="getWordTonality(barStructure.originalBarIndex * 4) === 'major'"
+                        [class.minor]="getWordTonality(barStructure.originalBarIndex * 4) === 'minor'">{{ getNoteLabel(barStructure.tonic) }}</span>
                       <span class="play-style">solo</span>
                     </div>
                     <div class="chord-section">
                       <div class="chord-notes">
                         @for (note of barStructure.chord; track $index; let chordIndex = $index) {
                           <span class="note-label chord"
-                            [class.active-note]="isGymnopedieNoteActive(barIndex, chordIndex + 1)"
+                            [class.active-note]="isGymnopedieNoteActive(sequenceIndex, chordIndex + 1)"
                             [class.top-note]="chordIndex === 0" [class.middle-note]="chordIndex === 1"
                             [class.bottom-note]="chordIndex === 2"
-                            [class.major]="getWordTonality(barIndex * 4 + chordIndex + 1) === 'major'"
-                            [class.minor]="getWordTonality(barIndex * 4 + chordIndex + 1) === 'minor'">{{ getNoteLabel(note) }}</span>
+                            [class.major]="getWordTonality(barStructure.originalBarIndex * 4 + chordIndex + 1) === 'major'"
+                            [class.minor]="getWordTonality(barStructure.originalBarIndex * 4 + chordIndex + 1) === 'minor'">{{ getNoteLabel(note) }}</span>
                         }
                       </div>
                       <span class="play-style">chord</span>

@@ -190,8 +190,8 @@ export class HomeComponent {
     return this.activeNoteIndices().includes(noteIndex);
   }
 
-  isGymnopedieNoteActive(barIndex: number, noteOffset: number): boolean {
-    const noteIndex = barIndex * 4 + noteOffset;
+  isGymnopedieNoteActive(sequenceIndex: number, noteOffset: number): boolean {
+    const noteIndex = sequenceIndex * 4 + noteOffset;
     return this.activeNoteIndices().includes(noteIndex);
   }
 
@@ -207,14 +207,22 @@ export class HomeComponent {
     return notes.map((n) => n.note);
   }
 
-  getGymnopedieStructure(): Array<{ tonic: NoteValue; chord: NoteValue[] }> {
+  getGymnopedieStructure(): Array<{
+    originalBarIndex: number;
+    tonic: NoteValue;
+    chord: NoteValue[];
+  }> {
     const comp = this.composition();
     if (!comp) return [];
 
-    return comp.bars.map((bar) => ({
+    const baseBars = comp.bars.map((bar, originalBarIndex) => ({
+      originalBarIndex,
       tonic: bar.steps[0].root,
       chord: [bar.steps[1].root, bar.steps[2].root, bar.steps[3].root],
     }));
+
+    // Render the visual sequence exactly as played: bar 1, bar 2, bar 1, bar 2.
+    return [...baseBars, ...baseBars];
   }
 
   getWordTonality(wordIndex: number): 'major' | 'minor' {
