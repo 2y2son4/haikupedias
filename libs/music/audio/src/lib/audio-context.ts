@@ -17,8 +17,9 @@ export class AudioContextManager {
     }
 
     try {
-      this.audioContext = new (window.AudioContext ||
-        (window as any).webkitAudioContext)();
+      const AudioContextClass = window.AudioContext ||
+        (window as unknown as Record<string, typeof AudioContext>)['webkitAudioContext'];
+      this.audioContext = new AudioContextClass();
 
       // Resume context if it's suspended (browser autoplay policy)
       if (this.audioContext.state === 'suspended') {
