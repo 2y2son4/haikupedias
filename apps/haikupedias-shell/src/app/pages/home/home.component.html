@@ -116,6 +116,8 @@
                         @for (note of barStructure.chord; track $index; let chordIndex = $index) {
                           <span class="note-label chord"
                             [class.active-note]="isGymnopedieNoteActive(barIndex, chordIndex + 1)"
+                            [class.top-note]="chordIndex === 0" [class.middle-note]="chordIndex === 1"
+                            [class.bottom-note]="chordIndex === 2"
                             [class.major]="getWordTonality(barIndex * 4 + chordIndex + 1) === 'major'"
                             [class.minor]="getWordTonality(barIndex * 4 + chordIndex + 1) === 'minor'">{{ getNoteLabel(note) }}</span>
                         }
