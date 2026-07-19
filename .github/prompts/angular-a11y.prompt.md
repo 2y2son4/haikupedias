@@ -1,5 +1,5 @@
 ---
-mode: agent
+agent: agent
 description: Implement or review Angular UI changes with WCAG 2.2 AA accessibility guardrails.
 ---
 

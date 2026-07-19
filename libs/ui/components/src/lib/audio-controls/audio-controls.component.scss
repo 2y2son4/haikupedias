@@ -71,6 +71,11 @@
     transform: translateY(-3px) scale(1.05);
   }
 
+  &:focus-visible {
+    outline: 3px solid $color-grey-800;
+    outline-offset: 3px;
+  }
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -116,6 +121,11 @@
       border-color: $color-grey-800;
     }
 
+    &:focus-visible {
+      outline: 3px solid $color-grey-800;
+      outline-offset: 3px;
+    }
+
     .dropdown-arrow {
       font-size: $font-size-sm;
       transition: transform 0.2s ease;
@@ -150,6 +160,11 @@
 
       &:hover {
         background: $color-grey-50;
+      }
+
+      &:focus-visible {
+        outline: 3px solid $color-grey-800;
+        outline-offset: -3px;
       }
 
       &.selected {
@@ -264,6 +279,11 @@
   transition: all 0.3s ease;
   font-weight: 700;
   height: 90px;
+
+  &:focus-visible {
+    outline: 3px solid $color-grey-800;
+    outline-offset: 3px;
+  }
 }
 
 .play-button {

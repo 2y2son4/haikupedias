@@ -1,6 +1,6 @@
 <div class="audio-controls">
   @if (errorMessage()) {
-    <div class="error-message">
+    <div class="error-message" role="alert" aria-live="assertive" aria-atomic="true">
       <p>⚠️ {{ errorMessage() }}</p>
     </div>
   }
@@ -11,30 +11,37 @@
       <div class="sound-type-selection">
         <p class="selection-prompt">Choose your sound:</p>
         <div class="sound-type-buttons">
-          <button class="sound-type-button" [disabled]="!canSelectSoundType" (click)="selectSoundType('synthetic')">
+          <button class="sound-type-button" [disabled]="!canSelectSoundType"
+            [attr.aria-pressed]="soundTypeSelected() && soundType() === 'synthetic'" (click)="selectSoundType('synthetic')">
             <div class="sound-type-button__title">
-              <span class="material-icons">library_music</span>
+              <span class="material-icons" aria-hidden="true">library_music</span>
               <span class="sound-name">Synthetic</span>
             </div>
             <span class="sound-description">Classic sine waves</span>
           </button>
-          <button class="sound-type-button" [disabled]="!canSelectSoundType" (click)="selectSoundType('piano-synth')">
+          <button class="sound-type-button" [disabled]="!canSelectSoundType"
+            [attr.aria-pressed]="soundTypeSelected() && soundType() === 'piano-synth'"
+            (click)="selectSoundType('piano-synth')">
             <div class="sound-type-button__title">
-              <span class="material-icons">piano</span>
+              <span class="material-icons" aria-hidden="true">piano</span>
               <span class="sound-name">Piano (Synth)</span>
             </div>
             <span class="sound-description">Rich FM synthesis</span>
           </button>
-          <button class="sound-type-button" [disabled]="!canSelectSoundType" (click)="selectSoundType('piano-samples')">
+          <button class="sound-type-button" [disabled]="!canSelectSoundType"
+            [attr.aria-pressed]="soundTypeSelected() && soundType() === 'piano-samples'"
+            (click)="selectSoundType('piano-samples')">
             <div class="sound-type-button__title">
-              <span class="material-icons">piano</span>
+              <span class="material-icons" aria-hidden="true">piano</span>
               <span class="sound-name">Piano (Samples)</span>
             </div>
             <span class="sound-description">Real recordings</span>
           </button>
-          <button class="sound-type-button" [disabled]="!canSelectSoundType" (click)="selectSoundType('instruments')">
+          <button class="sound-type-button" [disabled]="!canSelectSoundType"
+            [attr.aria-pressed]="soundTypeSelected() && soundType() === 'instruments'"
+            (click)="selectSoundType('instruments')">
             <div class="sound-type-button__title">
-              <span class="material-icons">post_add</span>
+              <span class="material-icons" aria-hidden="true">post_add</span>
               <span class="sound-name">Instruments</span>
             </div>
             <span class="sound-description">Various samples</span>
@@ -76,7 +83,7 @@
       <button class="control-button play-button" [disabled]="!canPlay" (click)="play()">
         @if (isPlaying) {
           <span class="icon playing">
-            <span class="material-icons">music_note</span>
+            <span class="material-icons" aria-hidden="true">music_note</span>
           </span>
           <span>Playing...</span>
           <span>{{selectedInstrument()}}</span>
@@ -108,7 +115,7 @@
         </button>
       } @else {
         <div class="download-info">
-          <p class="info-text"><span class="material-icons">warning</span> Download is only available with Synthetic sound</p>
+          <p class="info-text"><span class="material-icons" aria-hidden="true">warning</span> Download is only available with Synthetic sound</p>
           <p class="info-subtext">(Tone.js doesn't support offline rendering)</p>
         </div>
       }
@@ -121,7 +128,7 @@
     <!-- Playing State -->
     @if (isPlaying) {
       <button class="control-button play-button" disabled>
-        <span class="material-icons">music_note</span>
+        <span class="material-icons" aria-hidden="true">music_note</span>
         <span>Playing</span>
         <span>&nbsp;{{$selectedInstrumentName()}}</span>
       </button>
@@ -129,10 +136,10 @@
   </div>
 
   @if (!isInitialized()) {
-    <p class="status-message">Initializing audio...</p>
+    <p class="status-message" role="status" aria-live="polite">Initializing audio...</p>
   }
 
   @if (isInitialized() && !composition()) {
-    <p class="status-message">Select words to generate a composition</p>
+    <p class="status-message" role="status" aria-live="polite">Select words to generate a composition</p>
   }
 </div>
