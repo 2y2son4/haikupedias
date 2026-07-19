@@ -33,6 +33,7 @@ import { DodecaphonicArranger } from '@haikupedias/music/arrangers/dodecaphonic-
 export class HomeComponent {
   selectedWords = signal<Word[]>([]);
   selectedGenre = signal<'gymnopedie' | 'dodecaphonic' | null>(null);
+  visibleWordSetVersion = signal(0);
   isHaikuCompleted = signal(false);
   isHaikuCreated = signal(false);
   activeWordIndices = signal<number[]>([]);
@@ -134,9 +135,14 @@ export class HomeComponent {
     this.clearPlaybackHighlight();
   }
 
+  randomizeVisibleWordSets() {
+    this.visibleWordSetVersion.update((version) => version + 1);
+  }
+
   resetSelection() {
     this.selectedWords.set([]);
     this.selectedGenre.set(null);
+    this.visibleWordSetVersion.set(0);
     this.isHaikuCompleted.set(false);
     this.isHaikuCreated.set(false);
     this.clearPlaybackHighlight();
@@ -173,6 +179,7 @@ export class HomeComponent {
     // If genre is different from current, reset the words
     if (this.selectedGenre() !== genre) {
       this.selectedWords.set([]);
+      this.visibleWordSetVersion.set(0);
       this.isHaikuCompleted.set(false);
       this.isHaikuCreated.set(false);
       this.clearPlaybackHighlight();

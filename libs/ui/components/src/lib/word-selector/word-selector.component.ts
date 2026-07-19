@@ -1,4 +1,4 @@
-import { Component, output, signal, input } from '@angular/core';
+import { Component, computed, output, signal, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Word, WordType } from '@haikupedias/core/types';
 import { WORD_SET_A, WORD_SET_B } from '@haikupedias/poetry/lexicon';
@@ -20,6 +20,7 @@ export class WordSelectorComponent {
   // Input: selected words from parent
   selectedWords = input<Word[]>([]);
   maxWords = input<number>(8);
+  randomizeVersion = input<number>(0);
 
   // Output event when a word is selected
   wordSelected = output<Word>();
@@ -39,8 +40,20 @@ export class WordSelectorComponent {
     verb: 'Verbs',
     adverb: 'Adverbs',
   };
-  readonly groupedWordsSetA = this.buildWordGroups(this.wordsSetA);
-  readonly groupedWordsSetB = this.buildWordGroups(this.wordsSetB);
+
+  private readonly visibleGroupsVersion = signal(0);
+
+  readonly groupedWordsSetA = computed(() => {
+    this.randomizeVersion();
+    this.visibleGroupsVersion();
+    return this.buildVisibleWordGroups(this.wordsSetA);
+  });
+
+  readonly groupedWordsSetB = computed(() => {
+    this.randomizeVersion();
+    this.visibleGroupsVersion();
+    return this.buildVisibleWordGroups(this.wordsSetB);
+  });
 
   // Track last selected word for toast
   lastSelectedWord = signal<Word | null>(null);
@@ -74,5 +87,50 @@ export class WordSelectorComponent {
       label: this.wordTypeLabels[type],
       words: words.filter((word) => word.type === type),
     }));
+  }
+
+  private buildVisibleWordGroups(words: Word[]): WordGroup[] {
+    const groupedWords = this.buildWordGroups(words);
+
+    return groupedWords.map((group) => ({
+      ...group,
+      words: this.selectBalancedHalf(group.words),
+    }));
+  }
+
+  private selectBalancedHalf(words: Word[]): Word[] {
+    const majorWords = words.filter((word) => word.tonalityGroup === 'major');
+    const minorWords = words.filter((word) => word.tonalityGroup === 'minor');
+
+    const visibleMajorWords = this.pickRandomSubset(
+      majorWords,
+      this.getHalfCount(majorWords.length),
+    );
+    const visibleMinorWords = this.pickRandomSubset(
+      minorWords,
+      this.getHalfCount(minorWords.length),
+    );
+
+    return [...visibleMajorWords, ...visibleMinorWords].sort((a, b) =>
+      a.label.localeCompare(b.label),
+    );
+  }
+
+  private getHalfCount(size: number): number {
+    return Math.floor(size / 2);
+  }
+
+  private pickRandomSubset<T>(items: T[], size: number): T[] {
+    const shuffled = this.shuffle([...items]);
+    return shuffled.slice(0, Math.min(size, shuffled.length));
+  }
+
+  private shuffle<T>(items: T[]): T[] {
+    for (let i = items.length - 1; i > 0; i--) {
+      const randomIndex = Math.floor(Math.random() * (i + 1));
+      [items[i], items[randomIndex]] = [items[randomIndex], items[i]];
+    }
+
+    return items;
   }
 }

@@ -7,10 +7,17 @@
 
   &-title {
     display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
   }
+}
+
+.word-selector-heading {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 h3 {
@@ -170,6 +177,11 @@ h3 {
 }
 
 @media (max-width: 768px) {
+  .word-selector-title {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
   .word-sets {
     grid-template-columns: 1fr;
   }

@@ -1,14 +1,16 @@
 <div class="word-selector">
   <div class="word-selector-title">
-    <h3>Select Your Words: </h3>
-    <p class="instructions">Choose <strong>{{ maxWords() }} unique words</strong> to create your poem.</p>
+    <div class="word-selector-heading">
+      <h3>Select Your Words: </h3>
+      <p class="instructions">Choose <strong>{{ maxWords() }} unique words</strong> to create your poem.</p>
+    </div>
   </div>
 
   <div class="word-sets">
     <div class="word-set">
       <h4>Set A: Contemplative & Natural</h4>
       <div class="word-type-groups">
-        @for (group of groupedWordsSetA; track group.type) {
+        @for (group of groupedWordsSetA(); track group.type) {
           <section class="word-type-group">
             <h5 class="word-type-title">{{ group.label }}</h5>
             <div class="word-grid">
@@ -29,7 +31,7 @@
     <div class="word-set">
       <h4>Set B: Dynamic & Urban</h4>
       <div class="word-type-groups">
-        @for (group of groupedWordsSetB; track group.type) {
+        @for (group of groupedWordsSetB(); track group.type) {
           <section class="word-type-group">
             <h5 class="word-type-title">{{ group.label }}</h5>
             <div class="word-grid">

@@ -29,7 +29,11 @@
           <div class="selection-title-row">
             <h2 class="step-title">Select {{ selectedGenre() === 'dodecaphonic' ? '12' : '8' }} seed words</h2>
             @if (selectedWords().length < (selectedGenre() === 'dodecaphonic' ? 12 : 8) && !isHaikuCreated()) {
-              <button class="lucky-button" (click)="selectLuckyWords()">I'm feeling lucky</button>
+              <div class="word-selector-actions">
+                <button type="button" class="randomize-button" (click)="randomizeVisibleWordSets()"
+                  aria-label="Randomize visible words in each category">Randomize Word Sets</button>
+                <button class="lucky-button" (click)="selectLuckyWords()">I'm feeling lucky</button>
+              </div>
             }
           </div>
 
@@ -51,7 +55,7 @@
 
         @if (selectedWords().length < (selectedGenre() === 'dodecaphonic' ? 12 : 8)) {
           <lib-word-selector [selectedWords]="selectedWords()" [maxWords]="selectedGenre() === 'dodecaphonic' ? 12 : 8"
-            (wordSelected)="onWordSelected($event)" />
+            [randomizeVersion]="visibleWordSetVersion()" (wordSelected)="onWordSelected($event)" />
         } @else {
           <div class="selection-complete">
             <p class="complete-message">✓ Selection complete! Scroll down and finish your haiku.</p>
