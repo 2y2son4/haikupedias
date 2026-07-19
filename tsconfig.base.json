@@ -29,6 +29,9 @@
         "./libs/music/composition-engine/src/index.ts"
       ],
       "@haikupedias/music/theory": ["./libs/music/theory/src/index.ts"],
+      "@haikupedias/poetry/auto-completion": [
+        "./libs/poetry/auto-completion/src/index.ts"
+      ],
       "@haikupedias/poetry/haiku-engine": [
         "./libs/poetry/haiku-engine/src/index.ts"
       ],

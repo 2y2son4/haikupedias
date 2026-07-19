@@ -1,0 +1,7 @@
+{
+  "name": "@haikupedias/poetry/auto-completion",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts"
+}

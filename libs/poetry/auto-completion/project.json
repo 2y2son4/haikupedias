@@ -1,0 +1,21 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "poetry-auto-completion",
+  "projectType": "library",
+  "sourceRoot": "libs/poetry/auto-completion/src",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/poetry/auto-completion",
+        "main": "libs/poetry/auto-completion/src/index.ts",
+        "tsConfig": "libs/poetry/auto-completion/tsconfig.lib.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  },
+  "tags": ["scope:poetry", "type:feature"]
+}
