@@ -12,7 +12,8 @@
         <p class="selection-prompt">Choose your sound:</p>
         <div class="sound-type-buttons">
           <button class="sound-type-button" [disabled]="!canSelectSoundType"
-            [attr.aria-pressed]="soundTypeSelected() && soundType() === 'synthetic'" (click)="selectSoundType('synthetic')">
+            [attr.aria-pressed]="soundTypeSelected() && soundType() === 'synthetic'"
+            (click)="selectSoundType('synthetic')">
             <div class="sound-type-button__title">
               <span class="material-icons" aria-hidden="true">library_music</span>
               <span class="sound-name">Synthetic</span>
@@ -115,7 +116,8 @@
         </button>
       } @else {
         <div class="download-info">
-          <p class="info-text"><span class="material-icons" aria-hidden="true">warning</span> Download is only available with Synthetic sound</p>
+          <p class="info-text"><span class="material-icons" aria-hidden="true">warning</span> Download is only available
+            with Synthetic sound</p>
           <p class="info-subtext">(Tone.js doesn't support offline rendering)</p>
         </div>
       }
