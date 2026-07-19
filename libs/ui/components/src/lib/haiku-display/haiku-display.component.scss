@@ -26,6 +26,17 @@
 .haiku-content {
   text-align: center;
   flex: 2;
+
+  &.locked-view {
+    flex: 0 0 auto;
+    width: max-content;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+    border: 1px solid $color-grey-200;
+    border-radius: 10px;
+    background: rgba($color-white, 0.55);
+  }
 }
 
 .haiku-line {
@@ -40,6 +51,14 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 0.55rem;
+}
+
+.haiku-content.locked-view .haiku-line {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  white-space: nowrap;
+  margin: 0.5rem auto;
 }
 
 .fixed-word {
@@ -73,6 +92,13 @@
   }
 }
 
+.filled-word {
+  display: inline-block;
+  border-radius: 6px;
+  padding: 0.05rem 0.3rem;
+  color: $color-grey-800;
+}
+
 .blank-word {
   width: 5.5rem;
   border: none;
@@ -104,9 +130,11 @@
 }
 
 .haiku-actions {
-  margin-top: 1rem;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  gap: 0.5rem;
 }
 
 .haiku-action {
@@ -126,6 +154,17 @@
 
 .haiku-action.create:disabled {
   background: $color-grey-400;
+  cursor: not-allowed;
+}
+
+.haiku-action.clear {
+  background: $color-grey-50;
+  color: $color-grey-800;
+  border: 1px solid $color-grey-300;
+}
+
+.haiku-action.clear:disabled {
+  opacity: 0.55;
   cursor: not-allowed;
 }
 

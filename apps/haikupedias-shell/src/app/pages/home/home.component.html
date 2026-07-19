@@ -77,13 +77,13 @@
         <lib-haiku-display [haiku]="haiku()!" (completionChanged)="onHaikuCompletionChanged($event)"
           [activeWordIndices]="activeWordIndices()" [highlightKind]="activeHighlightKind()" (created)="onHaikuCreated()"
           [variant]="selectedGenre() === 'dodecaphonic' ? 'dodecaiku' : 'haikupedia'" (changed)="onHaikuChanged()" />
-        @if (!isHaikuCompleted()) {
+        <!-- @if (!isHaikuCompleted()) {
           <p class="complete-message selection-complete">Complete the missing words, then click CREATE to unlock music
             creation.</p>
         } @else if (!isHaikuCreated()) {
           <p class="complete-message selection-complete">Click CREATE to lock your haiku and generate a new composition.
           </p>
-        }
+        } -->
       </section>
     }
 

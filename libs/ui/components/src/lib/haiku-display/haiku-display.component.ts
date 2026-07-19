@@ -178,8 +178,18 @@ export class HaikuDisplayComponent {
     return this.blankValues()[blankKey] ?? '';
   }
 
+  getRenderedBlankValue(blankKey: string): string | null {
+    const value = this.getBlankValue(blankKey).trim();
+    return value ? value : null;
+  }
+
   get canCreate(): boolean {
     return this.isComplete() && !this.isLocked();
+  }
+
+  get hasFilledBlanks(): boolean {
+    const values = this.blankValues();
+    return Object.values(values).some((value) => value.trim().length > 0);
   }
 
   isWordActive(wordIndex: number): boolean {
@@ -206,6 +216,15 @@ export class HaikuDisplayComponent {
   onChange(): void {
     this.isLocked.set(false);
     this.changed.emit();
+    this.completionChanged.emit(this.isComplete());
+  }
+
+  onClearBlanks(): void {
+    if (this.isLocked()) {
+      return;
+    }
+
+    this.blankValues.set({});
     this.completionChanged.emit(this.isComplete());
   }
 
