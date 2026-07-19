@@ -1,69 +1,71 @@
 <div class="audio-controls">
   @if (errorMessage()) {
-  <div class="error-message">
-    <p>⚠️ {{ errorMessage() }}</p>
-  </div>
+    <div class="error-message">
+      <p>⚠️ {{ errorMessage() }}</p>
+    </div>
   }
 
   <div class="controls-container">
     <!-- Sound Type Selection (first step) -->
     @if (!soundTypeSelected() && !hasPlayed()) {
-    <div class="sound-type-selection">
-      <p class="selection-prompt">Choose your sound:</p>
-      <div class="sound-type-buttons">
-        <button class="sound-type-button" [disabled]="!canSelectSoundType" (click)="selectSoundType('synthetic')">
-          <div class="sound-type-button__title">
-            <span class="material-icons">library_music</span>
-            <span class="sound-name">Synthetic</span>
-          </div>
-          <span class="sound-description">Classic sine waves</span>
-        </button>
-        <button class="sound-type-button" [disabled]="!canSelectSoundType" (click)="selectSoundType('piano-synth')">
-          <div class="sound-type-button__title">
-            <span class="material-icons">piano</span>
-            <span class="sound-name">Piano (Synth)</span>
-          </div>
-          <span class="sound-description">Rich FM synthesis</span>
-        </button>
-        <button class="sound-type-button" [disabled]="!canSelectSoundType" (click)="selectSoundType('piano-samples')">
-          <div class="sound-type-button__title">
-            <span class="material-icons">piano</span>
-            <span class="sound-name">Piano (Samples)</span>
-          </div>
-          <span class="sound-description">Real recordings</span>
-        </button>
-        <button class="sound-type-button" [disabled]="!canSelectSoundType" (click)="selectSoundType('instruments')">
-          <div class="sound-type-button__title">
-            <span class="material-icons">post_add</span>
-            <span class="sound-name">Instruments</span>
-          </div>
-          <span class="sound-description">Various samples</span>
-        </button>
+      <div class="sound-type-selection">
+        <p class="selection-prompt">Choose your sound:</p>
+        <div class="sound-type-buttons">
+          <button class="sound-type-button" [disabled]="!canSelectSoundType" (click)="selectSoundType('synthetic')">
+            <div class="sound-type-button__title">
+              <span class="material-icons">library_music</span>
+              <span class="sound-name">Synthetic</span>
+            </div>
+            <span class="sound-description">Classic sine waves</span>
+          </button>
+          <button class="sound-type-button" [disabled]="!canSelectSoundType" (click)="selectSoundType('piano-synth')">
+            <div class="sound-type-button__title">
+              <span class="material-icons">piano</span>
+              <span class="sound-name">Piano (Synth)</span>
+            </div>
+            <span class="sound-description">Rich FM synthesis</span>
+          </button>
+          <button class="sound-type-button" [disabled]="!canSelectSoundType" (click)="selectSoundType('piano-samples')">
+            <div class="sound-type-button__title">
+              <span class="material-icons">piano</span>
+              <span class="sound-name">Piano (Samples)</span>
+            </div>
+            <span class="sound-description">Real recordings</span>
+          </button>
+          <button class="sound-type-button" [disabled]="!canSelectSoundType" (click)="selectSoundType('instruments')">
+            <div class="sound-type-button__title">
+              <span class="material-icons">post_add</span>
+              <span class="sound-name">Instruments</span>
+            </div>
+            <span class="sound-description">Various samples</span>
+          </button>
+        </div>
       </div>
-    </div>
     }
 
     <!-- Instrument selector (shown when instruments sound type is selected, before first play) -->
     @if (soundType() === 'instruments' && soundTypeSelected() && !hasPlayed()) {
-    <div class="instrument-selector-container">
-      <p class="selection-prompt">Select an instrument:</p>
-      <div class="instrument-selector">
-        <button class="instrument-menu-toggle" (click)="toggleInstrumentMenu()">
-          <span>{{ instrumentNames[selectedInstrument()] }}</span>
-          <span class="dropdown-arrow">{{ showInstrumentMenu() ? '▲' : '▼' }}</span>
-        </button>
-        @if (showInstrumentMenu()) {
-        <div class="instrument-menu">
-          @for (instrument of getAvailableInstruments(); track instrument) {
-          <button class="instrument-option" [class.selected]="selectedInstrument() === instrument"
-            (click)="selectInstrument(instrument)">
-            {{ instrumentNames[instrument] }}
+      <div class="instrument-selector-container">
+        <p class="selection-prompt">Select an instrument:</p>
+        <div class="instrument-selector">
+          <button class="instrument-menu-toggle" (click)="toggleInstrumentMenu()" aria-haspopup="listbox"
+            [attr.aria-expanded]="showInstrumentMenu()" aria-controls="instrument-menu">
+            <span>{{ instrumentNames[selectedInstrument()] }}</span>
+            <span class="dropdown-arrow">{{ showInstrumentMenu() ? '▲' : '▼' }}</span>
           </button>
+          @if (showInstrumentMenu()) {
+            <div id="instrument-menu" class="instrument-menu" role="listbox" aria-label="Available instruments">
+              @for (instrument of getAvailableInstruments(); track instrument) {
+                <button class="instrument-option" role="option"
+                  [attr.aria-selected]="selectedInstrument() === instrument"
+                  [class.selected]="selectedInstrument() === instrument" (click)="selectInstrument(instrument)">
+                  {{ instrumentNames[instrument] }}
+                </button>
+              }
+            </div>
           }
         </div>
-        }
       </div>
-    </div>
     }
 
     <!-- Genre Selection (after sound type, before first play) -->
@@ -71,67 +73,66 @@
 
     <!-- Play Button (after sound type selection, before first play) -->
     @if (soundTypeSelected() && !hasPlayed()) {
-    <button class="control-button play-button" [disabled]="!canPlay" (click)="play()">
-      @if (isPlaying) {
-      <span class="icon playing">
-        <span class="material-icons">music_note</span>
-      </span>
-      <span>Playing...</span>
-      <span>{{selectedInstrument()}}</span>
-      } @else {
-      <span>Play Composition ({{ styleLabel }})</span>
-      }
-    </button>
+      <button class="control-button play-button" [disabled]="!canPlay" (click)="play()">
+        @if (isPlaying) {
+          <span class="icon playing">
+            <span class="material-icons">music_note</span>
+          </span>
+          <span>Playing...</span>
+          <span>{{selectedInstrument()}}</span>
+        } @else {
+          <span>Play Composition ({{ styleLabel }})</span>
+        }
+      </button>
     }
 
     <!-- Post-Play Controls -->
     @if (hasPlayed() && playbackState() !== 'playing') {
-    <button class="control-button replay-button" [disabled]="!canPlay" (click)="replay()">
-      <span>Replay ({{ styleLabel }} - {{ soundLabel }})</span>
-    </button>
+      <button class="control-button replay-button" [disabled]="!canPlay" (click)="replay()">
+        <span>Replay ({{ styleLabel }} - {{ soundLabel }})</span>
+      </button>
 
-    <button class="control-button sound-toggle-button" (click)="toggleSoundType()">
-      <span>Switch Sound</span>
-    </button>
+      <button class="control-button sound-toggle-button" (click)="toggleSoundType()">
+        <span>Switch Sound</span>
+      </button>
 
-    @if (soundType() === 'instruments') {
-    <button class="control-button instrument-change-button" (click)="changeInstrumentSelection()">
-      <span>Change&nbsp;{{$selectedInstrumentName()}}</span>
-    </button>
-    }
+      @if (soundType() === 'instruments') {
+        <button class="control-button instrument-change-button" (click)="changeInstrumentSelection()">
+          <span>Change&nbsp;{{$selectedInstrumentName()}}</span>
+        </button>
+      }
 
-    @if (canDownload) {
-    <button class="control-button download-button" (click)="downloadComposition()">
-      <span>⬇ Download</span>
-    </button>
-    } @else {
-    <div class="download-info">
-      <p class="info-text"><span class="material-icons">warning</span> Download is only available with Synthetic sound
-      </p>
-      <p class="info-subtext">(Tone.js doesn't support offline rendering)</p>
-    </div>
-    }
+      @if (canDownload) {
+        <button class="control-button download-button" (click)="downloadComposition()">
+          <span>⬇ Download</span>
+        </button>
+      } @else {
+        <div class="download-info">
+          <p class="info-text"><span class="material-icons">warning</span> Download is only available with Synthetic sound</p>
+          <p class="info-subtext">(Tone.js doesn't support offline rendering)</p>
+        </div>
+      }
 
-    <button class="control-button restart-button" (click)="onRestart()">
-      <span>Start Over</span>
-    </button>
+      <button class="control-button restart-button" (click)="onRestart()">
+        <span>Start Over</span>
+      </button>
     }
 
     <!-- Playing State -->
     @if (isPlaying) {
-    <button class="control-button play-button" disabled>
-      <span class="material-icons">music_note</span>
-      <span>Playing</span>
-      <span>&nbsp;{{$selectedInstrumentName()}}</span>
-    </button>
+      <button class="control-button play-button" disabled>
+        <span class="material-icons">music_note</span>
+        <span>Playing</span>
+        <span>&nbsp;{{$selectedInstrumentName()}}</span>
+      </button>
     }
   </div>
 
   @if (!isInitialized()) {
-  <p class="status-message">Initializing audio...</p>
+    <p class="status-message">Initializing audio...</p>
   }
 
   @if (isInitialized() && !composition()) {
-  <p class="status-message">Select words to generate a composition</p>
+    <p class="status-message">Select words to generate a composition</p>
   }
 </div>

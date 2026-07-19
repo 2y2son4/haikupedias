@@ -4,7 +4,7 @@
     <p class="tagline">Where poetry meets algorithmic music</p>
   </header>
 
-  <main class="experience">
+  <section class="experience">
     <!-- Step 1: Genre Selection - ALWAYS VISIBLE -->
     <section class="step">
       <div class="selection-header-genre">
@@ -138,5 +138,5 @@
       <lib-audio-controls [composition]="composition()" [genre]="selectedGenre()" (restart)="resetSelection()"
         (playbackHighlightChanged)="onPlaybackHighlightChanged($event)" />
     }
-  </main>
+  </section>
 </div>

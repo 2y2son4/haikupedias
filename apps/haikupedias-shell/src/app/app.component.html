@@ -1,19 +1,24 @@
 <div class="app-wrapper">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
   <header class="app-header">
     <div class="app-header-container">
       <a routerLink="/" class="logo" [class.logo-hidden]="!showLogoText">Haikupedias & Dodecaikus</a>
-      <button class="menu-button" (click)="toggleMenu()" [class.open]="menuOpen" aria-label="Toggle menu">
-        <span class="menu-icon"></span>
-        <span class="menu-icon"></span>
-        <span class="menu-icon"></span>
+      <button #menuButton class="menu-button" (click)="toggleMenu()" [class.open]="menuOpen"
+        [attr.aria-expanded]="menuOpen" aria-controls="site-menu" aria-label="Toggle menu">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span class="menu-icon" aria-hidden="true"></span>
       </button>
     </div>
   </header>
 
-  <nav class="side-menu" [class.open]="menuOpen">
-    <div class="menu-overlay" (click)="closeMenu()"></div>
-    <div class="menu-content">
-      <button class="close-button" (click)="closeMenu()">×</button>
+  <nav class="side-menu" [class.open]="menuOpen" aria-label="Site">
+    <button class="menu-overlay" aria-label="Close navigation menu" [attr.aria-hidden]="!menuOpen" tabindex="-1"
+      (click)="closeMenu()"></button>
+    <div #menuContent id="site-menu" class="menu-content" [attr.aria-hidden]="!menuOpen"
+      (keydown)="onMenuKeydown($event)">
+      <button #closeMenuButton class="close-button" (click)="closeMenu()" aria-label="Close navigation menu">×</button>
       <ul class="menu-list">
         <li>
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">
@@ -37,7 +42,7 @@
     </div>
   </nav>
 
-  <main class="app-content">
+  <main id="main-content" class="app-content" tabindex="-1">
     <router-outlet />
   </main>
 </div>

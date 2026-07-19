@@ -50,7 +50,7 @@
   </div>
 
   @if (showToast()) {
-    <div class="toast-message">
+    <div class="toast-message" role="status" aria-live="polite" aria-atomic="true">
       <p>✓ Selected: <strong>{{ lastSelectedWord()?.label }}</strong> ({{ lastSelectedWord()?.tonalityGroup }})</p>
     </div>
   }

@@ -102,6 +102,11 @@
       background: $color-grey-50;
     }
 
+    &:focus-visible {
+      outline: 3px solid $color-grey-800;
+      outline-offset: 3px;
+    }
+
     &.active {
       border-color: $color-grey-800;
       background: $color-grey-200;
@@ -129,6 +134,11 @@
   &:hover {
     background: $color-grey-200;
     transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 3px solid $color-grey-800;
+    outline-offset: 3px;
   }
 }
 
@@ -177,6 +187,11 @@
   &:hover {
     background: $color-grey-800;
     transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 3px solid $color-grey-800;
+    outline-offset: 3px;
   }
 }
 
