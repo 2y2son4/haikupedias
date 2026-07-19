@@ -21,6 +21,7 @@ export class WordSelectorComponent {
   selectedWords = input<Word[]>([]);
   maxWords = input<number>(8);
   randomizeVersion = input<number>(0);
+  showAllWords = input<boolean>(false);
 
   // Output event when a word is selected
   wordSelected = output<Word>();
@@ -44,15 +45,21 @@ export class WordSelectorComponent {
   private readonly visibleGroupsVersion = signal(0);
 
   readonly groupedWordsSetA = computed(() => {
+    const showAllWords = this.showAllWords();
     this.randomizeVersion();
     this.visibleGroupsVersion();
-    return this.buildVisibleWordGroups(this.wordsSetA);
+    return showAllWords
+      ? this.buildWordGroups(this.wordsSetA)
+      : this.buildVisibleWordGroups(this.wordsSetA);
   });
 
   readonly groupedWordsSetB = computed(() => {
+    const showAllWords = this.showAllWords();
     this.randomizeVersion();
     this.visibleGroupsVersion();
-    return this.buildVisibleWordGroups(this.wordsSetB);
+    return showAllWords
+      ? this.buildWordGroups(this.wordsSetB)
+      : this.buildVisibleWordGroups(this.wordsSetB);
   });
 
   // Track last selected word for toast

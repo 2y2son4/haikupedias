@@ -31,8 +31,13 @@
             @if (selectedWords().length < (selectedGenre() === 'dodecaphonic' ? 12 : 8) && !isHaikuCreated()) {
               <div class="word-selector-actions">
                 <button type="button" class="randomize-button" (click)="randomizeVisibleWordSets()"
-                  aria-label="Randomize visible words in each category">Randomize Word Sets</button>
-                <button class="lucky-button" (click)="selectLuckyWords()">I'm feeling lucky</button>
+                  [disabled]="showAllWordSets()" aria-label="Randomize Visible Words in Each Category">Randomize Word
+                  Sets</button>
+
+                <button type="button" class="wordset-toggle-button" (click)="toggleWordSetVisibility()"
+                  [attr.aria-label]="getWordSetVisibilityToggleLabel()">{{ getWordSetVisibilityToggleLabel() }}</button>
+
+                <button class="lucky-button" (click)="selectLuckyWords()">I'm Feeling Lucky</button>
               </div>
             }
           </div>
@@ -55,7 +60,8 @@
 
         @if (selectedWords().length < (selectedGenre() === 'dodecaphonic' ? 12 : 8)) {
           <lib-word-selector [selectedWords]="selectedWords()" [maxWords]="selectedGenre() === 'dodecaphonic' ? 12 : 8"
-            [randomizeVersion]="visibleWordSetVersion()" (wordSelected)="onWordSelected($event)" />
+            [randomizeVersion]="visibleWordSetVersion()" [showAllWords]="showAllWordSets()"
+            (wordSelected)="onWordSelected($event)" />
         } @else {
           <div class="selection-complete">
             <p class="complete-message">✓ Selection complete! Scroll down and finish your haiku.</p>

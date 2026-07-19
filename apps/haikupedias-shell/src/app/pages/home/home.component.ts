@@ -34,6 +34,7 @@ export class HomeComponent {
   selectedWords = signal<Word[]>([]);
   selectedGenre = signal<'gymnopedie' | 'dodecaphonic' | null>(null);
   visibleWordSetVersion = signal(0);
+  showAllWordSets = signal(false);
   isHaikuCompleted = signal(false);
   isHaikuCreated = signal(false);
   activeWordIndices = signal<number[]>([]);
@@ -139,10 +140,21 @@ export class HomeComponent {
     this.visibleWordSetVersion.update((version) => version + 1);
   }
 
+  toggleWordSetVisibility() {
+    this.showAllWordSets.update((showAll) => !showAll);
+  }
+
+  getWordSetVisibilityToggleLabel(): string {
+    return this.showAllWordSets()
+      ? 'Show Halved Word Sets'
+      : 'Show Full Word Sets';
+  }
+
   resetSelection() {
     this.selectedWords.set([]);
     this.selectedGenre.set(null);
     this.visibleWordSetVersion.set(0);
+    this.showAllWordSets.set(false);
     this.isHaikuCompleted.set(false);
     this.isHaikuCreated.set(false);
     this.clearPlaybackHighlight();
@@ -180,6 +192,7 @@ export class HomeComponent {
     if (this.selectedGenre() !== genre) {
       this.selectedWords.set([]);
       this.visibleWordSetVersion.set(0);
+      this.showAllWordSets.set(false);
       this.isHaikuCompleted.set(false);
       this.isHaikuCreated.set(false);
       this.clearPlaybackHighlight();
