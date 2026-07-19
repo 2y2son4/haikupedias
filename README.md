@@ -53,10 +53,10 @@ The app is built with Angular, Tone.js, and the Web Audio API.
 
 On the Home page, select a poetic form:
 
-| Mode | Structure | Description |
-|------|-----------|-------------|
-| **Haikupedia** | 2 – 4 – 2 words (8 total) | A compact poem with two single-word lines framing a four-word middle line |
-| **Dodecaiku** | 3 – 6 – 3 words (12 total) | A longer form with three-word bookends around a six-word core |
+| Mode           | Structure                  | Description                                                               |
+| -------------- | -------------------------- | ------------------------------------------------------------------------- |
+| **Haikupedia** | 2 – 4 – 2 words (8 total)  | A compact poem with two single-word lines framing a four-word middle line |
+| **Dodecaiku**  | 3 – 6 – 3 words (12 total) | A longer form with three-word bookends around a six-word core             |
 
 ### 2. Pick your words
 
@@ -72,8 +72,8 @@ The Home page shows two word sets (Set A and Set B). You'll also see the poem st
 Once all slots are filled, the poem preview area appears. You can:
 
 - Tap any word to replace it
-- Use **I'm feeling lucky** to randomise remaining unfilled slots
-- When you're happy, **lock** the poem to finalise it
+- Use **I'm feeling lucky** to randomize remaining unfilled slots
+- When you're happy, **lock** the poem to finalice it
 
 Locking triggers the musical arrangement and unlocks the playback controls.
 
@@ -83,21 +83,21 @@ The composition panel appears once your poem is locked. It shows a visual timeli
 
 #### Choose an Arranger
 
-| Arranger | Style |
-|----------|-------|
-| **Gymnopedie** | Chordal, ambient — each word becomes a soft chord. Inspired by Satie's _Gymnopédies_. |
-| **Dodecaphonic** | 12-tone row — words are mapped to a tone row that completes a full chromatic cycle. |
+| Arranger         | Style                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------- |
+| **Gymnopedie**   | Chordal, ambient — each word becomes a soft chord. Inspired by Satie's _Gymnopédies_. |
+| **Dodecaphonic** | 12-tone row — words are mapped to a tone row that completes a full chromatic cycle.   |
 
 Try both — the same poem sounds completely different under each arranger.
 
 #### Choose an Audio Engine
 
-| Engine | Description |
-|--------|-------------|
-| **Synthetic** | Web Audio API oscillator — lightweight, works everywhere |
-| **Piano Synth** | Synthesized piano tone |
-| **Piano Samples** | Sampled acoustic piano |
-| **Instruments** | Multiple sampled instruments (strings, woodwinds, etc.) |
+| Engine            | Description                                              |
+| ----------------- | -------------------------------------------------------- |
+| **Synthetic**     | Web Audio API oscillator — lightweight, works everywhere |
+| **Piano Synth**   | Synthesized piano tone                                   |
+| **Piano Samples** | Sampled acoustic piano                                   |
+| **Instruments**   | Multiple sampled instruments (strings, woodwinds, etc.)  |
 
 Some engines may take a moment to load on first use.
 
@@ -254,6 +254,29 @@ Common aliases from `tsconfig.base.json`:
 - Architecture follows domain separation: `poetry`, `music`, `ui`, and shared `core`.
 - The workspace is organized as an Nx monorepo with clear library boundaries.
 - `tmp/` contains temporary/generated workspace artifacts and is not part of the public API surface.
+
+## Accessibility (Angular + WCAG 2.2 AA)
+
+All UI changes should meet baseline accessibility requirements.
+
+Checklist for contributors:
+
+- Use semantic HTML first (`main`, `nav`, `button`, `label`, headings in order).
+- Ensure every interactive control has an accessible name (visible text, `aria-label`, or `aria-labelledby`).
+- Keep full keyboard support: tab order, visible focus, and Enter/Space activation.
+- Use ARIA only when native semantics are not enough.
+- Associate form labels, help text, and errors programmatically.
+- Do not rely on color alone to communicate meaning.
+- Verify contrast for text and interactive elements against WCAG 2.2 AA targets.
+- Respect reduced motion preferences.
+
+Recommended review pass for each UI PR:
+
+1. Name/Role: can assistive tech identify each control clearly?
+2. Keyboard: can all actions be completed without a mouse?
+3. Focus: is focus visible and predictable after actions/dialogs?
+4. Announcements: are async status updates exposed where needed?
+5. Contrast: are text and controls readable in all states?
 
 ## References
 
